@@ -1,0 +1,51 @@
+.text-center {
+	text-align: center;
+}
+
+page-signup {
+	.content {
+  		background-color: #263050;
+  		color: #fff;
+
+	  	.wrapper {
+	  		padding: 60px 20px 0;
+	  		letter-spacing: 1px;
+	  	}
+
+	  	.form-content {
+
+  			label {
+	  			text-align: left;
+	  			display: inherit;
+	  		}	
+
+	  		.input {
+	  			border-bottom: 1px solid #fff;
+	  			font-weight: 300;
+	  			// margin-bottom: 20px;
+	  		}
+
+	  		button {
+	  			width: 100%;
+	  			font-size: 15px;
+	  			font-weight: 500;
+	  			padding: 25px;
+	  			letter-spacing: 1px;
+
+	  			i {
+	  				margin-right: 5px;
+	  			}
+	  		}
+	  	}
+
+	  	.bottom {
+	  		margin: 20px;
+	  		text-align: left;
+
+	  		a {
+	  			color: #fff;
+	  			font-weight: bold;
+	  		}
+	  	}
+	}
+}
