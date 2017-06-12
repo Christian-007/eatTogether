@@ -23,40 +23,40 @@
       <ion-grid>
         <ion-row>
           <ion-col col-6>
-            <ion-input type="text" placeholder="First Name"></ion-input>
+            <ion-input type="text" name="fname" [(ngModel)]="fname" placeholder="First Name"></ion-input>
           </ion-col>
           <ion-col col-6>
-            <ion-input type="text" placeholder="Last Name"></ion-input>
+            <ion-input type="text" name="lname" [(ngModel)]="lname" placeholder="Last Name"></ion-input>
           </ion-col>
         </ion-row>
 
         <ion-row>
           <ion-col col-12>
-            <ion-input type="email" placeholder="Email address"></ion-input>
+            <ion-input type="email" name="email" [(ngModel)]="email" placeholder="Email address"></ion-input>
       	  </ion-col>
     	</ion-row>
 
     	<ion-row>
           <ion-col col-12>
-            <ion-input type="text" placeholder="Location"></ion-input>
+            <ion-input type="text" name="loc" [(ngModel)]="loc" placeholder="Location"></ion-input>
       	  </ion-col>
     	</ion-row>
 
     	<ion-row>
           <ion-col col-12>
-            <ion-input type="password" placeholder="Password"></ion-input>
+            <ion-input type="password" name="password" [(ngModel)]="password" placeholder="Password"></ion-input>
       	  </ion-col>
     	</ion-row>
 
     	<ion-row>
           <ion-col col-12>
-            <ion-input type="password" placeholder="Confirm Password"></ion-input>
+            <ion-input type="password" name="confpassword" [(ngModel)]="confpassword" placeholder="Confirm Password"></ion-input>
       	  </ion-col>
     	</ion-row>
       </ion-grid>
 
       <br>
-      <button ion-button color="light" round>SIGN UP</button>
+      <button ion-button color="light" (click)="sendPostData()" round>SIGN UP</button>
     </div>
 
     <p class="bottom">

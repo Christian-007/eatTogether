@@ -1,30 +1,5 @@
 <!-- <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
-</ion-header>
-
-<ion-content padding>
-<ion-content>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
-  <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemSelected(item)">
-      {{ item.text }}
-    </button>  
-  </ion-list>
-</ion-content> -->
-
-
-<!-- <ion-header>
-  <ion-navbar>
     <ion-title>
       Let's Eat Together
     </ion-title>
@@ -37,6 +12,15 @@
   <p>
     If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
   </p> -->
+  
+  <!-- RESTful API -->
+  <!-- <ion-list>
+    <ion-item *ngFor="let user of users">
+      {{user.fname}}
+      {{user.lname}}
+      {{user.password}}
+    </ion-item>
+  </ion-list> -->
   <div class="text-center wrapper">
     <i class="fa fa-cutlery fa-4x fa-border" aria-hidden="true"></i>
     
@@ -50,14 +34,13 @@
       <ion-input type="password" placeholder="Enter password"></ion-input>
 
       <button ion-button color="light" round>LOGIN</button>
-      <button ion-button round class="fb"><i class="fa fa-facebook-square fa-lg" aria-hidden="true"></i> LOGIN WITH FACEBOOK</button>
+      <button ion-button (click)="getData()" round class="fb"><i class="fa fa-facebook-square fa-lg" aria-hidden="true"></i> LOGIN WITH FACEBOOK</button>
       <button ion-button round class="gplus"><i class="fa fa-google-plus fa-lg" aria-hidden="true"></i> LOGIN WITH GOOGLE</button>
     </div>
         
     <p class="bottom">
       Don't have an account? 
       <a href="#" class="signup" (click)="signupPage()"> Sign Up</a>
-      <!-- <button href="" class="signup" (click)="signupPage()"> Sign Up</button> -->
     </p>
   </div>
 </ion-content>
