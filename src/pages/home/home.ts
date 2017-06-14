@@ -10,6 +10,7 @@ import { RestapiserviceProvider } from '../../providers/restapiservice/restapise
 })
 export class HomePage {
   users: any;
+  email: string; password: string;
 
   constructor(public navCtrl: NavController, public restapiService: RestapiserviceProvider, public http: Http, public loadingCtrl: LoadingController, private alertCtrl: AlertController) {
     // this.restapiservice.load().then(data => this.rest = data);
@@ -47,6 +48,38 @@ export class HomePage {
       loader.dismiss();
       alert.present();
     });
+  }
+
+  loginUser() {
+    // console.log(this.email); console.log(this.password);
+
+    let loader = this.loadingCtrl.create({
+      content: "Please wait..."
+    });
+    loader.present();
+
+    this.restapiService.getUserLogin(this.email,this.password)
+    .then(data => {
+      // this.users = data;
+      console.log(data);
+      if(data == true){
+        loader.dismiss();
+        console.log("Logged in successfully!");
+      }else {
+        console.log("Wrong password or email");
+        let alert = this.alertCtrl.create({
+            title: "Login Error",
+            subTitle: "Wrong username or password",
+            buttons: ['Close']
+        });
+        loader.dismiss();
+        alert.present();
+      }
+
+    }, error => {
+      console.log(JSON.stringify(error.json()));
+    });
+    
   }
   
 }

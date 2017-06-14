@@ -24,7 +24,7 @@ export class SignupServiceProvider {
     var params = 'fname='+fname+'&'+'lname='+lname+'&'+'email='+email+'&'+'location='+location+'&'+'password='+password;
 
     return new Promise(resolve => {
-      this.http.post("https://restful-api-dissertation.herokuapp.com/signup", params , {headers: headers})
+      this.http.post("http://localhost:5000/signup", params , {headers: headers})
         .subscribe(data => {
           this.data = data;
           resolve(this.data);

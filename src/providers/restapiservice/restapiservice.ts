@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 /*
@@ -30,6 +30,23 @@ export class RestapiserviceProvider {
           resolve(this.data);
         }, error => {
           console.log(JSON.stringify(error.json()));
+        });
+    });
+  }
+
+  getUserLogin(email: string, password: string) {
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+ 
+    var params = 'email='+email+'&'+'&'+'password='+password;
+
+    return new Promise(resolve => {
+      // this.http.post("https://restful-api-dissertation.herokuapp.com/signup", params , {headers: headers})
+      this.http.post("http://localhost:5000/login", params , {headers: headers})
+        .map(res => res.json())
+        .subscribe(data => {
+          this.data = data;
+          resolve(this.data);
         });
     });
   }
