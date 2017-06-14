@@ -41,8 +41,8 @@ export class RestapiserviceProvider {
     var params = 'email='+email+'&'+'&'+'password='+password;
 
     return new Promise(resolve => {
-      // this.http.post("https://restful-api-dissertation.herokuapp.com/signup", params , {headers: headers})
-      this.http.post("http://localhost:5000/login", params , {headers: headers})
+      // this.http.post("https://restful-api-dissertation.herokuapp.com/login", params , {headers: headers})
+      this.http.post("https://restful-api-dissertation.herokuapp.com/login", params , {headers: headers})
         .map(res => res.json())
         .subscribe(data => {
           this.data = data;

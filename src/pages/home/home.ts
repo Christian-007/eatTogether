@@ -3,6 +3,7 @@ import { NavController, AlertController, LoadingController } from 'ionic-angular
 import { Http } from '@angular/http';
 import { SignupPage } from '../signup/signup';
 import { RestapiserviceProvider } from '../../providers/restapiservice/restapiservice';
+import { TabsPage } from '../tabs/tabs';
 
 @Component({
   selector: 'page-home',
@@ -65,6 +66,7 @@ export class HomePage {
       if(data == true){
         loader.dismiss();
         console.log("Logged in successfully!");
+        this.navCtrl.push(TabsPage);
       }else {
         console.log("Wrong password or email");
         let alert = this.alertCtrl.create({

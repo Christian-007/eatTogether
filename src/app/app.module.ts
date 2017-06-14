@@ -11,11 +11,23 @@ import { SignupPage } from '../pages/signup/signup';
 import { RestapiserviceProvider } from '../providers/restapiservice/restapiservice';
 import { SignupServiceProvider } from '../providers/signup-service/signup-service';
 
+import { TabsPage } from '../pages/tabs/tabs';
+import { EventTabPage } from '../pages/event-tab/event-tab';
+import { ProfileTabPage } from '../pages/profile-tab/profile-tab';
+import { HomeTabPage } from '../pages/home-tab/home-tab';
+import { MapsTabPage } from '../pages/maps-tab/maps-tab';
+import { TabsServiceProvider } from '../providers/tabs-service/tabs-service';
+
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    SignupPage
+    SignupPage,
+    TabsPage,
+    EventTabPage,
+    ProfileTabPage,
+    HomeTabPage,
+    MapsTabPage
   ],
   imports: [
     BrowserModule,
@@ -26,14 +38,20 @@ import { SignupServiceProvider } from '../providers/signup-service/signup-servic
   entryComponents: [
     MyApp,
     HomePage,
-    SignupPage
+    SignupPage,
+    TabsPage,
+    EventTabPage,
+    ProfileTabPage,
+    HomeTabPage,
+    MapsTabPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     RestapiserviceProvider,
-    SignupServiceProvider
+    SignupServiceProvider,
+    TabsServiceProvider
   ]
 })
 export class AppModule {}
