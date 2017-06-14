@@ -23,7 +23,7 @@ export class RestapiserviceProvider {
     }
 
     return new Promise(resolve => {
-      this.http.get("https://restful-api-dissertation.herokuapp.com/api")
+      this.http.get("https://restful-api-dissertation.herokuapp.com/users")
         .map(res => res.json())
         .subscribe(data => {
           this.data = data;
