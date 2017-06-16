@@ -1,3 +1,84 @@
 page-home-tab {
 
+  .content {
+    background-color: #F8F9FB;  
+
+    .sectionTitle, .see-btn {
+      padding: 20px 0 5px 10px;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      color: rgb(64,75,105);
+      font-weight: 700;
+
+      [col-4] {
+        text-align: right;
+      }
+
+      ion-badge {
+        padding: 2px 10px;
+        font-size: 10px;
+        background-color: rgb(64,75,105);
+        border-radius: 15px;
+        color: #fff;
+      }
+
+      .see-btn {
+        font-size: 10px;
+        padding: 2px 10px;
+        background-color: transparent;
+        border-radius: 15px;
+        border: 1px solid rgb(64,75,105);
+      }
+    }
+
+    .card-custom {
+      border-top: 1px solid #F0F0F0;
+      background-color: #FFF;
+      padding: 5px;
+
+      img {
+        border-radius: 50%;
+        width: 110px;
+        height: 110px;
+      }
+
+      p {
+        margin: 0;
+        font-size: 12px;
+      }
+
+      .cardTitle {
+        font-size: 16px;
+        font-weight: 700;
+        color: rgb(64,75,105);
+        font-family: 'Karla', sans-serif;
+      }
+
+      .subTitle {
+        color: #777;
+      }
+
+      .cardContent {
+        margin: 10px 0;
+        color: #777;
+        font-weight: 300;
+      }
+
+      ion-row {
+        font-size: 10px;
+        color: #777;
+        font-weight: 300;
+
+        i {
+          color: rgb(64,75,105);
+        }
+      }
+    }
+
+    .card-custom:last-child {
+      border-bottom: 1px solid #F0F0F0;
+    }
+
+  }
+
 }
