@@ -14,6 +14,12 @@
 
 
 <ion-content>
+  
+  <!-- Floating Action Buttons -->
+  <ion-fab right bottom>
+    <button ion-fab color="positive"><ion-icon name="create"></ion-icon></button>
+  </ion-fab>
+
   <ion-grid class="sectionTitle">
     <ion-row>
       <ion-col col-8>
@@ -30,10 +36,10 @@
 
     <ion-row>
 
-      <ion-col col-5>
-        <img src="assets/img/cavendish.jpg" alt="Cavendish">
+      <ion-col col-6>
+        <div class="bg-img" style="background-image: url('assets/img/cavendish.jpg')"></div>
       </ion-col>
-      <ion-col col-7>
+      <ion-col col-6>
         <p class="cardTitle">MEAL AT CAVENDISH</p>
         <p class="subTitle">HOSTED BY: Chris William</p>
         <p class="cardContent">
@@ -53,7 +59,7 @@
           <ion-col col-6>
             <i class="fa fa-map-marker" aria-hidden="true"></i> Sheffield
           </ion-col>
-          <ion-col col-6>
+          <ion-col col-6 class="e-type">
             <i class="fa fa-unlock" aria-hidden="true"></i> PUBLIC
           </ion-col>
         </ion-row>
@@ -67,10 +73,10 @@
 
     <ion-row>
     
-      <ion-col col-5>
-        <img src="assets/img/beehive.jpg" alt="beehive">
+      <ion-col col-6>
+        <div class="bg-img" style="background-image: url('assets/img/beehive.jpg')"></div>
       </ion-col>
-      <ion-col col-7>
+      <ion-col col-6>
         <p class="cardTitle">MEAL AT BEEHIVE</p>
         <p class="subTitle">HOSTED BY: Chris William</p>
         <p class="cardContent">
@@ -90,7 +96,93 @@
           <ion-col col-6>
             <i class="fa fa-map-marker" aria-hidden="true"></i> Sheffield
           </ion-col>
+          <ion-col col-6 class="e-type">
+            <i class="fa fa-unlock" aria-hidden="true"></i> PUBLIC
+          </ion-col>
+        </ion-row>
+      </ion-col>
+
+    </ion-row>
+    
+  </div>
+
+  <ion-grid class="sectionTitle">
+    <ion-row>
+      <ion-col col-8>
+        MY EVENT
+        <ion-badge item-end>1</ion-badge>
+      </ion-col>
+      <ion-col col-4>
+        <button class="see-btn">SEE ALL</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="card-custom">
+
+    <ion-row>
+    
+      <ion-col col-6>
+        <div class="bg-img" style="background-image: url('assets/img/beehive.jpg')"></div>
+      </ion-col>
+      <ion-col col-6>
+        <p class="cardTitle">MEAL AT BEEHIVE</p>
+        <p class="subTitle">HOSTED BY: Chris William</p>
+        <p class="cardContent">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque.
+        </p>
+
+        <ion-row>
           <ion-col col-6>
+            <i class="fa fa-calendar" aria-hidden="true"></i> 16 Jun 2017
+          </ion-col>
+          <ion-col col-6>
+            <i class="fa fa-clock-o" aria-hidden="true"></i> 12.30 - 14.30
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col col-6>
+            <i class="fa fa-map-marker" aria-hidden="true"></i> Sheffield
+          </ion-col>
+          <ion-col col-6 class="e-type">
+            <i class="fa fa-unlock" aria-hidden="true"></i> PUBLIC
+          </ion-col>
+        </ion-row>
+      </ion-col>
+
+    </ion-row>
+    
+  </div>
+
+  <div class="card-custom">
+
+    <ion-row>
+
+      <ion-col col-6>
+        <img src="assets/img/cavendish.jpg" alt="Cavendish">
+      </ion-col>
+      <ion-col col-6>
+        <p class="cardTitle">MEAL AT CAVENDISH</p>
+        <p class="subTitle">HOSTED BY: Chris William</p>
+        <p class="cardContent">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque.
+        </p>
+
+        <ion-row>
+          <ion-col col-6>
+            <i class="fa fa-calendar" aria-hidden="true"></i> 16 Jun 2017
+          </ion-col>
+          <ion-col col-6>
+            <i class="fa fa-clock-o" aria-hidden="true"></i> 12.30 - 14.30
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col col-6>
+            <i class="fa fa-map-marker" aria-hidden="true"></i> Sheffield
+          </ion-col>
+          <ion-col col-6 class="e-type">
             <i class="fa fa-unlock" aria-hidden="true"></i> PUBLIC
           </ion-col>
         </ion-row>
