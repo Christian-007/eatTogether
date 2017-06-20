@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { RestapiserviceProvider } from '../../providers/restapiservice/restapiservice';
 
 /**
  * Generated class for the ProfileTabPage page.
@@ -13,8 +14,15 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'profile-tab.html',
 })
 export class ProfileTabPage {
+  fname: string; lname: string;
+  email: string; id: string;
+  location: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public restapiService: RestapiserviceProvider) {
+    let currentUser = this.restapiService.getUserInfo();
+    this.id = currentUser["id"];
+    this.fname = currentUser["fname"]; this.lname = currentUser["lname"];
+    this.email = currentUser["email"]; this.location = currentUser["location"];
   }
 
   ionViewDidLoad() {
@@ -22,6 +30,7 @@ export class ProfileTabPage {
   }
 
   logoutPage() {
+    this.restapiService.logout();
     this.navCtrl.parent.parent.pop();
   }
 }

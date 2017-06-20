@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 /*
@@ -8,10 +9,28 @@ import 'rxjs/add/operator/map';
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html
   for more info on providers and Angular 2 DI.
 */
+
+export class User {
+  id: string;
+  fname: string;
+  lname: string;
+  email: string;
+  location:string;
+ 
+  constructor(id: string, fname: string, lname: string, email: string, location:string) {
+    this.id = id;
+    this.fname = fname;
+    this.lname = lname;
+    this.email = email;
+    this.location = location;
+  }
+}
+
 @Injectable()
 export class RestapiserviceProvider {
+  currentUser: User;
   data: any;
-  apiUrl = 'https://jsonplaceholder.typicode.com';
+  apiUrl = "http://localhost:5000/signup";
 
   constructor(public http: Http) {
     console.log('Hello RestapiserviceProvider Provider');
@@ -41,14 +60,24 @@ export class RestapiserviceProvider {
     var params = 'email='+email+'&'+'&'+'password='+password;
 
     return new Promise(resolve => {
-      // this.http.post("https://restful-api-dissertation.herokuapp.com/login", params , {headers: headers})
+      // this.http.post("http://localhost:5000/login", params , {headers: headers})
       this.http.post("https://restful-api-dissertation.herokuapp.com/login", params , {headers: headers})
         .map(res => res.json())
         .subscribe(data => {
           this.data = data;
+          // console.log("Data: " + data["id"]);
+          this.currentUser = new User(data["id"], data["fname"], data["lname"], data["email"], data["location"]);
           resolve(this.data);
         });
     });
+  }
+
+  public getUserInfo() : User {
+    return this.currentUser;
+  }
+
+  public logout() {
+    this.currentUser = null;
   }
 
 }

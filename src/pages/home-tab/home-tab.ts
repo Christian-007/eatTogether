@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { RestapiserviceProvider } from '../../providers/restapiservice/restapiservice';
 
 /**
  * Generated class for the HomeTabPage page.
@@ -14,7 +15,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class HomeTabPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public restapiService: RestapiserviceProvider) {
+    let currentUser = this.restapiService.getUserInfo();
+    console.log("currentUser Name: " + currentUser["fname"]);
   }
 
   ionViewDidLoad() {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, LoadingController } from 'ionic-angular';
+import { NavController, AlertController, LoadingController, Loading } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { SignupPage } from '../signup/signup';
 import { RestapiserviceProvider } from '../../providers/restapiservice/restapiservice';
@@ -10,6 +10,7 @@ import { TabsPage } from '../tabs/tabs';
   templateUrl: 'home.html'
 })
 export class HomePage {
+  loading: Loading;
   users: any;
   email: string; password: string;
 
@@ -25,10 +26,7 @@ export class HomePage {
   }
 
   getData() {
-    let loader = this.loadingCtrl.create({
-      content: "Please wait..."
-    });
-    loader.present();
+    this.showLoading();
 
     this.restapiService.getData()
     .then(data => {
@@ -40,31 +38,20 @@ export class HomePage {
         dataList = data[i].fname;
         console.log(dataList);
       }*/
-
-      let alert = this.alertCtrl.create({
-          title: "GET Request",
-          subTitle: data[0].fname,
-          buttons: ['Close']
-      });
-      loader.dismiss();
-      alert.present();
+      
+      this.loading.dismiss();
     });
   }
 
   loginUser() {
     // console.log(this.email); console.log(this.password);
-
-    let loader = this.loadingCtrl.create({
-      content: "Please wait..."
-    });
-    loader.present();
+    this.showLoading();
 
     this.restapiService.getUserLogin(this.email,this.password)
     .then(data => {
       // this.users = data;
       console.log(data);
-      if(data == true){
-        loader.dismiss();
+      if(data != false){
         console.log("Logged in successfully!");
         this.navCtrl.push(TabsPage);
       }else {
@@ -74,7 +61,7 @@ export class HomePage {
             subTitle: "Wrong username or password",
             buttons: ['Close']
         });
-        loader.dismiss();
+        this.loading.dismiss();
         alert.present();
       }
 
@@ -82,6 +69,14 @@ export class HomePage {
       console.log(JSON.stringify(error.json()));
     });
     
+  }
+
+  showLoading() {
+    this.loading = this.loadingCtrl.create({
+      content: "Please wait...",
+      dismissOnPageChange: true
+    });
+    this.loading.present();
   }
   
 }
