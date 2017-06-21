@@ -7,6 +7,7 @@ import { HttpModule } from '@angular/http';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { CreatePage } from '../pages/create/create';
 import { SignupPage } from '../pages/signup/signup';
 import { RestapiserviceProvider } from '../providers/restapiservice/restapiservice';
 import { SignupServiceProvider } from '../providers/signup-service/signup-service';
@@ -27,7 +28,8 @@ import { TabsServiceProvider } from '../providers/tabs-service/tabs-service';
     EventTabPage,
     ProfileTabPage,
     HomeTabPage,
-    MapsTabPage
+    MapsTabPage,
+    CreatePage
   ],
   imports: [
     BrowserModule,
@@ -43,7 +45,8 @@ import { TabsServiceProvider } from '../providers/tabs-service/tabs-service';
     EventTabPage,
     ProfileTabPage,
     HomeTabPage,
-    MapsTabPage
+    MapsTabPage,
+    CreatePage
   ],
   providers: [
     StatusBar,

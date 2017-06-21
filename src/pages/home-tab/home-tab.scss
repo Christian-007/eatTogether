@@ -29,68 +29,13 @@ page-home-tab {
       }
     }
 
-    .card-custom {
-      border-top: 1px solid #F0F0F0;
-      background-color: #FFF;
-      padding: 5px;
-
-      img {
-        max-width: 100%;
-        height: auto;
-      }
-
-      .bg-img {
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: 50% 50%;
-        min-height: 150px;
-        display: block;
-      }
-
-      .bg-img:before {
-        content: "";
-        display: block;
-        padding-bottom: 50%;
-      }
-
-      p {
-        margin: 0;
-        font-size: 12px;
-      }
-
-      .cardTitle {
-        font-size: 16px;
-        font-weight: 700;
-        color: rgb(64,75,105);
-        font-family: 'Karla', sans-serif;
-      }
-
-      .subTitle {
-        color: #666;
-      }
-
-      .cardContent {
-        margin: 10px 0;
-        color: #000;
-      }
-
-      .e-type {
-        font-weight: 700;
-      }
-
-      ion-row {
-        font-size: 10px;
-        color: #777;
-
-        i {
-          color: rgb(64,75,105);
-        }
+    .upcoming, .myevent {
+      .card-custom:last-child {
+        border-bottom: 1px solid #F0F0F0;
       }
     }
 
-    .card-custom:last-child {
-      border-bottom: 1px solid #F0F0F0;
-    }
+    
 
   }
 

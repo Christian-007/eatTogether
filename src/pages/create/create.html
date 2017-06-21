@@ -1,0 +1,73 @@
+<!--
+  Generated template for the CreatePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button (click)="dismissModal()">Cancel</button>
+    </ion-buttons>
+    <ion-title>Create Event</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div class="form-content">
+    <ion-grid>
+      <label for="title">Event Title</label>
+      <ion-row>
+        <ion-col col-12>
+          <ion-input class="form-input" type="text" name="title" placeholder="Event title"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <label for="description">Event Description</label>
+        <ion-col col-12>
+          <ion-textarea class="form-input" name="description" [(ngModel)]="description" placeholder="Description"></ion-textarea>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <label for="loc"><i class="fa fa-map-marker" aria-hidden="true"></i> Location</label>
+        <ion-col col-12>
+          <ion-input class="form-input" type="text" name="loc" [(ngModel)]="loc" placeholder="Location"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <label for="startdate"><i class="fa fa-calendar" aria-hidden="true"></i> Start</label>
+      <ion-row>
+        <ion-col col-6>  
+          <ion-input class="form-input" type="text" name="startdate" [(ngModel)]="startdate" placeholder="Start Date"></ion-input>
+        </ion-col>
+        <ion-col col-6>
+          <ion-input class="form-input" type="text" name="starttime" [(ngModel)]="starttime" placeholder="Start Time"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <label for="enddate"><i class="fa fa-calendar" aria-hidden="true"></i> End</label>
+      <ion-row>
+        <ion-col col-6>  
+          <ion-input class="form-input" type="text" name="enddate" [(ngModel)]="enddate" placeholder="End Date"></ion-input>
+        </ion-col>
+        <ion-col col-6>
+          <ion-input class="form-input" type="text" name="endtime" [(ngModel)]="endtime" placeholder="End Time"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <label for="type">Event Type</label>
+      <ion-row>
+        <ion-col col-12>
+          <ion-input class="form-input" type="text" name="type" [(ngModel)]="type" placeholder="Event Type"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <button ion-button color="light" (click)="loginUser()" class="create-btn" round>CREATE</button>
+    </ion-grid> 
+  </div>
+</ion-content>
