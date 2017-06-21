@@ -22,7 +22,7 @@
       <label for="title">Event Title</label>
       <ion-row>
         <ion-col col-12>
-          <ion-input class="form-input" type="text" name="title" placeholder="Event title"></ion-input>
+          <ion-input class="form-input" type="text" name="title" [(ngModel)]="title" placeholder="Event title"></ion-input>
         </ion-col>
       </ion-row>
 
@@ -43,20 +43,20 @@
       <label for="startdate"><i class="fa fa-calendar" aria-hidden="true"></i> Start</label>
       <ion-row>
         <ion-col col-6>  
-          <ion-input class="form-input" type="text" name="startdate" [(ngModel)]="startdate" placeholder="Start Date"></ion-input>
+          <ion-datetime class="form-input date" displayFormat="MM/DD/YYYY" name="startdate" [(ngModel)]="startdate" placeholder="Start Date"></ion-datetime>
         </ion-col>
         <ion-col col-6>
-          <ion-input class="form-input" type="text" name="starttime" [(ngModel)]="starttime" placeholder="Start Time"></ion-input>
+          <ion-datetime class="form-input date" displayFormat="HH:mm" name="starttime" [(ngModel)]="starttime" placeholder="Start Time"></ion-datetime>
         </ion-col>
       </ion-row>
 
       <label for="enddate"><i class="fa fa-calendar" aria-hidden="true"></i> End</label>
       <ion-row>
         <ion-col col-6>  
-          <ion-input class="form-input" type="text" name="enddate" [(ngModel)]="enddate" placeholder="End Date"></ion-input>
+          <ion-datetime class="form-input date" displayFormat="MM/DD/YYYY" name="enddate" [(ngModel)]="enddate" placeholder="End Date"></ion-datetime>
         </ion-col>
         <ion-col col-6>
-          <ion-input class="form-input" type="text" name="endtime" [(ngModel)]="endtime" placeholder="End Time"></ion-input>
+          <ion-datetime class="form-input date" displayFormat="HH:mm" name="endtime" [(ngModel)]="endtime" placeholder="End Time"></ion-datetime>
         </ion-col>
       </ion-row>
 
@@ -67,7 +67,7 @@
         </ion-col>
       </ion-row>
 
-      <button ion-button color="light" (click)="loginUser()" class="create-btn" round>CREATE</button>
+      <button ion-button color="light" (click)="createEvent()" class="create-btn" round>CREATE</button>
     </ion-grid> 
   </div>
 </ion-content>
