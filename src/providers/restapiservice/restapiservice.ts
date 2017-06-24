@@ -71,6 +71,19 @@ export class RestapiserviceProvider {
     });
   }
 
+  getOneUserInfo(user_id: any) {
+    return new Promise(resolve => {
+      this.http.get("http://localhost:5000/user/" + user_id)
+        .map(res => res.json())
+        .subscribe(data => {
+          this.data = data;
+          resolve(this.data);
+        }, error => {
+          console.log(JSON.stringify(error.json()));
+        });
+    });
+  }
+
   public getUserInfo() : User {
     return this.currentUser;
   }

@@ -53,7 +53,10 @@ export class HomeTabPage {
           startdate: event.startdate,
           endtime: event.endtime,
           enddate: event.enddate,
-          type: event.type
+          type: event.type,
+          user_id: event.user_id,
+          user_fname: event.fname,
+          user_lname: event.lname
         });
       }
 
