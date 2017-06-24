@@ -45,9 +45,22 @@ export class TabsServiceProvider {
     });
   }
 
-  getEventsOfUser(user_id: any) {
+  getMyEvents(user_id: any) {
     return new Promise(resolve => {
-      this.http.get("http://localhost:5000/events/users/"+user_id)
+      this.http.get("http://localhost:5000/my_events/"+user_id)
+        .map(res => res.json())
+        .subscribe(data => {
+          this.data = data;
+          resolve(this.data);
+        }, error => {
+          console.log(JSON.stringify(error.json()));
+        });
+    });
+  }
+
+  getUpcomingEvents(user_id: any) {
+    return new Promise(resolve => {
+      this.http.get("http://localhost:5000/upcoming_events/"+user_id)
         .map(res => res.json())
         .subscribe(data => {
           this.data = data;

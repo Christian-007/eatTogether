@@ -34,31 +34,31 @@
 
   <div class="upcoming">
 
-    <div class="card-custom" *ngFor="let event of eventsArray">
+    <div class="card-custom" *ngFor="let upcomingEvent of upcomingEventsArray">
       <ion-row>
         <ion-col col-6>
           <div class="bg-img" style="background-image: url('assets/img/cavendish.jpg')"></div>
         </ion-col>
         <ion-col col-6>
-          <p class="cardTitle">{{event.title}}</p>
-          <p class="subTitle">HOSTED BY: {{event.user_fname}} {{event.user_lname}}</p>
-          <p class="cardContent">{{event.description}}</p>
+          <p class="cardTitle">{{upcomingEvent.title}}</p>
+          <p class="subTitle">HOSTED BY: {{upcomingEvent.user_fname}} {{upcomingEvent.user_lname}}</p>
+          <p class="cardContent">{{upcomingEvent.description}}</p>
 
           <ion-row>
             <ion-col col-6>
-              <i class="fa fa-calendar" aria-hidden="true"></i> {{event.startdate}}
+              <i class="fa fa-calendar" aria-hidden="true"></i> {{upcomingEvent.startdate}}
             </ion-col>
             <ion-col col-6>
-              <i class="fa fa-clock-o" aria-hidden="true"></i> {{event.starttime}} - {{event.endtime}}
+              <i class="fa fa-clock-o" aria-hidden="true"></i> {{upcomingEvent.starttime}} - {{upcomingEvent.endtime}}
             </ion-col>
           </ion-row>
 
           <ion-row>
             <ion-col col-6>
-              <i class="fa fa-map-marker" aria-hidden="true"></i> {{event.location}}
+              <i class="fa fa-map-marker" aria-hidden="true"></i> {{upcomingEvent.location}}
             </ion-col>
             <ion-col col-6 class="e-type">
-              <i class="fa fa-unlock" aria-hidden="true"></i> {{event.type}}
+              <i class="fa fa-unlock" aria-hidden="true"></i> {{upcomingEvent.type}}
             </ion-col>
           </ion-row>
         </ion-col>
@@ -81,74 +81,37 @@
 
   <div class="myevent">
 
-    <div class="card-custom">
-      <ion-row>
+    <div class="card-custom" *ngFor="let upcomingEvent of upcomingEventsArray">
+      <ion-row *ngIf="upcomingEvent.user_id == currentUserID">
         <ion-col col-6>
-          <div class="bg-img" style="background-image: url('assets/img/beehive.jpg')"></div>
+          <div class="bg-img" style="background-image: url('assets/img/cavendish.jpg')"></div>
         </ion-col>
         <ion-col col-6>
-          <p class="cardTitle">MEAL AT BEEHIVE</p>
-          <p class="subTitle">HOSTED BY: Chris William</p>
-          <p class="cardContent">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque.
-          </p>
+          <p class="cardTitle">{{upcomingEvent.title}}</p>
+          <p class="subTitle">HOSTED BY: {{upcomingEvent.user_fname}} {{upcomingEvent.user_lname}}</p>
+          <p class="cardContent">{{upcomingEvent.description}}</p>
 
           <ion-row>
             <ion-col col-6>
-              <i class="fa fa-calendar" aria-hidden="true"></i> 16 Jun 2017
+              <i class="fa fa-calendar" aria-hidden="true"></i> {{upcomingEvent.startdate}}
             </ion-col>
             <ion-col col-6>
-              <i class="fa fa-clock-o" aria-hidden="true"></i> 12.30 - 14.30
+              <i class="fa fa-clock-o" aria-hidden="true"></i> {{upcomingEvent.starttime}} - {{upcomingEvent.endtime}}
             </ion-col>
           </ion-row>
 
           <ion-row>
             <ion-col col-6>
-              <i class="fa fa-map-marker" aria-hidden="true"></i> Sheffield
+              <i class="fa fa-map-marker" aria-hidden="true"></i> {{upcomingEvent.location}}
             </ion-col>
             <ion-col col-6 class="e-type">
-              <i class="fa fa-unlock" aria-hidden="true"></i> PUBLIC
+              <i class="fa fa-unlock" aria-hidden="true"></i> {{upcomingEvent.type}}
             </ion-col>
           </ion-row>
         </ion-col>
       </ion-row>
     </div>
 
-    <div class="card-custom">
-
-      <ion-row>
-
-        <ion-col col-6>
-          <img src="assets/img/cavendish.jpg" alt="Cavendish">
-        </ion-col>
-        <ion-col col-6>
-          <p class="cardTitle">MEAL AT CAVENDISH</p>
-          <p class="subTitle">HOSTED BY: Chris William</p>
-          <p class="cardContent">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque.
-          </p>
-
-          <ion-row>
-            <ion-col col-6>
-              <i class="fa fa-calendar" aria-hidden="true"></i> 16 Jun 2017
-            </ion-col>
-            <ion-col col-6>
-              <i class="fa fa-clock-o" aria-hidden="true"></i> 12.30 - 14.30
-            </ion-col>
-          </ion-row>
-
-          <ion-row>
-            <ion-col col-6>
-              <i class="fa fa-map-marker" aria-hidden="true"></i> Sheffield
-            </ion-col>
-            <ion-col col-6 class="e-type">
-              <i class="fa fa-unlock" aria-hidden="true"></i> PUBLIC
-            </ion-col>
-          </ion-row>
-        </ion-col>
-
-      </ion-row>
-      
-    </div>
   </div>
+
 </ion-content>

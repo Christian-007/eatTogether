@@ -17,13 +17,17 @@ import { TabsServiceProvider } from '../../providers/tabs-service/tabs-service';
 })
 export class HomeTabPage {
   loading: Loading; alert: Alert;
-  eventsData: any; eventsArray: any[];
+  myEventsData: any; myEventsArray: any[];
+  upcomingEventsData: any; upcomingEventsArray: any[];
+  currentUser: any; currentUserID: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public restapiService: RestapiserviceProvider, public tabsService: TabsServiceProvider, public loadingCtrl: LoadingController, private alertCtrl: AlertController) {
-    let currentUser = this.restapiService.getUserInfo();
+    this.currentUser = this.restapiService.getUserInfo();
+    this.currentUserID = this.currentUser["id"];
     // console.log("currentUser Name: " + currentUser["fname"]);
 
-    this.getAllEvents();
+    this.getUpcomingEvents();
+    // this.getMyEvents();
   }
 
   ionViewDidLoad() {
@@ -35,16 +39,16 @@ export class HomeTabPage {
     modal.present();
   }
 
-  getAllEvents() {
+  getUpcomingEvents() {
     this.showLoading();
 
-    this.tabsService.getAllEvents()
+    this.tabsService.getUpcomingEvents(this.currentUser["id"])
     .then(data => {
-      this.eventsData = data;
+      this.upcomingEventsData = data;
 
-      this.eventsArray = [];
-      for(let event of this.eventsData) { 
-        this.eventsArray.push({
+      this.upcomingEventsArray = [];
+      for(let event of this.upcomingEventsData) { 
+        this.upcomingEventsArray.push({
           id: event.id,
           title: event.title,
           description: event.description,
@@ -62,6 +66,53 @@ export class HomeTabPage {
 
       this.loading.dismiss();
     });
+  }
+
+  getMyEvents() {
+    this.myEventsArray = [];
+    for(let event of this.myEventsData) { 
+      if(event.user_id == this.currentUser["id"])
+      this.myEventsArray.push({
+        id: event.id,
+        title: event.title,
+        description: event.description,
+        location: event.location,
+        starttime: event.starttime,
+        startdate: event.startdate,
+        endtime: event.endtime,
+        enddate: event.enddate,
+        type: event.type,
+        user_id: event.user_id,
+        user_fname: event.fname,
+        user_lname: event.lname
+      });
+    }
+    // this.showLoading();
+
+    // this.tabsService.getMyEvents(this.currentUser["id"])
+    // .then(data => {
+    //   this.myEventsData = data;
+
+    //   this.myEventsArray = [];
+    //   for(let event of this.myEventsData) { 
+    //     this.myEventsArray.push({
+    //       id: event.id,
+    //       title: event.title,
+    //       description: event.description,
+    //       location: event.location,
+    //       starttime: event.starttime,
+    //       startdate: event.startdate,
+    //       endtime: event.endtime,
+    //       enddate: event.enddate,
+    //       type: event.type,
+    //       user_id: event.user_id,
+    //       user_fname: event.fname,
+    //       user_lname: event.lname
+    //     });
+    //   }
+
+    //   this.loading.dismiss();
+    // });
   }
 
   showLoading() {
