@@ -12,10 +12,8 @@ $font-path: "../assets/fonts";
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/v2/theming/overriding-ionic-variables/
 
-.card-custom {
-  border-top: 1px solid #F0F0F0;
-  background-color: #FFF;
-  padding: 5px;
+.card-custom, ion-card {
+  font-family: 'Source Sans Pro', sans-serif !important;
 
   img {
     max-width: 100%;
@@ -33,40 +31,30 @@ $font-path: "../assets/fonts";
   .bg-img:before {
     content: "";
     display: block;
-    padding-bottom: 50%;
-  }
-
-  p {
-    margin: 0;
-    font-size: 12px;
+    padding-bottom: 70%;
   }
 
   .cardTitle {
-    font-size: 16px;
     font-weight: 700;
     color: rgb(64,75,105);
-    font-family: 'Karla', sans-serif;
     text-transform: uppercase;
+    padding: 0; margin: 0;
   }
 
   .subTitle {
-    color: #666;
-  }
-
-  .cardContent {
-    margin: 10px 0;
-    font-weight: 300;
-    color: #000;
+    color: #000 !important;
+    font-size: 1.4rem !important;
+    margin-bottom: 5px !important;
   }
 
   .e-type {
     font-weight: 700;
     text-transform: uppercase;
+    color: rgb(64,75,105);
   }
 
   ion-row {
-    font-size: 10px;
-    color: #777;
+    color: #000;
 
     i {
       color: rgb(64,75,105);
@@ -140,7 +128,7 @@ $toolbar-background: #2C3859;
 @import "noto-sans";
 
 // Google Font API
-@import url('https://fonts.googleapis.com/css?family=Karla:400,700');
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700');
 
 // Font Awesome
 @import "./scss/font-awesome"; 

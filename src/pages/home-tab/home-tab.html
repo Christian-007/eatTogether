@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar no-border-bottom>
     <ion-title>Home</ion-title>
     <ion-buttons end>
       <button ion-button (click)="goToCreateEventPage()">
@@ -15,44 +15,48 @@
     </ion-buttons>
   </ion-navbar>
 
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="homeSegment">
+      <ion-segment-button value="upcoming">
+        Upcoming
+      </ion-segment-button>
+      <ion-segment-button value="my">
+        My Event
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
 </ion-header>
 
-
 <ion-content>
-
-  <ion-grid class="sectionTitle">
-    <ion-row>
-      <ion-col col-8>
+  
+  <div [ngSwitch]="homeSegment">
+    <ion-list *ngSwitchCase="'upcoming'">
+      <div class="sectionTitle">
         UPCOMING EVENT
         <ion-badge item-end>260k</ion-badge>
-      </ion-col>
-      <ion-col col-4>
-        <button class="see-btn">SEE ALL</button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+      </div>
 
-  <div class="upcoming">
-
-    <div class="card-custom" *ngFor="let upcomingEvent of upcomingEventsArray">
-      <ion-row>
-        <ion-col col-6>
-          <div class="bg-img" style="background-image: url('assets/img/cavendish.jpg')"></div>
-        </ion-col>
-        <ion-col col-6>
-          <p class="cardTitle">{{upcomingEvent.title}}</p>
-          <p class="subTitle">HOSTED BY: {{upcomingEvent.user_fname}} {{upcomingEvent.user_lname}}</p>
-          <p class="cardContent">{{upcomingEvent.description}}</p>
-
+      <ion-card *ngFor="let upcomingEvent of upcomingEventsArray">
+        <!-- <img src="assets/img/cavendish.jpg"/> -->
+        <div class="bg-img" style="background-image: url('assets/img/yates.jpg')"></div>
+        <ion-card-content>
+          <ion-card-title class="cardTitle">
+            {{upcomingEvent.title}}
+          </ion-card-title>
+          <p class="subTitle">Hosted by: {{upcomingEvent.user_fname}} {{upcomingEvent.user_lname}}</p>
+          <p>
+            The most popular industrial group ever, and largely
+            responsible for bringing the music to a mass audience.
+          </p>
           <ion-row>
             <ion-col col-6>
-              <i class="fa fa-calendar" aria-hidden="true"></i> {{upcomingEvent.startdate}}
+              <i class="fa fa-calendar" aria-hidden="true"></i> {{upcomingEvent.startdate | date: 'yMMMd'}}
             </ion-col>
             <ion-col col-6>
               <i class="fa fa-clock-o" aria-hidden="true"></i> {{upcomingEvent.starttime}} - {{upcomingEvent.endtime}}
             </ion-col>
           </ion-row>
-
           <ion-row>
             <ion-col col-6>
               <i class="fa fa-map-marker" aria-hidden="true"></i> {{upcomingEvent.location}}
@@ -61,57 +65,47 @@
               <i class="fa fa-unlock" aria-hidden="true"></i> {{upcomingEvent.type}}
             </ion-col>
           </ion-row>
-        </ion-col>
-      </ion-row>
-    </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-list>
 
-  </div>
-
-  <ion-grid class="sectionTitle">
-    <ion-row>
-      <ion-col col-8>
+    <ion-list *ngSwitchCase="'my'">
+      <div class="sectionTitle">
         MY EVENT
-        <ion-badge item-end>1</ion-badge>
-      </ion-col>
-      <ion-col col-4>
-        <button class="see-btn">SEE ALL</button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
-  <div class="myevent">
-
-    <div class="card-custom" *ngFor="let upcomingEvent of upcomingEventsArray">
-      <ion-row *ngIf="upcomingEvent.user_id == currentUserID">
-        <ion-col col-6>
+        <ion-badge item-end>260k</ion-badge>
+      </div>
+      <ion-card *ngFor="let upcomingEvent of upcomingEventsArray">
+        <div *ngIf="upcomingEvent.user_id == currentUserID">
           <div class="bg-img" style="background-image: url('assets/img/cavendish.jpg')"></div>
-        </ion-col>
-        <ion-col col-6>
-          <p class="cardTitle">{{upcomingEvent.title}}</p>
-          <p class="subTitle">HOSTED BY: {{upcomingEvent.user_fname}} {{upcomingEvent.user_lname}}</p>
-          <p class="cardContent">{{upcomingEvent.description}}</p>
-
-          <ion-row>
-            <ion-col col-6>
-              <i class="fa fa-calendar" aria-hidden="true"></i> {{upcomingEvent.startdate}}
-            </ion-col>
-            <ion-col col-6>
-              <i class="fa fa-clock-o" aria-hidden="true"></i> {{upcomingEvent.starttime}} - {{upcomingEvent.endtime}}
-            </ion-col>
-          </ion-row>
-
-          <ion-row>
-            <ion-col col-6>
-              <i class="fa fa-map-marker" aria-hidden="true"></i> {{upcomingEvent.location}}
-            </ion-col>
-            <ion-col col-6 class="e-type">
-              <i class="fa fa-unlock" aria-hidden="true"></i> {{upcomingEvent.type}}
-            </ion-col>
-          </ion-row>
-        </ion-col>
-      </ion-row>
-    </div>
-
+          <ion-card-content>
+            <ion-card-title class="cardTitle">
+              {{upcomingEvent.title}}
+            </ion-card-title>
+            <p class="subTitle">Hosted by: {{upcomingEvent.user_fname}} {{upcomingEvent.user_lname}}</p>
+            <p>
+              The most popular industrial group ever, and largely
+              responsible for bringing the music to a mass audience.
+            </p>
+            <ion-row>
+              <ion-col col-6>
+                <i class="fa fa-calendar" aria-hidden="true"></i> {{upcomingEvent.startdate | date: 'yMMMd'}}
+              </ion-col>
+              <ion-col col-6>
+                <i class="fa fa-clock-o" aria-hidden="true"></i> {{upcomingEvent.starttime}} - {{upcomingEvent.endtime}}
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-6>
+                <i class="fa fa-map-marker" aria-hidden="true"></i> {{upcomingEvent.location}}
+              </ion-col>
+              <ion-col col-6 class="e-type">
+                <i class="fa fa-unlock" aria-hidden="true"></i> {{upcomingEvent.type}}
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </div>
+      </ion-card>
+    </ion-list>
   </div>
 
 </ion-content>

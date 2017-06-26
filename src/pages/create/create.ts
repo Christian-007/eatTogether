@@ -16,14 +16,18 @@ import { RestapiserviceProvider } from '../../providers/restapiservice/restapise
 })
 export class CreatePage {
   title: string; description: string;
-  loc: string; type: string;
+  loc: string; type: string = "public";
   startdate: any; enddate: any;
   starttime: any; endtime: any; user_id: any;
   loading: Loading; alert: Alert;
+  eventTypeOptions: { title: string };
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public tabsService: TabsServiceProvider, public loadingCtrl: LoadingController, private alertCtrl: AlertController, public restapiService: RestapiserviceProvider) {
     let currentUser = this.restapiService.getUserInfo();
     this.user_id = currentUser["id"];
+    this.eventTypeOptions = {
+      title: 'Event Type'
+    };
   }
 
   ionViewDidLoad() {

@@ -16,6 +16,7 @@ import { TabsServiceProvider } from '../../providers/tabs-service/tabs-service';
   templateUrl: 'home-tab.html',
 })
 export class HomeTabPage {
+  homeSegment: string = "upcoming";
   loading: Loading; alert: Alert;
   myEventsData: any; myEventsArray: any[];
   upcomingEventsData: any; upcomingEventsArray: any[];

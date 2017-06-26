@@ -63,7 +63,11 @@
       <label for="type">Event Type</label>
       <ion-row>
         <ion-col col-12>
-          <ion-input class="form-input" type="text" name="type" [(ngModel)]="type" placeholder="Event Type"></ion-input>
+          <!-- <ion-input class="form-input" type="text" name="type" [(ngModel)]="type" placeholder="Event Type"></ion-input> -->
+          <ion-select [(ngModel)]="type" [selectOptions]="eventTypeOptions">
+            <ion-option value="public">Public</ion-option>
+            <ion-option value="private">Private</ion-option>
+          </ion-select>
         </ion-col>
       </ion-row>
 
