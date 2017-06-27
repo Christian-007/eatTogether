@@ -18,6 +18,15 @@
 
 <ion-content>
   <div class="form-content">
+    <!-- <img src="http://localhost:5000/image.png" alt=""> -->
+    <img src="{{pathForImage(lastImage)}}" style="width: 100%" [hidden]="lastImage === null">
+    <h3 [hidden]="lastImage !== null">Please Select Image!</h3>
+    <button ion-button icon-left (click)="presentActionSheet()">
+      <ion-icon name="camera"></ion-icon>Select Image
+    </button>
+    <!-- <button ion-button icon-left (click)="uploadImage()" [disabled]="lastImage === null">
+      <ion-icon name="cloud-upload"></ion-icon>Upload
+    </button> -->
     <ion-grid>
       <label for="title">Event Title</label>
       <ion-row>

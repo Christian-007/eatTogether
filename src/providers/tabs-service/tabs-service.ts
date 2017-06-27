@@ -17,14 +17,14 @@ export class TabsServiceProvider {
 
   }
 
-  createEventPost(title: string, description: string, location: string, startdate: any, starttime: any, enddate: any, endtime: any, type: any, user_id: any) {
+  createEventPost(title: string, description: string, location: string, imgName: string, startdate: any, starttime: any, enddate: any, endtime: any, type: any, user_id: any) {
     var headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
  
-    var params = 'title='+title+'&'+'description='+description+'&'+'location='+location+'&'+'startdate='+startdate+'&'+'starttime='+starttime+'&'+'enddate='+enddate+'&'+'endtime='+endtime+'&'+'type='+type+'&'+'user_id='+user_id;
+    var params = 'title='+title+'&'+'description='+description+'&'+'location='+location+'&'+'imgName='+imgName+'&'+'startdate='+startdate+'&'+'starttime='+starttime+'&'+'enddate='+enddate+'&'+'endtime='+endtime+'&'+'type='+type+'&'+'user_id='+user_id;
 
     return new Promise(resolve => {
-      this.http.post("http://localhost:5000/create_events", params , {headers: headers})
+      this.http.post("https://restful-api-dissertation.herokuapp.com/create_events", params , {headers: headers})
         .subscribe(data => {
           this.data = data;
           resolve(this.data);
@@ -34,7 +34,7 @@ export class TabsServiceProvider {
 
   getAllEvents() {
     return new Promise(resolve => {
-      this.http.get("http://localhost:5000/events")
+      this.http.get("https://restful-api-dissertation.herokuapp.com/events")
         .map(res => res.json())
         .subscribe(data => {
           this.data = data;
@@ -47,7 +47,7 @@ export class TabsServiceProvider {
 
   getMyEvents(user_id: any) {
     return new Promise(resolve => {
-      this.http.get("http://localhost:5000/my_events/"+user_id)
+      this.http.get("https://restful-api-dissertation.herokuapp.com/my_events/"+user_id)
         .map(res => res.json())
         .subscribe(data => {
           this.data = data;
@@ -60,7 +60,7 @@ export class TabsServiceProvider {
 
   getUpcomingEvents(user_id: any) {
     return new Promise(resolve => {
-      this.http.get("http://localhost:5000/upcoming_events/"+user_id)
+      this.http.get("https://restful-api-dissertation.herokuapp.com/upcoming_events/"+user_id)
         .map(res => res.json())
         .subscribe(data => {
           this.data = data;

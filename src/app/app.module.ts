@@ -19,6 +19,11 @@ import { HomeTabPage } from '../pages/home-tab/home-tab';
 import { MapsTabPage } from '../pages/maps-tab/maps-tab';
 import { TabsServiceProvider } from '../providers/tabs-service/tabs-service';
 
+import { File } from '@ionic-native/file';
+import { Transfer } from '@ionic-native/transfer';
+import { FilePath } from '@ionic-native/file-path';
+import { Camera } from '@ionic-native/camera';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -51,6 +56,10 @@ import { TabsServiceProvider } from '../providers/tabs-service/tabs-service';
   providers: [
     StatusBar,
     SplashScreen,
+    File,
+    Transfer,
+    Camera,
+    FilePath,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     RestapiserviceProvider,
     SignupServiceProvider,

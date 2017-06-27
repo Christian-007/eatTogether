@@ -73,7 +73,7 @@ export class RestapiserviceProvider {
 
   getOneUserInfo(user_id: any) {
     return new Promise(resolve => {
-      this.http.get("http://localhost:5000/user/" + user_id)
+      this.http.get("https://restful-api-dissertation.herokuapp.com/user/" + user_id)
         .map(res => res.json())
         .subscribe(data => {
           this.data = data;
