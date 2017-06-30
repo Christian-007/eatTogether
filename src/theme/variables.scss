@@ -12,6 +12,20 @@ $font-path: "../assets/fonts";
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/v2/theming/overriding-ionic-variables/
 
+.bg-img {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  min-height: 150px;
+  display: block;
+}
+
+.bg-img:before {
+  content: "";
+  display: block;
+  padding-bottom: 70%;
+}
+
 .card-custom, ion-card {
   font-family: 'Source Sans Pro', sans-serif !important;
 
@@ -20,19 +34,19 @@ $font-path: "../assets/fonts";
     height: auto;
   }
 
-  .bg-img {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    min-height: 150px;
-    display: block;
-  }
+  // .bg-img {
+  //   background-size: cover;
+  //   background-repeat: no-repeat;
+  //   background-position: 50% 50%;
+  //   min-height: 150px;
+  //   display: block;
+  // }
 
-  .bg-img:before {
-    content: "";
-    display: block;
-    padding-bottom: 70%;
-  }
+  // .bg-img:before {
+  //   content: "";
+  //   display: block;
+  //   padding-bottom: 70%;
+  // }
 
   .cardTitle {
     font-weight: 700;

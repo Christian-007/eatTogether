@@ -18,6 +18,7 @@ import { ProfileTabPage } from '../pages/profile-tab/profile-tab';
 import { HomeTabPage } from '../pages/home-tab/home-tab';
 import { MapsTabPage } from '../pages/maps-tab/maps-tab';
 import { TabsServiceProvider } from '../providers/tabs-service/tabs-service';
+import { EventDetailsPage } from '../pages/event-details/event-details';
 
 import { File } from '@ionic-native/file';
 import { Transfer } from '@ionic-native/transfer';
@@ -34,7 +35,8 @@ import { Camera } from '@ionic-native/camera';
     ProfileTabPage,
     HomeTabPage,
     MapsTabPage,
-    CreatePage
+    CreatePage,
+    EventDetailsPage
   ],
   imports: [
     BrowserModule,
@@ -51,7 +53,8 @@ import { Camera } from '@ionic-native/camera';
     ProfileTabPage,
     HomeTabPage,
     MapsTabPage,
-    CreatePage
+    CreatePage,
+    EventDetailsPage
   ],
   providers: [
     StatusBar,

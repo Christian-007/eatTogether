@@ -1,0 +1,45 @@
+<!--
+  Generated template for the EventDetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Event Details</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div class="bg-img" [ngStyle]="{ 'background-image': 'url(' + upcomingEvent.imgName + ')'}"></div>
+  <div class="sectionDetails">
+    <ion-row>
+      <ion-col col-6><i class="fa fa-calendar" aria-hidden="true"></i> {{upcomingEvent.startdate | date: 'yMMMd'}}</ion-col>
+      <ion-col col-6 class="text-right"><i class="fa fa-clock-o" aria-hidden="true"></i>
+       {{upcomingEvent.starttime}} - {{upcomingEvent.endtime}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12><i class="fa fa-map-marker" aria-hidden="true"></i> {{upcomingEvent.location}}</ion-col>
+    </ion-row>
+
+    <p class="title">{{upcomingEvent.title}}</p>
+    <p class="description">
+      {{upcomingEvent.description}}
+    </p>
+  </div>
+  <p class="hosted">Hosted by</p>
+  <hr>
+  <ion-row class="hosted-by">
+    <ion-col col-3 class="avatar-col"><img class="avatar" src="assets/img/beehive.jpg"></ion-col>
+    <ion-col col-9>
+      <ion-row>
+        <ion-col col-12 class="user-name">{{upcomingEvent.user_fname}} {{upcomingEvent.user_lname}}</ion-col>
+        <ion-col col-12 class="user-location">Sheffield, United Kingdom</ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+</ion-content>

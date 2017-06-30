@@ -133,14 +133,15 @@ export class CreatePage {
     if (img === null) {
       return '';
     } else {
-      return cordova.file.dataDirectory + img;
+      return 'url(' + cordova.file.dataDirectory + img + ')';
     }
   }
 
   public uploadImage() {
     // Destination URL
-    // var url = "http://yoururl/upload.php";
     var url = "https://restful-api-dissertation.herokuapp.com/img_upload";
+    // var urlLocal = "http://192.168.1.31:5000/img_upload";
+    var urlLocal = "http://143.167.211.7:5000/img_upload";
    
     // File for Upload
     var targetPath = this.pathForImage(this.lastImage);
@@ -164,7 +165,7 @@ export class CreatePage {
     // this.loading.present();
    
     // Use the FileTransfer to upload the image
-    fileTransfer.upload(targetPath, url, options).then(data => {
+    fileTransfer.upload(targetPath, this.restapiService.ipAddress+"/img_upload", options).then(data => {
       // this.loading.dismissAll()
       this.presentToast('Image succesful uploaded.');
     }, err => {
@@ -191,13 +192,13 @@ export class CreatePage {
     this.tabsService.createEventPost(this.title, this.description, this.loc, this.lastImage, this.startdate, this.starttime, this.enddate, this.endtime, this.type, this.user_id)
     .then(data => {
       console.log(JSON.stringify(data));
-      this.loading.dismissAll();
+      this.loading.dismiss();
     }, error => {
       console.log(JSON.stringify(error.json()));
-      this.loading.dismissAll();
+      this.loading.dismiss();
       this.showAlertError();
     });
-    
+    this.loading.dismiss();
   }
 
   showLoading() {

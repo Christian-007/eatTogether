@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ModalController, AlertController, 
 import { CreatePage } from '../create/create';
 import { RestapiserviceProvider } from '../../providers/restapiservice/restapiservice';
 import { TabsServiceProvider } from '../../providers/tabs-service/tabs-service';
+import { EventDetailsPage } from '../event-details/event-details';
 
 /**
  * Generated class for the HomeTabPage page.
@@ -21,6 +22,8 @@ export class HomeTabPage {
   myEventsData: any; myEventsArray: any[];
   upcomingEventsData: any; upcomingEventsArray: any[];
   currentUser: any; currentUserID: any;
+  // ipAddress = "http://192.168.1.31:5000";
+  ipAddress = "http://143.167.211.7:5000";
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public restapiService: RestapiserviceProvider, public tabsService: TabsServiceProvider, public loadingCtrl: LoadingController, private alertCtrl: AlertController) {
     this.currentUser = this.restapiService.getUserInfo();
@@ -54,7 +57,7 @@ export class HomeTabPage {
           title: event.title,
           description: event.description,
           location: event.location,
-          imgName: 'https://restful-api-dissertation.herokuapp.com/image/'+event.imgName,
+          imgName: this.restapiService.ipAddress+'/image/'+event.imgName,
           starttime: event.starttime,
           startdate: event.startdate,
           endtime: event.endtime,
@@ -79,7 +82,7 @@ export class HomeTabPage {
         title: event.title,
         description: event.description,
         location: event.location,
-        imgName: event.imgName,
+        imgName: this.restapiService.ipAddress+'/image/'+event.imgName,
         starttime: event.starttime,
         startdate: event.startdate,
         endtime: event.endtime,
@@ -90,32 +93,11 @@ export class HomeTabPage {
         user_lname: event.lname
       });
     }
-    // this.showLoading();
+  }
 
-    // this.tabsService.getMyEvents(this.currentUser["id"])
-    // .then(data => {
-    //   this.myEventsData = data;
-
-    //   this.myEventsArray = [];
-    //   for(let event of this.myEventsData) { 
-    //     this.myEventsArray.push({
-    //       id: event.id,
-    //       title: event.title,
-    //       description: event.description,
-    //       location: event.location,
-    //       starttime: event.starttime,
-    //       startdate: event.startdate,
-    //       endtime: event.endtime,
-    //       enddate: event.enddate,
-    //       type: event.type,
-    //       user_id: event.user_id,
-    //       user_fname: event.fname,
-    //       user_lname: event.lname
-    //     });
-    //   }
-
-    //   this.loading.dismiss();
-    // });
+  tapEvent(upcomingEvent) {
+    console.log("Tapped");
+    this.navCtrl.push(EventDetailsPage, { upcomingEvent: upcomingEvent });
   }
 
   showLoading() {

@@ -34,11 +34,10 @@
     <ion-list *ngSwitchCase="'upcoming'">
       <div class="sectionTitle">
         UPCOMING EVENT
-        <ion-badge item-end>260k</ion-badge>
+        <ion-badge item-end>{{upcomingEventsArray?.length}}</ion-badge>
       </div>
 
-      <ion-card *ngFor="let upcomingEvent of upcomingEventsArray">
-        <!-- <div class="bg-img" style="background-image: url('https://restful-api-dissertation.herokuapp.com/image/{{upcomingEvent.imgName}}')"></div> -->
+      <ion-card *ngFor="let upcomingEvent of upcomingEventsArray" (tap)="tapEvent(upcomingEvent)">
         <div class="bg-img" [ngStyle]="{ 'background-image': 'url(' + upcomingEvent.imgName + ')'}"></div>
         <ion-card-content>
           <ion-card-title class="cardTitle">
@@ -73,7 +72,8 @@
         MY EVENT
         <ion-badge item-end>260k</ion-badge>
       </div>
-      <ion-card *ngFor="let upcomingEvent of upcomingEventsArray">
+      <!-- This tap on MY EVENT MAY NOT WORK -->
+      <ion-card *ngFor="let upcomingEvent of upcomingEventsArray" (tap)="tapEvent(upcomingEvent)">
         <div *ngIf="upcomingEvent.user_id == currentUserID">
           <!-- <div class="bg-img" style="background-image: url('assets/img/cavendish.jpg')"></div> -->
           <div class="bg-img" [ngStyle]="{ 'background-image': 'url(' + upcomingEvent.imgName + ')'}"></div>

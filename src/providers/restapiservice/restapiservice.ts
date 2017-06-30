@@ -29,7 +29,11 @@ export class User {
 export class RestapiserviceProvider {
   currentUser: User;
   data: any;
-  apiUrl = "http://localhost:5000/signup";
+  apiUrl = "http://localhost:5000/";
+  // ipAddress = "http://192.168.1.31:5000";
+  // ipAddress = "http://143.167.211.7:5000";
+  // ipAddress = "http://10.32.20.53:5000";
+  ipAddress = "https://restful-api-dissertation.herokuapp.com";
 
   constructor(public http: Http) {
     console.log('Hello RestapiserviceProvider Provider');
@@ -41,7 +45,8 @@ export class RestapiserviceProvider {
     }
 
     return new Promise(resolve => {
-      this.http.get("https://restful-api-dissertation.herokuapp.com/users")
+      // this.http.get("https://restful-api-dissertation.herokuapp.com/users")
+      this.http.get(this.ipAddress+"/users")
         .map(res => res.json())
         .subscribe(data => {
           this.data = data;
@@ -60,7 +65,8 @@ export class RestapiserviceProvider {
 
     return new Promise(resolve => {
       // this.http.post("http://localhost:5000/login", params , {headers: headers})
-      this.http.post("https://restful-api-dissertation.herokuapp.com/login", params , {headers: headers})
+      // this.http.post("https://restful-api-dissertation.herokuapp.com/login", params , {headers: headers})
+      this.http.post(this.ipAddress+"/login", params , {headers: headers})
         .map(res => res.json())
         .subscribe(data => {
           this.data = data;
@@ -73,7 +79,8 @@ export class RestapiserviceProvider {
 
   getOneUserInfo(user_id: any) {
     return new Promise(resolve => {
-      this.http.get("https://restful-api-dissertation.herokuapp.com/user/" + user_id)
+      // this.http.get("https://restful-api-dissertation.herokuapp.com/user/" + user_id)
+      this.http.get(this.ipAddress+"/user"  + user_id)
         .map(res => res.json())
         .subscribe(data => {
           this.data = data;
