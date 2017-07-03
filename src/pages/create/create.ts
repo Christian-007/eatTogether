@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ActionSheetController, ToastController, Platform, AlertController, Alert, LoadingController, Loading } from 'ionic-angular';
+import { Component} from '@angular/core';
+import { IonicPage, Events, ViewController, NavController, NavParams, ActionSheetController, ToastController, Platform, AlertController, Alert, LoadingController, Loading } from 'ionic-angular';
 import { TabsServiceProvider } from '../../providers/tabs-service/tabs-service';
 import { RestapiserviceProvider } from '../../providers/restapiservice/restapiservice';
+import { SearchLocationPage } from '../search-location/search-location';
 
 import { File } from '@ionic-native/file';
 import { Transfer, TransferObject } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
 import { Camera } from '@ionic-native/camera';
+import { googlemaps } from 'googlemaps';
 
 /**
  * Generated class for the CreatePage page.
@@ -16,6 +18,7 @@ import { Camera } from '@ionic-native/camera';
  */
 
 declare var cordova: any;
+// declare var google: any;
 
 @IonicPage()
 @Component({
@@ -23,20 +26,28 @@ declare var cordova: any;
   templateUrl: 'create.html',
 })
 export class CreatePage {
+
   title: string; description: string;
   loc: string; type: string = "public";
+  address: string;
   startdate: any; enddate: any;
   starttime: any; endtime: any; user_id: any;
   loading: Loading; alert: Alert;
   eventTypeOptions: { title: string };
   lastImage: string = null;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public tabsService: TabsServiceProvider, public loadingCtrl: LoadingController, private alertCtrl: AlertController, public restapiService: RestapiserviceProvider, private camera: Camera, private transfer: Transfer, private file: File, private filePath: FilePath, public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, public platform: Platform) {
+  constructor(public navCtrl: NavController, public events: Events, public viewCtrl: ViewController, public navParams: NavParams, public tabsService: TabsServiceProvider, public loadingCtrl: LoadingController, private alertCtrl: AlertController, public restapiService: RestapiserviceProvider, private camera: Camera, private transfer: Transfer, private file: File, private filePath: FilePath, public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, public platform: Platform) {
     let currentUser = this.restapiService.getUserInfo();
     this.user_id = currentUser["id"];
     this.eventTypeOptions = {
       title: 'Event Type'
     };
+    this.address = "Search for location";
+    this.events.subscribe('searchLocation', (data) => {
+      // console.log("data: " + data["location"]);
+      this.loc = data["location"];
+      this.address = data["address"];
+    });
   }
 
   ionViewDidLoad() {
@@ -45,8 +56,15 @@ export class CreatePage {
     // this.enddate = new Date().toISOString();
   }
 
+  searchLocation() {
+    this.navCtrl.push(SearchLocationPage);
+  }
+
   dismissModal() {
-    this.navCtrl.pop();
+    this.restapiService.param = "Hello";
+    this.events.unsubscribe('searchLocation');
+    this.viewCtrl.dismiss();
+    // this.navCtrl.pop();
   }
 
   public presentActionSheet() {

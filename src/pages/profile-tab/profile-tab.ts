@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { RestapiserviceProvider } from '../../providers/restapiservice/restapiservice';
 
 /**
@@ -18,7 +18,7 @@ export class ProfileTabPage {
   email: string; id: string;
   location: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public restapiService: RestapiserviceProvider) {
+  constructor(public navCtrl: NavController, public events: Events, public navParams: NavParams, public restapiService: RestapiserviceProvider) {
     let currentUser = this.restapiService.getUserInfo();
     this.id = currentUser["id"];
     this.fname = currentUser["fname"]; this.lname = currentUser["lname"];

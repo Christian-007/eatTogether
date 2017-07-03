@@ -34,6 +34,7 @@ export class RestapiserviceProvider {
   // ipAddress = "http://143.167.211.7:5000";
   // ipAddress = "http://10.32.20.53:5000";
   ipAddress = "https://restful-api-dissertation.herokuapp.com";
+  param: any;
 
   constructor(public http: Http) {
     console.log('Hello RestapiserviceProvider Provider');

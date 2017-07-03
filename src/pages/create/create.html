@@ -17,6 +17,7 @@
 
 
 <ion-content>
+  <!-- <div #map id="map"></div>   -->
   <div id="photo" class="bg-img" [style.background-image]="pathForImage(lastImage)">
     <button class="select-btn" (click)="presentActionSheet()"><ion-icon name="camera"></ion-icon> SELECT IMAGE</button>
   </div>
@@ -45,7 +46,9 @@
       <ion-row>
         <label for="loc"><i class="fa fa-map-marker" aria-hidden="true"></i> Location</label>
         <ion-col col-12>
-          <ion-input class="form-input" type="text" name="loc" [(ngModel)]="loc" placeholder="Location"></ion-input>
+          <!-- <ion-input class="form-input" type="text" name="loc" [(ngModel)]="loc" placeholder="Location" (click)="searchLocation()">
+          </ion-input> -->
+          <button ion-button color="light" (click)="searchLocation()" class="search-btn" full>{{address}}</button>
         </ion-col>
       </ion-row>
 

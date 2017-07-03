@@ -20,7 +20,7 @@ page-create {
         font-weight: 700;
       }
 
-      .form-input {
+      .form-input, .search-btn {
         border-radius: 20px;
         padding: 0 10px;
         border: 2px solid #F0F0F0;
@@ -32,6 +32,22 @@ page-create {
 
       .form-input.datetime-md {
         padding: 12px;
+      }
+
+      .search-btn {
+        background-color: #fff;
+        box-shadow: none;
+        font-size: 14px;
+        padding: 20px 10px !important;
+
+        .button-inner {
+          color: #a0a0a0;
+          display: block !important;
+          position: absolute;
+          left: 15px; top: 13px;
+          text-align: left;
+          text-transform: none;
+        }
       }
 
       textarea {

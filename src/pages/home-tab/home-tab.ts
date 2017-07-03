@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, AlertController, Alert, LoadingController, Loading } from 'ionic-angular';
+import { IonicPage, Events, NavController, NavParams, ModalController, AlertController, Alert, LoadingController, Loading } from 'ionic-angular';
 import { CreatePage } from '../create/create';
 import { RestapiserviceProvider } from '../../providers/restapiservice/restapiservice';
 import { TabsServiceProvider } from '../../providers/tabs-service/tabs-service';
@@ -24,12 +24,12 @@ export class HomeTabPage {
   currentUser: any; currentUserID: any;
   // ipAddress = "http://192.168.1.31:5000";
   ipAddress = "http://143.167.211.7:5000";
+  paramReceived: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public restapiService: RestapiserviceProvider, public tabsService: TabsServiceProvider, public loadingCtrl: LoadingController, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public events: Events, public navParams: NavParams, public modalCtrl: ModalController, public restapiService: RestapiserviceProvider, public tabsService: TabsServiceProvider, public loadingCtrl: LoadingController, private alertCtrl: AlertController) {
     this.currentUser = this.restapiService.getUserInfo();
     this.currentUserID = this.currentUser["id"];
     // console.log("currentUser Name: " + currentUser["fname"]);
-
     this.getUpcomingEvents();
     // this.getMyEvents();
   }
@@ -40,6 +40,10 @@ export class HomeTabPage {
 
   goToCreateEventPage() {
     let modal = this.modalCtrl.create(CreatePage);
+    // modal.onDidDismiss(data => {
+    //   console.log(data);
+    //   this.paramReceived = data["foo"];
+    // });
     modal.present();
   }
 
