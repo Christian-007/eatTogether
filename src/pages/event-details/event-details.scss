@@ -39,13 +39,55 @@ page-event-details {
 
     }
 
+    hr {
+      margin-bottom: 0;
+    }
+
     .hosted {
       font-weight: 700;
       margin: 5px 10px 0;
     }
 
+    .count-people {
+      font-weight: 700;
+      padding: 5px 10px 0;
+      color: #8a8a8a;
+    }
+
     .avatar-col {
+      position: relative;
+
+      img.avatar {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    .avatar-col, .people-col {
       text-align: center;
+    }
+
+    .joined-people {
+      background-color: #fafafa;
+      position: relative;
+      border-bottom: 3px solid #F1F1F1;
+
+      .right-btn {
+        position: absolute;
+        top: 40%;
+        right: 0;
+      }
+    }
+
+    .people-col {
+      padding: 5px 10px;
+
+      .avatar {
+        width: 25px;
+        height: 25px;
+      }
     }
 
     .avatar {
@@ -55,9 +97,13 @@ page-event-details {
       overflow: hidden;
     }
 
+    .hosted-by:hover {
+      background-color: #fafafa;
+    }
+
     .hosted-by {
-      padding-bottom: 0.5em;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+      padding: 0.3em 0;
+      border-bottom: 3px solid #F1F1F1;
 
       [col-12]{
         padding: 3px 0 0;
@@ -70,6 +116,51 @@ page-event-details {
 
       .user-location {
         font-size: 12px;
+      }
+    }
+
+    .right-btn {
+      position: relative;
+
+      i {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #8a8a8a;
+      }
+    }
+
+    .button-group {
+      text-align: center;
+      padding: 5px 0;
+
+      .join-btn {
+        button {
+          background-color: #fff;
+          color: #2C3859;
+          border: 1px solid #2C3859;
+        }
+      }
+
+      .cancel-btn {
+        button {
+          background-color: #fff;
+          color: #F53D3D;
+          border: 1px solid #F53D3D;
+        }
+      }
+
+      button {
+        font-size: 14px;
+        margin: 0;
+        width: 100%;
+        font-weight: 700;
+        box-shadow: none;
+
+        i {
+          margin-right: 5px;
+        }
       }
     }
   }

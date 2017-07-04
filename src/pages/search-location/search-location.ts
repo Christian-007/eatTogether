@@ -49,8 +49,8 @@ export class SearchLocationPage implements OnInit{
     console.log("Item: " + JSON.stringify(item));
     let data = 
     { 
-      'location': this.loc,
-      'address': item["description"]
+      'location': item["description"],
+      'city': this.loc
     };
     this.events.publish('searchLocation', data);
     this.navCtrl.pop();

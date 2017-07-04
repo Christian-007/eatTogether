@@ -29,7 +29,7 @@ export class CreatePage {
 
   title: string; description: string;
   loc: string; type: string = "public";
-  address: string;
+  city: string;
   startdate: any; enddate: any;
   starttime: any; endtime: any; user_id: any;
   loading: Loading; alert: Alert;
@@ -42,12 +42,13 @@ export class CreatePage {
     this.eventTypeOptions = {
       title: 'Event Type'
     };
-    this.address = "Search for location";
+    this.loc = "Search for location";
     this.events.subscribe('searchLocation', (data) => {
       // console.log("data: " + data["location"]);
+      this.city = data["city"];
       this.loc = data["location"];
-      this.address = data["address"];
     });
+    
   }
 
   ionViewDidLoad() {
@@ -151,6 +152,14 @@ export class CreatePage {
     if (img === null) {
       return '';
     } else {
+      return cordova.file.dataDirectory + img;
+    }
+  }
+
+  public getImgPath(img) {
+    if (img === null) {
+      return '';
+    } else {
       return 'url(' + cordova.file.dataDirectory + img + ')';
     }
   }
@@ -158,11 +167,10 @@ export class CreatePage {
   public uploadImage() {
     // Destination URL
     var url = "https://restful-api-dissertation.herokuapp.com/img_upload";
-    // var urlLocal = "http://192.168.1.31:5000/img_upload";
-    var urlLocal = "http://143.167.211.7:5000/img_upload";
    
     // File for Upload
     var targetPath = this.pathForImage(this.lastImage);
+    console.log("targetPath: " + targetPath);
    
     // File name only
     var filename = this.lastImage;
@@ -196,6 +204,7 @@ export class CreatePage {
     console.log(this.title);
     console.log(this.description);
     console.log(this.loc);
+    console.log(this.city);
     console.log(this.type);
     console.log(this.startdate);
     console.log(this.enddate);
@@ -207,7 +216,7 @@ export class CreatePage {
     this.uploadImage();
 
     // console.log(this.fname); console.log(this.lname); console.log(this.email); console.log(this.password);
-    this.tabsService.createEventPost(this.title, this.description, this.loc, this.lastImage, this.startdate, this.starttime, this.enddate, this.endtime, this.type, this.user_id)
+    this.tabsService.createEventPost(this.title, this.description, this.loc, this.city, this.lastImage, this.startdate, this.starttime, this.enddate, this.endtime, this.type, this.user_id)
     .then(data => {
       console.log(JSON.stringify(data));
       this.loading.dismiss();

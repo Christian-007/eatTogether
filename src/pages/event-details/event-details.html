@@ -33,13 +33,37 @@
   </div>
   <p class="hosted">Hosted by</p>
   <hr>
-  <ion-row class="hosted-by">
+  <ion-row class="hosted-by" (tap)="userProfile()">
     <ion-col col-3 class="avatar-col"><img class="avatar" src="assets/img/beehive.jpg"></ion-col>
-    <ion-col col-9>
+    <ion-col col-8>
       <ion-row>
         <ion-col col-12 class="user-name">{{upcomingEvent.user_fname}} {{upcomingEvent.user_lname}}</ion-col>
         <ion-col col-12 class="user-location">Sheffield, United Kingdom</ion-col>
       </ion-row>
+    </ion-col>
+    <ion-col col-1 class="right-btn">
+      <i class="fa fa-angle-right fa-2x" aria-hidden="true"></i>
+    </ion-col>
+  </ion-row>
+  <ion-row class="joined-people" (tap)="joinedPeople()">
+    <p class="count-people">5 people joined</p>
+    <ion-col col-11 class="people-col">
+      <img class="avatar" src="assets/img/beehive.jpg">
+      <img class="avatar" src="assets/img/cavendish.jpg">
+      <img class="avatar" src="assets/img/yates.jpg">
+      <img class="avatar" src="assets/img/beehive.jpg">
+      <img class="avatar" src="assets/img/cavendish.jpg">
+    </ion-col>
+    <ion-col col-1 class="right-btn">
+      <i class="fa fa-angle-right fa-2x" aria-hidden="true"></i>
+    </ion-col>
+  </ion-row>
+  <ion-row class="button-group">
+    <ion-col col-6 class="join-btn">
+      <button ion-button round><i class="fa fa-check" aria-hidden="true"></i> JOIN</button>
+    </ion-col>
+    <ion-col col-6 class="cancel-btn">
+      <button ion-button round><i class="fa fa-times" aria-hidden="true"></i> CANCEL</button>
     </ion-col>
   </ion-row>
 </ion-content>

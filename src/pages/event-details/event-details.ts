@@ -23,4 +23,12 @@ export class EventDetailsPage {
     console.log('ionViewDidLoad EventDetailsPage');
   }
 
+  userProfile() {
+    console.log("Hey clicked user profile");
+  }
+
+  joinedPeople() {
+    console.log("Hey clicked joined people");
+  }
+
 }
