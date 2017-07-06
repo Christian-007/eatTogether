@@ -7,17 +7,21 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>ProfileTab</ion-title>
+    <ion-title>Profile</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-  <p>ID: {{id}}</p>
-  <p>First Name: {{fname}}</p>
-  <p>Last Name: {{lname}}</p>
-  <p>Email: {{email}}</p>
-  <p>Location: {{location}}</p>
+<ion-content>
+  <div class="container">
+    <div id="photo" class="bg-img"></div>
+    <div class="avatar-col">
+      <img class="avatar" src="assets/img/beehive.jpg">
+    </div>
+    <button class="edit">EDIT PROFILE</button>
+    <p class="name">{{fname}} {{lname}}</p>
+    <p class="location"><i class="fa fa-location-arrow" aria-hidden="true"></i> {{location}}</p>
+  </div>
   <a href="#" (click)="logoutPage()"> Logout</a>
 </ion-content>
