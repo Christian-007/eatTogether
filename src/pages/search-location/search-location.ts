@@ -39,21 +39,29 @@ export class SearchLocationPage implements OnInit{
   chooseItem(item){
     let itemSelected = item;
     this.searchItem = item;
+    let address = "";
     console.log("Item terms length: " + item["terms"].length);
     for(let i = 0; i<item["terms"].length; i++){
       if(i==item["terms"].length-2){
         console.log("City: " + JSON.stringify(item["terms"][i]["value"]));
         this.loc = item["terms"][i]["value"];
+        break;
+      }else {
+        address += item["terms"][i]["value"];
+        if(i<item["terms"].length-3){
+          address += ", ";
+        }
       }
     }
     console.log("Item: " + JSON.stringify(item));
     let data = 
     { 
-      'location': item["description"],
+      'location': address,
       'city': this.loc
     };
     this.events.publish('searchLocation', data);
     this.navCtrl.pop();
+    console.log("ADDRESS: " + address);
   }
 
   updateSearch() {

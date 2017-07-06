@@ -40,10 +40,13 @@ export class HomeTabPage {
 
   goToCreateEventPage() {
     let modal = this.modalCtrl.create(CreatePage);
-    // modal.onDidDismiss(data => {
-    //   console.log(data);
-    //   this.paramReceived = data["foo"];
-    // });
+    modal.onDidDismiss(data => {
+      console.log(data);
+      if(data["hasData"]){
+        // Refresh page with new data
+        this.getUpcomingEvents();
+      }
+    });
     modal.present();
   }
 
@@ -61,6 +64,7 @@ export class HomeTabPage {
           title: event.title,
           description: event.description,
           location: event.location,
+          city: event.city,
           imgName: this.restapiService.ipAddress+'/image/'+event.imgName,
           starttime: event.starttime,
           startdate: event.startdate,
@@ -86,6 +90,7 @@ export class HomeTabPage {
         title: event.title,
         description: event.description,
         location: event.location,
+        city: event.city,
         imgName: this.restapiService.ipAddress+'/image/'+event.imgName,
         starttime: event.starttime,
         startdate: event.startdate,

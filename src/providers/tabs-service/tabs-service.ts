@@ -51,6 +51,32 @@ export class TabsServiceProvider {
     });
   }
 
+  checkUsersInEvent(event_id: any) {
+    return new Promise(resolve => {
+      this.http.get(this.restapiService.ipAddress+"/users_events/"+event_id)
+        .map(res => res.json())
+        .subscribe(data => {
+          this.data = data;
+          resolve(this.data);
+        }, error => {
+          console.log(JSON.stringify(error.json()));
+        });
+    });
+  }
+
+  checkEventInformation(event_id: any) {
+    return new Promise(resolve => {
+      this.http.get(this.restapiService.ipAddress+"/event/"+event_id)
+        .map(res => res.json())
+        .subscribe(data => {
+          this.data = data;
+          resolve(this.data);
+        }, error => {
+          console.log(JSON.stringify(error.json()));
+        });
+    });
+  }
+
   getMyEvents(user_id: any) {
     return new Promise(resolve => {
       // this.http.get("https://restful-api-dissertation.herokuapp.com/my_events/"+user_id)

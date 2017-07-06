@@ -48,12 +48,6 @@ page-event-details {
       margin: 5px 10px 0;
     }
 
-    .count-people {
-      font-weight: 700;
-      padding: 5px 10px 0;
-      color: #8a8a8a;
-    }
-
     .avatar-col {
       position: relative;
 
@@ -73,6 +67,12 @@ page-event-details {
       background-color: #fafafa;
       position: relative;
       border-bottom: 3px solid #F1F1F1;
+
+      .count-people {
+        font-weight: 700;
+        padding: 5px 10px 0;
+        color: #4D82E9;
+      }
 
       .right-btn {
         position: absolute;
@@ -131,6 +131,11 @@ page-event-details {
       }
     }
 
+    ion-badge {
+      padding-left: 5px; padding-right: 5px;
+      font-size: 1rem;
+    }
+
     .button-group {
       text-align: center;
       padding: 5px 0;
@@ -142,6 +147,14 @@ page-event-details {
           border: 1px solid #2C3859;
         }
       }
+
+      .joined-btn {
+        button {
+          background-color: #2C3859;
+          color: #fff;
+        }
+      }
+
 
       .cancel-btn {
         button {

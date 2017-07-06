@@ -61,11 +61,10 @@ export class CreatePage {
     this.navCtrl.push(SearchLocationPage);
   }
 
-  dismissModal() {
-    this.restapiService.param = "Hello";
+  dismissModal(data) {
+    let pageChange = { 'hasData': data };
     this.events.unsubscribe('searchLocation');
-    this.viewCtrl.dismiss();
-    // this.navCtrl.pop();
+    this.viewCtrl.dismiss(pageChange);
   }
 
   public presentActionSheet() {
@@ -201,21 +200,9 @@ export class CreatePage {
   }
 
   createEvent() {
-    console.log(this.title);
-    console.log(this.description);
-    console.log(this.loc);
-    console.log(this.city);
-    console.log(this.type);
-    console.log(this.startdate);
-    console.log(this.enddate);
-    console.log(this.starttime);
-    console.log(this.lastImage);
-    console.log(this.endtime); console.log(this.user_id);
-
     this.showLoading();
     this.uploadImage();
 
-    // console.log(this.fname); console.log(this.lname); console.log(this.email); console.log(this.password);
     this.tabsService.createEventPost(this.title, this.description, this.loc, this.city, this.lastImage, this.startdate, this.starttime, this.enddate, this.endtime, this.type, this.user_id)
     .then(data => {
       console.log(JSON.stringify(data));
@@ -226,6 +213,7 @@ export class CreatePage {
       this.showAlertError();
     });
     this.loading.dismiss();
+    this.dismissModal(true);
   }
 
   showLoading() {
