@@ -51,6 +51,19 @@ export class TabsServiceProvider {
     });
   }
 
+  getEventsByCity(city_name: string){
+    return new Promise(resolve => {
+      this.http.get(this.restapiService.ipAddress+"/events/"+city_name)
+        .map(res => res.json())
+        .subscribe(data => {
+          this.data = data;
+          resolve(this.data);
+        }, error => {
+          console.log(JSON.stringify(error.json()));
+        });
+    });
+  }
+
   checkUsersInEvent(event_id: any) {
     return new Promise(resolve => {
       this.http.get(this.restapiService.ipAddress+"/users_events/"+event_id)
