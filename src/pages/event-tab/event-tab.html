@@ -15,10 +15,10 @@
 
 <ion-content>
   <div class="section-search">
-    <a href="#" class="close-btn">
+    <a href="#" class="close-btn" (click)="removeText()">
       <i class="fa fa-times" aria-hidden="true"></i>
     </a>
-    <input type="text" name="search" placeholder="Search by location.." value="{{searchCity}}" class="search-box">
+    <input type="text" name="search" placeholder="Search by location.." (keyup.enter)="searchEvent()" [(ngModel)]="searchCity" class="search-box">
 
     <p class="sr-text">SEARCH RESULT</p>
   </div>

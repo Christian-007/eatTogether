@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { IonicPage, Events, NavController, NavParams, ModalController, AlertController, Alert, LoadingController, Loading } from 'ionic-angular';
 import { CreatePage } from '../create/create';
 import { RestapiserviceProvider } from '../../providers/restapiservice/restapiservice';
@@ -26,12 +26,28 @@ export class HomeTabPage {
   ipAddress = "http://143.167.211.7:5000";
   paramReceived: any;
 
-  constructor(public navCtrl: NavController, public events: Events, public navParams: NavParams, public modalCtrl: ModalController, public restapiService: RestapiserviceProvider, public tabsService: TabsServiceProvider, public loadingCtrl: LoadingController, private alertCtrl: AlertController) {
+  constructor(
+    public navCtrl: NavController,
+    public events: Events,
+    public navParams: NavParams,
+    public modalCtrl: ModalController,
+    public restapiService: RestapiserviceProvider,
+    public tabsService: TabsServiceProvider,
+    public loadingCtrl: LoadingController,
+    private alertCtrl: AlertController,
+    private zone: NgZone
+  ) {
     this.currentUser = this.restapiService.getUserInfo();
     this.currentUserID = this.currentUser["id"];
-    // console.log("currentUser Name: " + currentUser["fname"]);
-    this.getUpcomingEvents();
-    // this.getMyEvents();
+    this.showLoading();
+    this.getUpcomingEvents(); // this.getMyEvents();
+
+    this.events.subscribe('pageChange',
+    (data) => {
+      console.log("HOMETAB data: " + data["isChange"]);
+      this.getUpcomingEvents();
+    });
+    
   }
 
   ionViewDidLoad() {
@@ -44,6 +60,7 @@ export class HomeTabPage {
       console.log(data);
       if(data["hasData"]){
         // Refresh page with new data
+        this.showLoading();
         this.getUpcomingEvents();
       }
     });
@@ -51,8 +68,6 @@ export class HomeTabPage {
   }
 
   getUpcomingEvents() {
-    this.showLoading();
-
     this.tabsService.getUpcomingEvents(this.currentUser["id"])
     .then(data => {
       this.upcomingEventsData = data;
@@ -76,8 +91,9 @@ export class HomeTabPage {
           user_lname: event.lname
         });
       }
-
-      this.loading.dismiss();
+      if(this.loading!==null){
+        this.loading.dismiss();
+      }
     });
   }
 

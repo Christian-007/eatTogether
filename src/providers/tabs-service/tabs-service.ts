@@ -28,8 +28,32 @@ export class TabsServiceProvider {
     var params = 'title='+title+'&'+'description='+description+'&'+'location='+location+'&'+'city='+city+'&'+'imgName='+imgName+'&'+'startdate='+startdate+'&'+'starttime='+starttime+'&'+'enddate='+enddate+'&'+'endtime='+endtime+'&'+'type='+type+'&'+'user_id='+user_id;
 
     return new Promise(resolve => {
-      // this.http.post("https://restful-api-dissertation.herokuapp.com/create_events", params , {headers: headers})
       this.http.post(this.restapiService.ipAddress+"/create_events", params , {headers: headers})
+        .subscribe(data => {
+          this.data = data;
+          resolve(this.data);
+        });
+    });
+  }
+
+  cancelJoinEvent(user_id: any, event_id: any) {
+    return new Promise(resolve => {
+      this.http.delete(this.restapiService.ipAddress+"/cancel_event/"+user_id+"/"+event_id)
+        .subscribe(data => {
+          this.data = data;
+          resolve(this.data);
+        });
+    });
+  }
+
+  joinEventPost(user_id: any, event_id: any) {
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+ 
+    var params = 'user_id='+user_id+'&'+'event_id='+event_id;
+
+    return new Promise(resolve => {
+      this.http.post(this.restapiService.ipAddress+"/join_events", params , {headers: headers})
         .subscribe(data => {
           this.data = data;
           resolve(this.data);

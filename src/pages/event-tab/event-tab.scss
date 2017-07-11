@@ -32,6 +32,10 @@ page-event-tab {
         background-color: #f8f9fb;
       }
 
+      .search-box::placeholder {
+        font-weight: 300;
+      }
+
       .sr-text {
         // float: left !important;
         font-weight: 300;

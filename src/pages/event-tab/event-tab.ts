@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, Loading } from 'ionic-angular';
 import { RestapiserviceProvider } from '../../providers/restapiservice/restapiservice';
 import { TabsServiceProvider } from '../../providers/tabs-service/tabs-service';
+import { EventDetailsPage } from '../event-details/event-details';
 
 /**
  * Generated class for the EventTabPage page.
@@ -29,6 +30,19 @@ export class EventTabPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EventTabPage');
+  }
+
+  removeText() {
+    this.searchCity = "";
+  }
+
+  searchEvent() {
+    console.log(this.searchCity);
+  }
+
+  tapEvent(upcomingEvent) {
+    console.log("Tapped");
+    this.navCtrl.push(EventDetailsPage, { upcomingEvent: upcomingEvent });
   }
 
   searchEventsByCity() {

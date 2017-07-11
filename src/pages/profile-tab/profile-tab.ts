@@ -31,6 +31,7 @@ export class ProfileTabPage {
 
   logoutPage() {
     this.restapiService.logout();
+    this.events.unsubscribe('pageChange');
     this.navCtrl.parent.parent.pop();
   }
 }

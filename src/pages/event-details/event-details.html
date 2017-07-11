@@ -67,11 +67,11 @@
     </ion-col>
 
     <ion-col col-6 class="join-btn" *ngIf="!isUserJoined">
-      <button ion-button round><i class="fa fa-check" aria-hidden="true"></i> JOIN</button>
+      <button ion-button round (click)="joinEvent()"><i class="fa fa-check" aria-hidden="true"></i> JOIN</button>
     </ion-col>
 
     <ion-col col-6 class="cancel-btn">
-      <button ion-button round><i class="fa fa-times" aria-hidden="true"></i> CANCEL</button>
+      <button ion-button round (click)="cancelEvent()"><i class="fa fa-times" aria-hidden="true"></i> CANCEL</button>
     </ion-col>
   </ion-row>
 </ion-content>
