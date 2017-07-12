@@ -22,9 +22,8 @@ export class HomeTabPage {
   myEventsData: any; myEventsArray: any[];
   upcomingEventsData: any; upcomingEventsArray: any[];
   currentUser: any; currentUserID: any;
-  // ipAddress = "http://192.168.1.31:5000";
-  ipAddress = "http://143.167.211.7:5000";
   paramReceived: any;
+  myEventCount: number = 0;
 
   constructor(
     public navCtrl: NavController,
@@ -91,10 +90,20 @@ export class HomeTabPage {
           user_lname: event.lname
         });
       }
+      this.countMyEvent();
+
       if(this.loading!==null){
         this.loading.dismiss();
       }
     });
+  }
+
+  countMyEvent() {
+    this.myEventCount = 0;
+    for(let i=0; i<this.upcomingEventsArray.length; i++){
+      if(this.upcomingEventsArray[i]["user_id"]==this.currentUserID)
+        this.myEventCount += 1;
+    }
   }
 
   getMyEvents() {

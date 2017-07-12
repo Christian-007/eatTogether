@@ -42,14 +42,19 @@ export class SearchLocationPage implements OnInit{
     let address = "";
     console.log("Item terms length: " + item["terms"].length);
     for(let i = 0; i<item["terms"].length; i++){
-      if(i==item["terms"].length-2){
-        console.log("City: " + JSON.stringify(item["terms"][i]["value"]));
-        this.loc = item["terms"][i]["value"];
+      if(item["terms"].length <= 2){
+        address += item["terms"][i]["value"];
         break;
       }else {
-        address += item["terms"][i]["value"];
-        if(i<item["terms"].length-3){
-          address += ", ";
+        if(i==item["terms"].length-2){
+          console.log("City: " + JSON.stringify(item["terms"][i]["value"]));
+          this.loc = item["terms"][i]["value"];
+          break;
+        }else {
+          address += item["terms"][i]["value"];
+          if(i<item["terms"].length-3){
+            address += ", ";
+          }
         }
       }
     }
@@ -61,7 +66,7 @@ export class SearchLocationPage implements OnInit{
     };
     this.events.publish('searchLocation', data);
     this.navCtrl.pop();
-    console.log("ADDRESS: " + address);
+    console.log("ADDRESS: " + data["location"] + " " + data["city"]);
   }
 
   updateSearch() {

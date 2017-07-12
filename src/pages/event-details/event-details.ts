@@ -18,7 +18,9 @@ export class EventDetailsPage {
   upcomingEvent; usersArray: any; eventInfo: any;
   currentUser: any;
   isUserJoined = false; isUserHost = false;
-  loading: Loading; alert: Alert; 
+  loading: Loading; alert: Alert;
+  peopleData: any; peopleArray: any;
+  ownerStatus: string;
 
   constructor(
     public navCtrl: NavController, 
@@ -33,6 +35,7 @@ export class EventDetailsPage {
     this.upcomingEvent = navParams.data.upcomingEvent;
     this.currentUser = this.restapiService.getUserInfo();
     this.checkIfUserHasJoined();
+    this.getPeopleInEvents();
   }
 
   ionViewDidLoad() {
@@ -49,6 +52,24 @@ export class EventDetailsPage {
         }
       }
       this.checkEventInfo();
+    });
+  }
+
+  getPeopleInEvents() {
+    this.tabsService.getParticipants(this.upcomingEvent["id"])
+    .then(data => {
+      this.peopleData = data;
+      this.peopleArray = [];
+      for(let people of this.peopleData) { 
+        this.peopleArray.push({
+          id: people.id,
+          user_fname: people.fname,
+          user_lname: people.lname,
+          email: people.email,
+          location: people.location,
+          event_id: people.event_id
+        });
+      }
     });
   }
 
@@ -75,6 +96,7 @@ export class EventDetailsPage {
       this.events.publish('pageChange', param);
       this.zone.run(() => {
         console.log('force update the screen');
+        this.getPeopleInEvents();
       });
     }, error => {
       // console.log(JSON.stringify(error.json()));
@@ -86,17 +108,61 @@ export class EventDetailsPage {
   }
 
   cancelEvent() {
+    if(this.currentUser["id"] == this.upcomingEvent["user_id"]){
+      // OWNER
+      this.ownerStatus = "owner";
+      this.showAlertConfirm("Are you sure you want to cancel this event? This will remove the event");
+    }else{
+      // NOT OWNER
+      this.ownerStatus = "not_owner";
+      this.showAlertConfirm("Are you sure you want to cancel joining this event?");
+    }
+  }
+
+  showAlertConfirm(content: string) {
+    let confirm = this.alertCtrl.create({
+      title: 'Cancel Event',
+      message: content,
+      buttons: [
+        {
+          text: 'No',
+          handler: () => {
+            console.log('Nothing happened');
+          }
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            console.log('Yes clicked');
+            this.httpRequestCancelEvent();
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
+  httpRequestCancelEvent() {
     this.showLoading("Cancel joining event..");
 
-    this.tabsService.cancelJoinEvent(this.currentUser["id"], this.upcomingEvent["id"])
+    this.tabsService.cancelJoinEvent(this.currentUser["id"], this.upcomingEvent["id"], this.upcomingEvent["user_id"])
     .then(data => {
       // console.log(JSON.stringify(data));
       this.isUserJoined = false;
       let param = { 'isChange': true };
       this.events.publish('pageChange', param);
-      this.zone.run(() => {
-        console.log('force update the screen');
-      });
+
+      // Check whether Owner or not
+      if(this.ownerStatus==="owner"){ // if owner, pop/dismiss current page
+        console.log("POP");
+        this.navCtrl.pop();
+      }
+      else { // otherwise, only rerender the current page
+        this.zone.run(() => {
+          console.log('force update the screen');
+          this.getPeopleInEvents();
+        });
+      }
     }, error => {
       // console.log(JSON.stringify(error.json()));
       this.showAlertError();

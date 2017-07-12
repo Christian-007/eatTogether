@@ -36,9 +36,9 @@ export class TabsServiceProvider {
     });
   }
 
-  cancelJoinEvent(user_id: any, event_id: any) {
+  cancelJoinEvent(user_id: any, event_id: any, owner_id: any) {
     return new Promise(resolve => {
-      this.http.delete(this.restapiService.ipAddress+"/cancel_event/"+user_id+"/"+event_id)
+      this.http.delete(this.restapiService.ipAddress+"/cancel_event/"+user_id+"/"+event_id+"/"+owner_id)
         .subscribe(data => {
           this.data = data;
           resolve(this.data);
@@ -63,8 +63,20 @@ export class TabsServiceProvider {
 
   getAllEvents() {
     return new Promise(resolve => {
-      // this.http.get("https://restful-api-dissertation.herokuapp.com/events")
       this.http.get(this.restapiService.ipAddress+"/events")
+        .map(res => res.json())
+        .subscribe(data => {
+          this.data = data;
+          resolve(this.data);
+        }, error => {
+          console.log(JSON.stringify(error.json()));
+        });
+    });
+  }
+
+  getParticipants(event_id: any) {
+    return new Promise(resolve => {
+      this.http.get(this.restapiService.ipAddress+"/users_events/"+event_id)
         .map(res => res.json())
         .subscribe(data => {
           this.data = data;
@@ -116,7 +128,6 @@ export class TabsServiceProvider {
 
   getMyEvents(user_id: any) {
     return new Promise(resolve => {
-      // this.http.get("https://restful-api-dissertation.herokuapp.com/my_events/"+user_id)
       this.http.get(this.restapiService.ipAddress+"/my_events/"+user_id)
         .map(res => res.json())
         .subscribe(data => {
@@ -130,7 +141,6 @@ export class TabsServiceProvider {
 
   getUpcomingEvents(user_id: any) {
     return new Promise(resolve => {
-      // this.http.get("https://restful-api-dissertation.herokuapp.com/upcoming_events/"+user_id)
       this.http.get(this.restapiService.ipAddress+"/upcoming_events/"+user_id)
         .map(res => res.json())
         .subscribe(data => {
