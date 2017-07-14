@@ -7,6 +7,12 @@
 <ion-header>
 
   <ion-navbar>
+    <ion-buttons start>
+      <button ion-button class="dismiss-btn" (click)="dismiss()">
+        <span ion-text color="light" showWhen="ios">Cancel</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>Edit Profile</ion-title>
   </ion-navbar>
 
@@ -15,12 +21,17 @@
 
 <ion-content>
   <div class="container">
-    <div id="photo" class="bg-img">
+    <!-- <div id="photo" class="bg-img">
+      <button class="changePhoto"><i class="fa fa-camera fa-2x" aria-hidden="true"></i> </button>
+    </div> -->
+    <div id="photo" class="bg-img" [ngStyle]="{ 'background-image': 'url(' + cover_pic + ')'}">
       <button class="changePhoto"><i class="fa fa-camera fa-2x" aria-hidden="true"></i> </button>
     </div>
-    <div class="avatar-col">
+    <div class="avatar-col" [ngStyle]="{ 'background-image': 'url(' + profile_pic + ')'}"></div>
+    <!-- <div class="avatar-col">
       <img class="avatar" src="assets/img/beehive.jpg">
-    </div>
+    </div> -->
+    <br>
     <button class="edit">CHANGE PHOTO</button>
   </div>
   <div class="details-section">
@@ -45,7 +56,7 @@
     <ion-row>
       <ion-col col-12>
         <label for=""><i class="fa fa-location-arrow" aria-hidden="true"></i> LOCATION</label>
-        <ion-input class="form-input" type="text" name="loc" [(ngModel)]="loc" placeholder="Location"></ion-input>
+        <ion-input class="form-input" type="text" name="location" [(ngModel)]="location" placeholder="Location"></ion-input>
       </ion-col>
     </ion-row>
     <ion-row>

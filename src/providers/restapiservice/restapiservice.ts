@@ -11,17 +11,18 @@ import 'rxjs/add/operator/map';
 
 export class User {
   id: string;
-  fname: string;
-  lname: string;
-  email: string;
-  location:string;
+  fname: string; lname: string;
+  email: string; location:string;
+  profile_pic: string; cover_pic: string;
  
-  constructor(id: string, fname: string, lname: string, email: string, location:string) {
+  constructor(id: string, fname: string, lname: string, email: string, location:string, profile_pic:string, cover_pic:string) {
     this.id = id;
     this.fname = fname;
     this.lname = lname;
     this.email = email;
     this.location = location;
+    this.profile_pic = profile_pic;
+    this.cover_pic = cover_pic;
   }
 }
 
@@ -61,7 +62,7 @@ export class RestapiserviceProvider {
     var headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
  
-    var params = 'email='+email+'&'+'&'+'password='+password;
+    var params = 'email='+email+'&'+'password='+password;
 
     return new Promise(resolve => {
       // this.http.post("http://localhost:5000/login", params , {headers: headers})
@@ -71,7 +72,7 @@ export class RestapiserviceProvider {
         .subscribe(data => {
           this.data = data;
           // console.log("Data: " + data["id"]);
-          this.currentUser = new User(data["id"], data["fname"], data["lname"], data["email"], data["location"]);
+          this.currentUser = new User(data["id"], data["fname"], data["lname"], data["email"], data["location"], data["profile_pic"], data["cover_pic"]);
           resolve(this.data);
         });
     });
@@ -87,6 +88,29 @@ export class RestapiserviceProvider {
           resolve(this.data);
         }, error => {
           console.log(JSON.stringify(error.json()));
+        });
+    });
+  }
+
+  // updateUserDetails(user_id: any, fname: string, lname: string, profile_pic: string, cover_pic: string, email: string, location: string) {
+  updateUserDetails(user_id: any, fname: string, lname: string) {
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+ 
+    var params = 'fname='+fname+'&'+'lname='+lname;
+
+    return new Promise(resolve => {
+      this.http.put(this.ipAddress+"/edit_user/"+user_id, params , {headers: headers})
+        .subscribe(data => {
+          this.data = data;
+          // this.currentUser.id = id;
+          // this.currentUser.fname = fname;
+          // this.currentUser.lname = lname;
+          // this.currentUser.email = email;
+          // this.currentUser.location = location;
+          // this.currentUser.profile_pic = profile_pic;
+          // this.currentUser.cover_pic = cover_pic;
+          resolve(this.data);
         });
     });
   }

@@ -1,4 +1,9 @@
 page-edit-profile {
+  .dismiss-btn {
+    color: #fff;
+    text-decoration: none;
+  }
+
   .content {
 
     p {
@@ -37,15 +42,22 @@ page-edit-profile {
         position: relative;
         text-align: center;
         margin-top: -16%;
-
-        img.avatar {
-          width: 100px;
-          height: 100px;
-          border-radius: 50%;
-          overflow: hidden;
-          border: 1px solid #ccc;
-        }
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        overflow: hidden;
+        display: inline-block;
       }
+
+      .avatar-col:before {
+        content: "";
+        display: block;
+        padding-bottom: 70%;
+      }
+
 
       .edit {
         border-radius: 20px;
@@ -69,13 +81,14 @@ page-edit-profile {
 
       ion-input {
         border-bottom: 2px solid #2C3859;
+        font-weight: 300;
       }
 
       .btn-style {
         font-weight: bold;
         background-color: #2C3859;
         color: #fff;
-        font-size: 13px;
+        font-size: 12px;
         padding: 20px;
       }
 
@@ -85,7 +98,7 @@ page-edit-profile {
         background-color: #fff;
         font-weight: bold;
         padding: 20px;
-        font-size: 13px;
+        font-size: 12px;
       }
     }
 
