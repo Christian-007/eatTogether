@@ -62,15 +62,15 @@
     </ion-col>
   </ion-row>
   <ion-row class="button-group">
+    <ion-col col-12 class="join-btn" *ngIf="!isUserJoined">
+      <button ion-button full round (click)="joinEvent()"><i class="fa fa-check" aria-hidden="true"></i> JOIN</button>
+    </ion-col>
+
     <ion-col col-6 class="joined-btn" *ngIf="isUserJoined">
       <button ion-button round [disabled]="true"><i class="fa fa-check" aria-hidden="true"></i> JOINED</button>
     </ion-col>
 
-    <ion-col col-6 class="join-btn" *ngIf="!isUserJoined">
-      <button ion-button round (click)="joinEvent()"><i class="fa fa-check" aria-hidden="true"></i> JOIN</button>
-    </ion-col>
-
-    <ion-col col-6 class="cancel-btn">
+    <ion-col col-6 class="cancel-btn" *ngIf="isUserJoined">
       <button ion-button round (click)="cancelEvent()"><i class="fa fa-times" aria-hidden="true"></i> CANCEL</button>
     </ion-col>
   </ion-row>

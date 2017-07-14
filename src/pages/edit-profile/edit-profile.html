@@ -1,0 +1,65 @@
+<!--
+  Generated template for the EditProfilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Edit Profile</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div class="container">
+    <div id="photo" class="bg-img">
+      <button class="changePhoto"><i class="fa fa-camera fa-2x" aria-hidden="true"></i> </button>
+    </div>
+    <div class="avatar-col">
+      <img class="avatar" src="assets/img/beehive.jpg">
+    </div>
+    <button class="edit">CHANGE PHOTO</button>
+  </div>
+  <div class="details-section">
+    <ion-row>
+      <ion-col col-6>
+        <label for="">FIRST NAME</label>
+        <ion-input class="form-input" type="text" name="fname" [(ngModel)]="fname" placeholder="First Name"></ion-input>
+      </ion-col>
+      <ion-col col-6>
+        <label for="">LAST NAME</label>
+        <ion-input class="form-input" type="text" name="lname" [(ngModel)]="lname" placeholder="Last Name"></ion-input>
+      </ion-col>
+    </ion-row>
+    <br>
+    <ion-row>
+      <ion-col col-12>
+        <label for=""><ion-icon name="mail"></ion-icon> EMAIL ADDRESS</label>
+        <ion-input class="form-input" type="text" name="email" [(ngModel)]="email" placeholder="Email Address"></ion-input>
+      </ion-col>
+    </ion-row>
+    <br>
+    <ion-row>
+      <ion-col col-12>
+        <label for=""><i class="fa fa-location-arrow" aria-hidden="true"></i> LOCATION</label>
+        <ion-input class="form-input" type="text" name="loc" [(ngModel)]="loc" placeholder="Location"></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        <button class="btn-style" ion-button full round (click)="saveChanges()"> SAVE CHANGES</button>
+      </ion-col>
+      <ion-col col-6>
+        <button class="btn-style" ion-button full round (click)="changePass()"> CHANGE PASSWORD</button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>
+        <button class="logout" ion-button full round (click)="logout()"> LOGOUT</button>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>
