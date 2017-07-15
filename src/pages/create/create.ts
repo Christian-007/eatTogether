@@ -165,7 +165,7 @@ export class CreatePage {
 
   public uploadImage() {
     // Destination URL
-    var url = "https://restful-api-dissertation.herokuapp.com/img_upload";
+    var url = this.restapiService.ipAddress+"/img_upload";
    
     // File for Upload
     var targetPath = this.pathForImage(this.lastImage);
@@ -190,7 +190,7 @@ export class CreatePage {
     // this.loading.present();
    
     // Use the FileTransfer to upload the image
-    fileTransfer.upload(targetPath, this.restapiService.ipAddress+"/img_upload", options).then(data => {
+    fileTransfer.upload(targetPath, url, options).then(data => {
       // this.loading.dismissAll()
       this.presentToast('Image succesful uploaded.');
     }, err => {

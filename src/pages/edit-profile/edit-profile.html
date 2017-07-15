@@ -18,21 +18,17 @@
 
 </ion-header>
 
-
 <ion-content>
   <div class="container">
-    <!-- <div id="photo" class="bg-img">
-      <button class="changePhoto"><i class="fa fa-camera fa-2x" aria-hidden="true"></i> </button>
-    </div> -->
-    <div id="photo" class="bg-img" [ngStyle]="{ 'background-image': 'url(' + cover_pic + ')'}">
-      <button class="changePhoto"><i class="fa fa-camera fa-2x" aria-hidden="true"></i> </button>
-    </div>
-    <div class="avatar-col" [ngStyle]="{ 'background-image': 'url(' + profile_pic + ')'}"></div>
-    <!-- <div class="avatar-col">
-      <img class="avatar" src="assets/img/beehive.jpg">
-    </div> -->
+    <div id="photo" class="bg-img" *ngIf="coverImage!=null"[style.background-image]="getImgPath(coverImage)"></div>
+    <div id="photo" class="bg-img" *ngIf="coverImage==null" [ngStyle]="{ 'background-image': 'url(' + cover_pic + ')'}"></div>
+    <button class="changePhoto" (click)="presentActionSheet('cover')">
+      <i class="fa fa-camera fa-2x" aria-hidden="true"></i> 
+    </button>
+    <div class="avatar-col" *ngIf="profileImage==null" [ngStyle]="{ 'background-image': 'url(' + profile_pic + ')'}"></div>
+    <div class="avatar-col" *ngIf="profileImage!=null" [style.background-image]="getImgPath(profileImage)"></div>
     <br>
-    <button class="edit">CHANGE PHOTO</button>
+    <button class="edit" (click)="presentActionSheet('profile')">CHANGE PHOTO</button>
   </div>
   <div class="details-section">
     <ion-row>
