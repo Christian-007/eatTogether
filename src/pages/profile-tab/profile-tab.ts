@@ -38,14 +38,15 @@ export class ProfileTabPage {
 
   goToEdit() {
     let modal = this.modalCtrl.create(EditProfilePage, { currentUser: this.currentUser });
-    // modal.onDidDismiss(data => {
-    //   console.log(data);
-    //   if(data["hasData"]){
-    //     // Refresh page with new data
-    //     this.showLoading();
-    //     this.getUpcomingEvents();
-    //   }
-    // });
+    modal.onDidDismiss(data => {
+      console.log(data);
+      if(data["navigate"]==="logout"){
+        // Refresh page with new data
+        // this.showLoading();
+        // this.getUpcomingEvents();
+        this.logoutPage();
+      }
+    });
     modal.present();
   }
 

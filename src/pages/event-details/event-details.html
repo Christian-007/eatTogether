@@ -37,7 +37,7 @@
   </p>
   <hr>
   <ion-row class="hosted-by" (tap)="userProfile()">
-    <ion-col col-3 class="avatar-col"><img class="avatar" src="assets/img/beehive.jpg"></ion-col>
+    <ion-col col-3 class="avatar-col"><img class="avatar" src="{{upcomingEvent.user_profile_pic}}"></ion-col>
     <ion-col col-8>
       <ion-row>
         <ion-col col-12 class="user-name">{{upcomingEvent.user_fname}} {{upcomingEvent.user_lname}}</ion-col>
@@ -51,11 +51,13 @@
   <ion-row class="joined-people" (tap)="joinedPeople()">
     <p class="count-people"><i class="fa fa-users" aria-hidden="true"></i> {{peopleArray?.length}} people joined</p>
     <ion-col col-11 class="people-col">
-      <img class="avatar" src="assets/img/beehive.jpg">
+      <!-- <div class="avatar-col" *ngIf="profileImage==null" [ngStyle]="{ 'background-image': 'url(' + profile_pic + ')'}"></div> -->
+      <img *ngFor="let people of peopleArray" class="avatar" src="{{people.profile_pic}}">
+      <!-- <img class="avatar" src="assets/img/beehive.jpg">
       <img class="avatar" src="assets/img/cavendish.jpg">
       <img class="avatar" src="assets/img/yates.jpg">
       <img class="avatar" src="assets/img/beehive.jpg">
-      <img class="avatar" src="assets/img/cavendish.jpg">
+      <img class="avatar" src="assets/img/cavendish.jpg"> -->
     </ion-col>
     <ion-col col-1 class="right-btn">
       <i class="fa fa-angle-right fa-2x" aria-hidden="true"></i>

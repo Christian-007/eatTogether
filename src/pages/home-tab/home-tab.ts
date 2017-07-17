@@ -87,7 +87,8 @@ export class HomeTabPage {
           type: event.type,
           user_id: event.user_id,
           user_fname: event.fname,
-          user_lname: event.lname
+          user_lname: event.lname,
+          user_profile_pic: this.restapiService.ipAddress+'/user_image/'+event.profile_pic
         });
       }
       this.countMyEvent();
@@ -124,7 +125,8 @@ export class HomeTabPage {
         type: event.type,
         user_id: event.user_id,
         user_fname: event.fname,
-        user_lname: event.lname
+        user_lname: event.lname,
+        user_profile_pic: this.restapiService.ipAddress+'/user_image/'+event.profile_pic
       });
     }
   }

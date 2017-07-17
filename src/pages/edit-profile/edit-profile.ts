@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, ViewController, NavController, NavParams, ToastController, AlertController, ActionSheetController, Platform } from 'ionic-angular';
+import { IonicPage, ViewController, NavController, Events, NavParams, ToastController, AlertController, ActionSheetController, Platform } from 'ionic-angular';
 import { RestapiserviceProvider } from '../../providers/restapiservice/restapiservice';
 
 import { File } from '@ionic-native/file';
@@ -40,6 +40,7 @@ export class EditProfilePage {
     private transfer: Transfer, 
     private file: File, 
     private filePath: FilePath, 
+    public events: Events,
     public toastCtrl: ToastController, 
     public platform: Platform)
   {
@@ -55,6 +56,14 @@ export class EditProfilePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EditProfilePage');
+  }
+
+  logoutPage() {
+    // this.restapiService.logout();
+    // this.events.unsubscribe('pageChange');
+    // console.log("PARENT: " + this.viewCtrl.parent);
+    this.dismiss('logout');
+    // this.navCtrl.parent.parent.parent.pop();
   }
 
   // Upload cover pic, upload profile pic, upload user details
@@ -75,7 +84,7 @@ export class EditProfilePage {
             .then(data => {
               console.log(JSON.stringify(data));
               this.presentToast('Successfully saved changes');
-              this.dismiss();
+              this.dismiss('profile');
             }, error => {
               console.log(JSON.stringify(error.json()));
             });
@@ -92,13 +101,14 @@ export class EditProfilePage {
     });
   }
 
-  dismiss() {
-    this.viewCtrl.dismiss();
+  dismiss(navigation: string) {
+    let pageChange = { 'navigate': navigation };
+    this.viewCtrl.dismiss(pageChange);
   }
 
   changePassword() {
     let prompt = this.alertCtrl.create({
-      title: 'Login',
+      title: 'Change Password',
       message: "Please enter your old and new password",
       inputs: [
         {

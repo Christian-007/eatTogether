@@ -8,7 +8,7 @@
 
   <ion-navbar>
     <ion-buttons start>
-      <button ion-button class="dismiss-btn" (click)="dismiss()">
+      <button ion-button class="dismiss-btn" (click)="dismiss('profile')">
         <span ion-text color="light" showWhen="ios">Cancel</span>
         <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
       </button>
@@ -65,7 +65,7 @@
     </ion-row>
     <ion-row>
       <ion-col col-12>
-        <button class="logout" ion-button full round (click)="logout()"> LOGOUT</button>
+        <button class="logout" ion-button full round (click)="logoutPage()"> LOGOUT</button>
       </ion-col>
     </ion-row>
   </div>

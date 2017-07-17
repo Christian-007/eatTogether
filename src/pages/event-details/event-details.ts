@@ -33,6 +33,7 @@ export class EventDetailsPage {
     private zone: NgZone
     ) {
     this.upcomingEvent = navParams.data.upcomingEvent;
+    console.log("PIC: " + this.upcomingEvent["user_profile_pic"]);
     this.currentUser = this.restapiService.getUserInfo();
     this.checkIfUserHasJoined();
     this.getPeopleInEvents();
@@ -67,6 +68,8 @@ export class EventDetailsPage {
           user_lname: people.lname,
           email: people.email,
           location: people.location,
+          profile_pic: this.restapiService.ipAddress+'/user_image/'+people.profile_pic,
+          cover_pic: this.restapiService.ipAddress+'/user_image/'+people.cover_pic,
           event_id: people.event_id
         });
       }
