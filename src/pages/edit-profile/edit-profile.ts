@@ -56,10 +56,34 @@ export class EditProfilePage {
     console.log('ionViewDidLoad EditProfilePage');
   }
 
+  // Upload cover pic, upload profile pic, upload user details
   saveChanges() {
-    this.restapiService.updateUserDetails(this.id, this.fname, this.lname)
+
+    // Step 1: Upload cover pic
+    this.uploadImage(this.coverImage, "cover")
     .then(data => {
-      console.log(JSON.stringify(data));
+      if(data){
+
+        // Step 2: Upload profile pic
+        this.uploadImage(this.profileImage, "profile")
+        .then(data => {
+          if(data){
+
+            // Step 3: Upload user details
+            this.restapiService.updateUserDetails(this.id, this.fname, this.lname, this.email, this.location, this.coverImage, this.profileImage)
+            .then(data => {
+              console.log(JSON.stringify(data));
+            }, error => {
+              console.log(JSON.stringify(error.json()));
+            });
+
+          }
+        }, error => {
+          console.log(JSON.stringify(error.json()));
+        });
+
+      }
+
     }, error => {
       console.log(JSON.stringify(error.json()));
     });
@@ -172,10 +196,28 @@ export class EditProfilePage {
   }
 
   // Get the origin of image (cover or profile image)
-  public uploadImage(imgType: string) {
+  public uploadImage(imgType: string, type: string) {
+    // Check if there is any changes to cover picture
+    if(type==='cover'){
+      if(this.coverImage === null) {
+        return new Promise((resolve, reject) => {
+          this.presentToast("NO CHANGE COVER");
+          resolve(true); // skip uploading if there is no change
+        });
+      }
+    }else { // Check if there is any changes to profile picture
+      if(this.profileImage === null) {
+        return new Promise((resolve, reject) => {
+          this.presentToast("NO CHANGE PROFILE");
+          resolve(true); // skip uploading if there is no change
+        });
+      }
+    }
     
+    // --- Only gets executed if there is a change to both or either profile or cover picture ---
+
     // Destination URL
-    var url = this.restapiService.ipAddress+"/img_upload";
+    var url = this.restapiService.ipAddress+"/user_img_upload";
    
     // File for Upload
     var targetPath = this.pathForImage(imgType);
@@ -192,13 +234,21 @@ export class EditProfilePage {
     };
    
     const fileTransfer: TransferObject = this.transfer.create();
-   
-    // Use the FileTransfer to upload the image
-    fileTransfer.upload(targetPath, url, options).then(data => {
-      this.presentToast('Image succesful uploaded.');
-    }, err => {
-      this.presentToast('Error while uploading file.');
+
+    return new Promise((resolve, reject) => {
+      // Use the FileTransfer to upload the image
+      fileTransfer.upload(targetPath, url, options).then(data => {
+        if (data) {
+          this.presentToast('Image succesful uploaded.');
+          resolve(data);
+        }else {
+          reject("ERROR");
+        }
+      }, err => {
+        this.presentToast('Error while uploading file.');
+      });
     });
+
   }
 
 }
