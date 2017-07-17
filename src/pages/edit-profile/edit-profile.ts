@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, ViewController, NavController, NavParams, ToastController, ActionSheetController, Platform } from 'ionic-angular';
+import { IonicPage, ViewController, NavController, NavParams, ToastController, AlertController, ActionSheetController, Platform } from 'ionic-angular';
 import { RestapiserviceProvider } from '../../providers/restapiservice/restapiservice';
 
 import { File } from '@ionic-native/file';
@@ -34,6 +34,7 @@ export class EditProfilePage {
     public viewCtrl: ViewController, 
     public restapiService: RestapiserviceProvider,
     public actionSheetCtrl: ActionSheetController,
+    public alertCtrl: AlertController,
     public navParams: NavParams,
     private camera: Camera, 
     private transfer: Transfer, 
@@ -73,6 +74,8 @@ export class EditProfilePage {
             this.restapiService.updateUserDetails(this.id, this.fname, this.lname, this.email, this.location, this.coverImage, this.profileImage)
             .then(data => {
               console.log(JSON.stringify(data));
+              this.presentToast('Successfully saved changes');
+              this.dismiss();
             }, error => {
               console.log(JSON.stringify(error.json()));
             });
@@ -91,6 +94,67 @@ export class EditProfilePage {
 
   dismiss() {
     this.viewCtrl.dismiss();
+  }
+
+  changePassword() {
+    let prompt = this.alertCtrl.create({
+      title: 'Login',
+      message: "Please enter your old and new password",
+      inputs: [
+        {
+          name: 'oldpass',
+          placeholder: 'Old password',
+          type: 'password'
+        },
+        {
+          name: 'newpass',
+          placeholder: 'New password',
+          type: 'password'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Save',
+          handler: user => {
+            if(user.oldpass==="" || user.newpass==="" ){
+              let alert = this.alertCtrl.create({
+                title: 'Empty Field',
+                subTitle: 'Old and new password fields cannot be empty.',
+                buttons: ['OK']
+              });
+              alert.present();
+            }
+            else {
+              this.restapiService.updateUserPassword(this.id, user.oldpass, user.newpass).then(data => {
+                if (data) {
+                  console.log(data);
+                  this.presentToast('Successfully changed your password');
+                }else {
+                  console.log(data);
+                  let alert = this.alertCtrl.create({
+                    title: 'Wrong Old Password',
+                    subTitle: 'You just inputted a wrong old password!',
+                    buttons: ['OK']
+                  });
+                  alert.present();
+                }
+              }, error => {
+                console.log(JSON.stringify(error.json()));
+              });
+            }
+
+            console.log('Saved clicked');
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
 
   public presentActionSheet(photoType: string) {
@@ -201,14 +265,14 @@ export class EditProfilePage {
     if(type==='cover'){
       if(this.coverImage === null) {
         return new Promise((resolve, reject) => {
-          this.presentToast("NO CHANGE COVER");
+          // this.presentToast("NO CHANGE COVER");
           resolve(true); // skip uploading if there is no change
         });
       }
     }else { // Check if there is any changes to profile picture
       if(this.profileImage === null) {
         return new Promise((resolve, reject) => {
-          this.presentToast("NO CHANGE PROFILE");
+          // this.presentToast("NO CHANGE PROFILE");
           resolve(true); // skip uploading if there is no change
         });
       }

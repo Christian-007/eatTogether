@@ -92,7 +92,22 @@ export class RestapiserviceProvider {
     });
   }
 
-  // updateUserDetails(user_id: any, fname: string, lname: string, profile_pic: string, cover_pic: string, email: string, location: string) {
+  updateUserPassword(user_id: any, old_pass: string, new_pass: string ){
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+ 
+    var params = 'old_pass='+old_pass+'&'+'new_pass='+new_pass;
+
+    return new Promise(resolve => {
+      this.http.put(this.ipAddress+"/edit_pass/"+user_id, params , {headers: headers})
+      .map(res => res.json())
+      .subscribe(data => {
+        this.data = data;
+        resolve(this.data);
+      });
+    });
+  }
+
   updateUserDetails(user_id: any, fname: string, lname: string, email: string, location: string, cover_pic: string, user_pic: string) {
     var headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
