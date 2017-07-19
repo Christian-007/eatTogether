@@ -2,6 +2,7 @@ import { Component, NgZone } from '@angular/core';
 import { IonicPage, Events, NavController, NavParams, AlertController, Alert, LoadingController, Loading } from 'ionic-angular';
 import { RestapiserviceProvider } from '../../providers/restapiservice/restapiservice';
 import { TabsServiceProvider } from '../../providers/tabs-service/tabs-service';
+import { UserProfilePage } from '../../pages/user-profile/user-profile';
 
 /**
  * Generated class for the EventDetailsPage page.
@@ -184,6 +185,7 @@ export class EventDetailsPage {
 
   userProfile() {
     console.log("Hey clicked user profile");
+    this.navCtrl.push(UserProfilePage, { userProfile: this.currentUser });
   }
 
   joinedPeople() {

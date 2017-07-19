@@ -21,6 +21,7 @@ import { TabsServiceProvider } from '../providers/tabs-service/tabs-service';
 import { EventDetailsPage } from '../pages/event-details/event-details';
 import { SearchLocationPage } from '../pages/search-location/search-location';
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
+import { UserProfilePage } from '../pages/user-profile/user-profile';
 
 import { File } from '@ionic-native/file';
 import { Transfer } from '@ionic-native/transfer';
@@ -40,7 +41,8 @@ import { Camera } from '@ionic-native/camera';
     CreatePage,
     EventDetailsPage,
     SearchLocationPage,
-    EditProfilePage
+    EditProfilePage,
+    UserProfilePage
   ],
   imports: [
     BrowserModule,
@@ -60,7 +62,8 @@ import { Camera } from '@ionic-native/camera';
     CreatePage,
     EventDetailsPage,
     SearchLocationPage,
-    EditProfilePage
+    EditProfilePage,
+    UserProfilePage
   ],
   providers: [
     StatusBar,

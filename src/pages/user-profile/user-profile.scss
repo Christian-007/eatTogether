@@ -1,0 +1,68 @@
+page-user-profile {
+  .content {
+
+    p {
+      margin: 0;
+    }
+
+    .bg-img {
+      background-color: #ECF6FB;
+
+      .select-btn {
+        background-color: rgba(255, 255, 255, 0.8);
+        font-size: 14px;
+        padding: 5px;
+      }
+    }
+
+    .bg-img:before {
+      padding-bottom: 60%;
+    }
+
+    .container {
+      text-align: center;
+
+      .avatar-col {
+        position: relative;
+        text-align: center;
+        margin-top: -16%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        overflow: hidden;
+        display: inline-block;
+      }
+
+      .avatar-col:before {
+        content: "";
+        display: block;
+        padding-bottom: 70%;
+      }
+
+      .edit {
+        border-radius: 20px;
+        font-size: 10px;
+        padding: 4px 15px;
+        font-weight: bold;
+        background-color: #2C3859;
+        color: #fff;
+      }
+
+      .name {
+        font-size: 20px;
+        margin-top: 10px;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+      }
+
+      .location {
+        font-weight: 300;
+        letter-spacing: 0.5px;
+      }      
+    }
+
+  }
+}
