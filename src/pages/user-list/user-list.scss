@@ -1,0 +1,76 @@
+page-user-list {
+  .content {
+    font-family: 'Source Sans Pro', sans-serif;
+
+    p {
+      margin: 0;
+    }
+
+    .avatar-col {
+      position: relative;
+
+      img.avatar {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    .avatar-col, .people-col {
+      text-align: center;
+    }
+
+    .people-col {
+      padding: 5px 10px;
+
+      .avatar {
+        width: 25px;
+        height: 25px;
+        margin-left: 4px;
+      }
+    }
+
+    .avatar {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    .hosted-by:hover {
+      background-color: #fafafa;
+    }
+
+    .hosted-by {
+      padding: 0.3em 0;
+      border-bottom: 3px solid #F1F1F1;
+
+      [col-12]{
+        padding: 3px 0 0;
+      }
+
+      .user-name {
+        font-weight: 700;
+        font-size: 16px;
+      }
+
+      .user-location {
+        font-size: 12px;
+      }
+    }
+
+    .right-btn {
+      position: relative;
+
+      i {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #8a8a8a;
+      }
+    }
+
+  }
+}

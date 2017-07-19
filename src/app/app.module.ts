@@ -22,6 +22,7 @@ import { EventDetailsPage } from '../pages/event-details/event-details';
 import { SearchLocationPage } from '../pages/search-location/search-location';
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { UserProfilePage } from '../pages/user-profile/user-profile';
+import { UserListPage } from '../pages/user-list/user-list';
 
 import { File } from '@ionic-native/file';
 import { Transfer } from '@ionic-native/transfer';
@@ -42,7 +43,8 @@ import { Camera } from '@ionic-native/camera';
     EventDetailsPage,
     SearchLocationPage,
     EditProfilePage,
-    UserProfilePage
+    UserProfilePage,
+    UserListPage
   ],
   imports: [
     BrowserModule,
@@ -63,7 +65,8 @@ import { Camera } from '@ionic-native/camera';
     EventDetailsPage,
     SearchLocationPage,
     EditProfilePage,
-    UserProfilePage
+    UserProfilePage,
+    UserListPage
   ],
   providers: [
     StatusBar,

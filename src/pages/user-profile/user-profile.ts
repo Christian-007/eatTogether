@@ -27,8 +27,16 @@ export class UserProfilePage {
     this.lname = this.currentUser["lname"];
     this.email = this.currentUser["email"];
     this.location = this.currentUser["location"];
-    this.profile_pic = this.restapiService.ipAddress+'/user_image/'+this.currentUser["profile_pic"];
-    this.cover_pic = this.restapiService.ipAddress+'/user_image/'+this.currentUser["cover_pic"];
+    if(this.currentUser["profile_pic"].indexOf(this.restapiService.ipAddress+'/user_image/') === -1) {
+      this.profile_pic = this.restapiService.ipAddress+'/user_image/' + this.currentUser["profile_pic"];
+    }else{
+      this.profile_pic = this.currentUser["profile_pic"];
+    }
+    if(this.currentUser["cover_pic"].indexOf(this.restapiService.ipAddress+'/user_image/') === -1) {
+      this.cover_pic = this.restapiService.ipAddress+'/user_image/' + this.currentUser["cover_pic"];
+    }else{
+      this.cover_pic = this.currentUser["cover_pic"];
+    }
   }
 
   ionViewDidLoad() {

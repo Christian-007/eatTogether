@@ -3,6 +3,7 @@ import { IonicPage, Events, NavController, NavParams, AlertController, Alert, Lo
 import { RestapiserviceProvider } from '../../providers/restapiservice/restapiservice';
 import { TabsServiceProvider } from '../../providers/tabs-service/tabs-service';
 import { UserProfilePage } from '../../pages/user-profile/user-profile';
+import { UserListPage } from '../../pages/user-list/user-list';
 
 /**
  * Generated class for the EventDetailsPage page.
@@ -21,7 +22,7 @@ export class EventDetailsPage {
   isUserJoined = false; isUserHost = false;
   loading: Loading; alert: Alert;
   peopleData: any; peopleArray: any;
-  ownerStatus: string;
+  ownerStatus: string; ownerProfile: any;
 
   constructor(
     public navCtrl: NavController, 
@@ -65,8 +66,8 @@ export class EventDetailsPage {
       for(let people of this.peopleData) { 
         this.peopleArray.push({
           id: people.id,
-          user_fname: people.fname,
-          user_lname: people.lname,
+          fname: people.fname,
+          lname: people.lname,
           email: people.email,
           location: people.location,
           profile_pic: this.restapiService.ipAddress+'/user_image/'+people.profile_pic,
@@ -185,11 +186,17 @@ export class EventDetailsPage {
 
   userProfile() {
     console.log("Hey clicked user profile");
-    this.navCtrl.push(UserProfilePage, { userProfile: this.currentUser });
+    this.restapiService.getOneUserInfo(this.upcomingEvent["user_id"])
+    .then(data => {
+      this.ownerProfile = data;
+      // console.log("data: " + this.ownerProfile["fname"]);
+      this.navCtrl.push(UserProfilePage, { userProfile: this.ownerProfile });
+    });
   }
 
   joinedPeople() {
     console.log("Hey clicked joined people");
+    this.navCtrl.push(UserListPage, { peopleArray: this.peopleArray } );
   }
 
   showAlertSuccess(infoTitle: string, infoSub: string) {
