@@ -1,7 +1,114 @@
 page-event-tab {
 
+  ion-slides {
+    height: 58% !important;
+
+    ion-slide {
+      height: 200px !important;
+    }
+  }
+
   .content {
     background-color: #F8F9FB;
+
+    hr {
+      height: 1px;
+    }
+
+    .recommended {
+      [col-6] {
+        padding: 0;
+      }
+
+      .sr-text {
+        font-weight: 500;
+      }
+
+      .see-all {
+        text-align: right;
+        a {
+          text-decoration: none;  
+        }
+      }
+    }
+
+    .ion-bg {
+      font-family: 'Source Sans Pro', sans-serif;
+
+      // bg ion-card styling START
+      ion-card {
+        position: relative;
+        text-align: center;
+        margin-bottom: 0;
+        border-radius: 0;
+      }
+
+      .card-title {
+        position: absolute;
+        top: 30%;
+        font-size: 2.0em;
+        width: 100%;
+        font-weight: bold;
+        color: #fff;
+        text-shadow: 1px 1px 30px #000;
+      }
+      // bg ion-card styling END
+
+      .content-custom {
+        background: #fff;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        // margin: 0 10px;
+        padding-left: 16px;
+        padding-right: 16px;
+        padding-top: 13px;
+        padding-bottom: 14px;
+        line-height: 1.4;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      .rec-title {
+        font-size: 16px;
+        color: #404b69;
+        font-weight: 500;
+        text-align: left;
+      }
+
+      .rec-date, .rec-time {
+        color: #808080;
+        font-size: 14px;
+      }
+
+      .rec-date {
+        text-align: left;
+      }
+
+      .rec-time {
+        text-align: right;
+      }
+
+      .rec-row {
+
+        [col-6] {
+          padding: 0;
+        }
+
+        i {
+          margin-right: 5px;
+        }
+      }
+
+    }
+
+    .sr-text {
+      // float: left !important;
+      padding: 0 15px;
+      font-weight: 300;
+      font-size: 10px;
+      letter-spacing: 1px;
+    }
 
     .section-search {
       position: relative;
@@ -34,13 +141,6 @@ page-event-tab {
 
       .search-box::placeholder {
         font-weight: 300;
-      }
-
-      .sr-text {
-        // float: left !important;
-        font-weight: 300;
-        font-size: 10px;
-        letter-spacing: 1px;
       }
     }
     

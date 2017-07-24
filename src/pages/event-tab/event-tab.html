@@ -18,9 +18,60 @@
       <i class="fa fa-times" aria-hidden="true"></i>
     </a>
     <input type="text" name="search" placeholder="Search by location.." (keyup.enter)="searchEvent()" [(ngModel)]="searchCity" class="search-box">
-
-    <p class="sr-text">SEARCH RESULT</p>
   </div>
+  <ion-row class="recommended">
+    <ion-col col-6>
+      <p class="sr-text">RECOMMENDED</p>
+    </ion-col>
+    <ion-col col-6>
+      <p class="sr-text see-all"><a href="">SEE ALL  <ion-icon name="arrow-forward"></ion-icon></a></p>
+    </ion-col>
+  </ion-row>
+  <ion-slides pager>
+    <ion-slide>
+      <div class="ion-bg">
+        <ion-card>
+          <!-- <img src="assets/img/beehive.jpg"/> -->
+          <div class="bg-img" [ngStyle]="{ 'background-image': 'url(assets/img/beehive.jpg)'}"></div>
+          <div class="card-title">Meal at Beehive</div>
+          <div class="content-custom">
+            <p class="rec-title">Hosted by: Christian Sunardi</p>
+            <ion-row class="rec-row">
+              <ion-col col-6>
+                <p class="rec-date"><i class="fa fa-calendar" aria-hidden="true"></i> Sep 10, 2017</p>
+              </ion-col>
+              <ion-col col-6>
+                <p class="rec-time"><i class="fa fa-clock-o" aria-hidden="true"></i> 18:00</p>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-card>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="ion-bg">
+        <ion-card>
+          <!-- <img src="assets/img/yates.jpg"/> -->
+          <div class="bg-img" [ngStyle]="{ 'background-image': 'url(assets/img/yates.jpg)'}"></div>
+          <div class="card-title">Meal at Yates</div>
+          <div class="content-custom">
+            <p class="rec-title">Hosted by: Roger Moore</p>
+            <ion-row>
+              <ion-col col-6>
+                <p class="rec-date"><i class="fa fa-calendar" aria-hidden="true"></i> Sep 10, 2017</p>
+              </ion-col>
+              <ion-col col-6>
+                <p class="rec-time"><i class="fa fa-clock-o" aria-hidden="true"></i> 18:00</p>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-card>
+      </div>
+    </ion-slide>
+  </ion-slides>
+  <hr>
+
+  <p class="sr-text">SEARCH RESULT</p>  
 
   <ion-card *ngFor="let upcomingEvent of eventsArray" (tap)="tapEvent(upcomingEvent)">
     <div class="bg-img" [ngStyle]="{ 'background-image': 'url(' + upcomingEvent.imgName + ')'}"></div>
