@@ -1,5 +1,6 @@
 page-profile-tab {
   .content {
+    font-family: 'Source Sans Pro', sans-serif;
 
     p {
       margin: 0;
@@ -54,13 +55,14 @@ page-profile-tab {
       .name {
         font-size: 20px;
         margin-top: 10px;
-        font-weight: 500;
+        font-weight: 600;
         letter-spacing: 0.5px;
       }
 
       .location {
         font-weight: 300;
         letter-spacing: 0.5px;
+        color: #667F97;
       }      
     }
 

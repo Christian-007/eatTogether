@@ -38,6 +38,7 @@ export class EventTabPage {
 
   searchEvent() {
     console.log(this.searchCity);
+    this.searchEventsByCity();
   }
 
   tapEvent(upcomingEvent) {
@@ -48,7 +49,7 @@ export class EventTabPage {
   searchEventsByCity() {
     this.showLoading();
 
-    this.tabsService.getEventsByCity(this.currentUser["location"])
+    this.tabsService.getEventsByCity(this.searchCity)
     .then(data => {
       this.eventsData = data;
       console.log("DATA: " + JSON.stringify(this.eventsData));

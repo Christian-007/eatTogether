@@ -16,6 +16,9 @@
   <div class="container">
     <div id="photo" class="bg-img" [ngStyle]="{ 'background-image': 'url(' + cover_pic + ')'}"></div>
     <div class="avatar-col" [ngStyle]="{ 'background-image': 'url(' + profile_pic + ')'}"></div>
+    <br>
+    <button class="star" *ngIf="!isStarred && !isOwner" (click)="star()"><i class="fa fa-star" aria-hidden="true"></i> STAR</button>
+    <button class="starred" *ngIf="isStarred && !isOwner" (click)="unstar()"><i class="fa fa-star" aria-hidden="true"></i> STARRED</button>
     <p class="name">{{fname}} {{lname}}</p>
     <p class="location"><i class="fa fa-location-arrow" aria-hidden="true"></i> {{location}}</p>
   </div>

@@ -152,4 +152,42 @@ export class TabsServiceProvider {
     });
   }
 
+  starPerson(user_id: any, star_person_id: any){
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+ 
+    var params = 'user_id='+user_id+'&'+'star_person_id='+star_person_id;
+
+    return new Promise(resolve => {
+      this.http.post(this.restapiService.ipAddress+"/star", params , {headers: headers})
+        .subscribe(data => {
+          this.data = data;
+          resolve(this.data);
+        });
+    });
+  }
+
+  checkStars(user_id: any, person_id: any){
+    return new Promise(resolve => {
+      this.http.get(this.restapiService.ipAddress+"/star/"+user_id+"/"+person_id)
+        .map(res => res.json())
+        .subscribe(data => {
+          this.data = data;
+          resolve(this.data);
+        }, error => {
+          console.log(JSON.stringify(error.json()));
+        });
+    });
+  }
+
+  unstarPerson(user_id: any, star_person_id: any) {
+    return new Promise(resolve => {
+      this.http.delete(this.restapiService.ipAddress+"/unstar/"+user_id+"/"+star_person_id)
+        .subscribe(data => {
+          this.data = data;
+          resolve(this.data);
+        });
+    });
+  }
+
 }
