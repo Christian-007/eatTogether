@@ -96,8 +96,19 @@ export class UserProfilePage {
   }
 
   unstar() {
-    this.isStarred = false;
-    this.presentToast("Successfully unstarred") ;
+    this.tabsService.unstarPerson(this.currentUser["id"], this.id).then(data => {
+      if (data) {
+        console.log(data);
+        this.isStarred = false;
+        this.presentToast("Successfully unstarred") ;
+      }else {
+        console.log(data);
+        this.presentToast('Error Occurred.');
+      }
+    }, error => {
+      console.log(JSON.stringify(error.json()));
+      this.presentToast('Error Occurred.');
+    });
   }
 
   private presentToast(text) {
