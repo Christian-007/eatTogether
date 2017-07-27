@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, ModalController, NavParams, Events } from 'ionic-angular';
 import { RestapiserviceProvider } from '../../providers/restapiservice/restapiservice';
+import { TabsServiceProvider } from '../../providers/tabs-service/tabs-service';
 import { EditProfilePage } from '../edit-profile/edit-profile';
+import { UserListPage } from '../../pages/user-list/user-list';
 
 /**
  * Generated class for the ProfileTabPage page.
@@ -20,8 +22,9 @@ export class ProfileTabPage {
   location: string; profile_pic: string = null;
   cover_pic: string = null;
   currentUser: any;
+  peopleData: any; peopleArray: any;
 
-  constructor(public navCtrl: NavController, public events: Events, public navParams: NavParams, public restapiService: RestapiserviceProvider, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public tabsService: TabsServiceProvider, public events: Events, public navParams: NavParams, public restapiService: RestapiserviceProvider, public modalCtrl: ModalController) {
     this.currentUser = this.restapiService.getUserInfo();
     this.id = this.currentUser["id"];
     this.fname = this.currentUser["fname"]; this.lname = this.currentUser["lname"];
@@ -41,13 +44,31 @@ export class ProfileTabPage {
     modal.onDidDismiss(data => {
       console.log(data);
       if(data["navigate"]==="logout"){
-        // Refresh page with new data
-        // this.showLoading();
-        // this.getUpcomingEvents();
         this.logoutPage();
       }
     });
     modal.present();
+  }
+
+  starPeople() {
+    this.tabsService.getStarPeople(this.id)
+    .then(data => {
+      this.peopleData = data;
+      this.peopleArray = [];
+      for(let people of this.peopleData) { 
+        this.peopleArray.push({
+          id: people.id,
+          fname: people.fname,
+          lname: people.lname,
+          email: people.email,
+          location: people.location,
+          profile_pic: this.restapiService.ipAddress+'/user_image/'+people.profile_pic,
+          cover_pic: this.restapiService.ipAddress+'/user_image/'+people.cover_pic,
+          event_id: people.event_id
+        });
+      }
+      this.navCtrl.push(UserListPage, { peopleArray: this.peopleArray, title: "Star People" } );
+    });
   }
 
   logoutPage() {

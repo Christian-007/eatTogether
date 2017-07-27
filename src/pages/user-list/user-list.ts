@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { RestapiserviceProvider } from '../../providers/restapiservice/restapiservice';
 import { UserProfilePage } from '../../pages/user-profile/user-profile';
 
@@ -16,9 +16,11 @@ import { UserProfilePage } from '../../pages/user-profile/user-profile';
 })
 export class UserListPage {
   peopleArray: any;
+  pageTitle: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public restapiService: RestapiserviceProvider) {
+  constructor(public navCtrl: NavController, public events: Events, public navParams: NavParams, public restapiService: RestapiserviceProvider) {
     this.peopleArray = navParams.data.peopleArray;
+    this.pageTitle = navParams.data.title;
   }
 
   ionViewDidLoad() {

@@ -190,6 +190,19 @@ export class TabsServiceProvider {
     });
   }
 
+  getStarPeople(user_id: any){
+    return new Promise(resolve => {
+      this.http.get(this.restapiService.ipAddress+"/star_people/"+user_id)
+        .map(res => res.json())
+        .subscribe(data => {
+          this.data = data;
+          resolve(this.data);
+        }, error => {
+          console.log(JSON.stringify(error.json()));
+        });
+    });
+  }
+
   getRecommendations(user_id: any) {
     return new Promise(resolve => {
       this.http.get(this.restapiService.ipAddress+"/recommendations/"+user_id)

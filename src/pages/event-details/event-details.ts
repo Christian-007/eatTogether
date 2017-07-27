@@ -196,7 +196,7 @@ export class EventDetailsPage {
 
   joinedPeople() {
     console.log("Hey clicked joined people");
-    this.navCtrl.push(UserListPage, { peopleArray: this.peopleArray } );
+    this.navCtrl.push(UserListPage, { peopleArray: this.peopleArray, title: "Going" } );
   }
 
   showAlertSuccess(infoTitle: string, infoSub: string) {

@@ -28,7 +28,7 @@
     </a>
     <input type="text" name="search" placeholder="Search by location.." (keyup.enter)="searchEvent()" [(ngModel)]="searchCity" class="search-box">
   </div>
-  <ion-row class="recommended">
+  <ion-row *ngIf="!isEmptyRecom" class="recommended">
     <ion-col col-6>
       <p class="sr-text">RECOMMENDED</p>
     </ion-col>
@@ -36,7 +36,7 @@
       <p class="sr-text see-all"><a href="">SEE ALL  <ion-icon name="arrow-forward"></ion-icon></a></p>
     </ion-col>
   </ion-row>
-  <ion-slides #slides pager>
+  <ion-slides *ngIf="!isEmptyRecom" #slides pager>
     <ion-slide *ngFor="let recommendation of recommendationArray" (tap)="tapEvent(recommendation)">
       <div class="ion-bg">
         <ion-card>
@@ -57,7 +57,7 @@
       </div>
     </ion-slide>
   </ion-slides>
-  <hr>
+  <hr *ngIf="!isEmptyRecom">
 
   <p class="sr-text">SEARCH RESULT</p>  
 

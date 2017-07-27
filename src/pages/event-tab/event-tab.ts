@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewChildren, AfterViewInit } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, Slides, NavParams, LoadingController, Loading } from 'ionic-angular';
 import { RestapiserviceProvider } from '../../providers/restapiservice/restapiservice';
 import { TabsServiceProvider } from '../../providers/tabs-service/tabs-service';
@@ -15,7 +15,7 @@ import { EventDetailsPage } from '../event-details/event-details';
   selector: 'page-event-tab',
   templateUrl: 'event-tab.html',
 })
-export class EventTabPage implements AfterViewInit{
+export class EventTabPage {
   @ViewChild('slides') slides: Slides;
 
   currentUser: any;
@@ -23,8 +23,15 @@ export class EventTabPage implements AfterViewInit{
   loading: Loading; 
   recommendationData: any; recommendationArray: any[];
   eventsData: any; eventsArray: any[];
+  isEmptyRecom: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public tabsService: TabsServiceProvider, public restapiService: RestapiserviceProvider) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public loadingCtrl: LoadingController, 
+    public tabsService: TabsServiceProvider, 
+    public restapiService: RestapiserviceProvider
+  ) {
     console.log("HELLO WORLD".toLowerCase());
     this.currentUser = this.restapiService.getUserInfo();
     this.searchCity = this.currentUser["location"];
@@ -32,24 +39,10 @@ export class EventTabPage implements AfterViewInit{
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EventTabPage');
-    let currentIndex = this.slides.getActiveIndex();
-    console.log("INDEX: " + currentIndex);
-    console.log(this.slides);
-  }
-
-
-  ngAfterContentInit() {
-    let currentIndex = this.slides.getActiveIndex();
-    console.log("INDEX: " + currentIndex);
-    // After the view is initialized, this.userProfile will be available
-    // this.doRefresh(0);
   }
 
   ngAfterViewInit() {
     this.doRefresh(0);
-    // After the view is initialized, this.userProfile will be available
-    let currentIndex = this.slides.getActiveIndex();
-    console.log("INDEX: " + currentIndex);
   }
 
   doRefresh(refresher) {
@@ -80,9 +73,21 @@ export class EventTabPage implements AfterViewInit{
             });
           }
 
+          this.isEmptyRecom = false;
+          if(data["status"]===false){
+            this.isEmptyRecom = true;
+          }
+
           console.log("RECOMMENDATION: " + JSON.stringify(this.recommendationData));
-          if(refresher != 0)
+          if(refresher != 0){
+            console.log("SLIDES", this.slides);
+            if(this.slides !== undefined){                          
+              let currentIndex = this.slides.getActiveIndex();
+              console.log("HEY: " + currentIndex);
+              this.slides.slideTo(0, 500);
+            }
             refresher.complete();
+          }
         }, error => {
           console.log(JSON.stringify(error.json()));
           if(refresher != 0)
