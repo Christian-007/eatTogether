@@ -31,8 +31,8 @@ export class RestapiserviceProvider {
   currentUser: User;
   data: any;
   // ipAddress = "http://localhost:5000";
-  // ipAddress = "http://192.168.10.195:5000";
-  ipAddress = "http://143.167.210.82:5000";
+  ipAddress = "http://192.168.1.23:5000";
+  // ipAddress = "http://143.167.210.82:5000";
   // ipAddress = "https://restful-api-dissertation.herokuapp.com";
   param: any;
 

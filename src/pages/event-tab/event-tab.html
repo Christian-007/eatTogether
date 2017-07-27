@@ -13,6 +13,15 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
   <div class="section-search">
     <a href="#" class="close-btn" (click)="removeText()">
       <i class="fa fa-times" aria-hidden="true"></i>
@@ -27,41 +36,20 @@
       <p class="sr-text see-all"><a href="">SEE ALL  <ion-icon name="arrow-forward"></ion-icon></a></p>
     </ion-col>
   </ion-row>
-  <ion-slides pager>
-    <ion-slide>
+  <ion-slides #slides pager>
+    <ion-slide *ngFor="let recommendation of recommendationArray" (tap)="tapEvent(recommendation)">
       <div class="ion-bg">
         <ion-card>
-          <!-- <img src="assets/img/beehive.jpg"/> -->
-          <div class="bg-img" [ngStyle]="{ 'background-image': 'url(assets/img/beehive.jpg)'}"></div>
-          <div class="card-title">Meal at Beehive</div>
+          <div class="bg-img" [ngStyle]="{ 'background-image': 'url(' + recommendation.imgName + ')'}"></div>
+          <div class="card-title">{{recommendation.title}}</div>
           <div class="content-custom">
-            <p class="rec-title">Hosted by: Christian Sunardi</p>
+            <p class="rec-title">Hosted by: {{recommendation.user_fname}} {{recommendation.user_lname}}</p>
             <ion-row class="rec-row">
               <ion-col col-6>
-                <p class="rec-date"><i class="fa fa-calendar" aria-hidden="true"></i> Sep 10, 2017</p>
+                <p class="rec-date"><i class="fa fa-calendar" aria-hidden="true"></i> {{recommendation.startdate | date: 'yMMMd'}}</p>
               </ion-col>
               <ion-col col-6>
-                <p class="rec-time"><i class="fa fa-clock-o" aria-hidden="true"></i> 18:00</p>
-              </ion-col>
-            </ion-row>
-          </div>
-        </ion-card>
-      </div>
-    </ion-slide>
-    <ion-slide>
-      <div class="ion-bg">
-        <ion-card>
-          <!-- <img src="assets/img/yates.jpg"/> -->
-          <div class="bg-img" [ngStyle]="{ 'background-image': 'url(assets/img/yates.jpg)'}"></div>
-          <div class="card-title">Meal at Yates</div>
-          <div class="content-custom">
-            <p class="rec-title">Hosted by: Roger Moore</p>
-            <ion-row class="rec-row">
-              <ion-col col-6>
-                <p class="rec-date"><i class="fa fa-calendar" aria-hidden="true"></i> Sep 10, 2017</p>
-              </ion-col>
-              <ion-col col-6>
-                <p class="rec-time"><i class="fa fa-clock-o" aria-hidden="true"></i> 18:00</p>
+                <p class="rec-time"><i class="fa fa-clock-o" aria-hidden="true"></i> {{recommendation.starttime}} - {{recommendation.endtime}}</p>
               </ion-col>
             </ion-row>
           </div>
