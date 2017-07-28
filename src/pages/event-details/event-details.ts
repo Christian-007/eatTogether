@@ -37,8 +37,50 @@ export class EventDetailsPage {
     this.upcomingEvent = navParams.data.upcomingEvent;
     console.log("PIC: " + this.upcomingEvent["user_profile_pic"]);
     this.currentUser = this.restapiService.getUserInfo();
-    this.checkIfUserHasJoined();
-    this.getPeopleInEvents();
+    this.checkIfUserHasJoined()
+    .then(data => {
+      console.log("FINISHED CHECK USER");
+      console.log(data);
+
+      this.checkEventInfo()
+      .then(data => {
+        console.log("FINISHED CHECK EVENT INFO");
+        console.log(data);
+
+        this.getPeopleInEvents()
+        .then(data => {
+          console.log("FINISHED GET PEOPLE");
+        }, error => {
+          console.log("ERROR GET PEOPLE");
+          console.log(JSON.stringify(error.json()));
+        });
+
+      }, error => {
+        console.log("ERROR CHECK EVENT");
+        console.log(error);
+        this.alert = this.alertCtrl.create({
+            title: "ERROR: Event Not Found",
+            subTitle: "This event does not exist anymore.",
+            buttons: 
+            [
+              {
+                text: 'OK',
+                handler: data => {
+                  console.log('Cancel clicked');
+                  let param = { 'isChange': true };
+                  this.events.publish('pageChange', param);
+                  this.navCtrl.pop();
+                }
+              }
+            ]
+        });
+        this.alert.present();
+      });
+
+    }, error => {
+      console.log("FINISHED CHECK USER");
+      console.log(JSON.stringify(error.json()));
+    });
   }
 
   ionViewDidLoad() {
@@ -46,46 +88,61 @@ export class EventDetailsPage {
   }
 
   checkIfUserHasJoined() {
-    this.tabsService.checkUsersInEvent(this.upcomingEvent["id"])
-    .then(data => {
-      this.usersArray = data;
-      for(let user of this.usersArray) { 
-        if(user["id"]==this.currentUser["id"]){
-          this.isUserJoined = true;
+    return new Promise((resolve, reject) => {
+      this.tabsService.checkUsersInEvent(this.upcomingEvent["id"])
+      .then(data => {
+        this.usersArray = data;
+        for(let user of this.usersArray) { 
+          if(user["id"]==this.currentUser["id"]){
+            this.isUserJoined = true;
+          }
         }
-      }
-      this.checkEventInfo();
+        resolve(true);
+        // this.checkEventInfo();
+      },error => {
+        reject(false);
+      });
     });
   }
 
   getPeopleInEvents() {
-    this.tabsService.getParticipants(this.upcomingEvent["id"])
-    .then(data => {
-      this.peopleData = data;
-      this.peopleArray = [];
-      for(let people of this.peopleData) { 
-        this.peopleArray.push({
-          id: people.id,
-          fname: people.fname,
-          lname: people.lname,
-          email: people.email,
-          location: people.location,
-          profile_pic: this.restapiService.ipAddress+'/user_image/'+people.profile_pic,
-          cover_pic: this.restapiService.ipAddress+'/user_image/'+people.cover_pic,
-          event_id: people.event_id
-        });
-      }
+    return new Promise((resolve, reject) => {
+      this.tabsService.getParticipants(this.upcomingEvent["id"])
+      .then(data => {
+        this.peopleData = data;
+        this.peopleArray = [];
+        for(let people of this.peopleData) { 
+          this.peopleArray.push({
+            id: people.id,
+            fname: people.fname,
+            lname: people.lname,
+            email: people.email,
+            location: people.location,
+            profile_pic: this.restapiService.ipAddress+'/user_image/'+people.profile_pic,
+            cover_pic: this.restapiService.ipAddress+'/user_image/'+people.cover_pic,
+            event_id: people.event_id
+          });
+        }
+        resolve(true);
+      },error => {
+        reject(false);
+      });
     });
   }
 
   checkEventInfo() {
-    this.tabsService.checkEventInformation(this.upcomingEvent["id"])
-    .then(data => {
-      this.eventInfo = data;
-      if(this.eventInfo["user_id"]==this.currentUser["id"]){
-        this.isUserHost = true;
-      }
-      console.log("IS HOST: " + this.isUserHost);
+    return new Promise((resolve, reject) => {
+      this.tabsService.checkEventInformation(this.upcomingEvent["id"])
+      .then(data => {
+        this.eventInfo = data;
+        if(this.eventInfo["user_id"]==this.currentUser["id"]){
+          this.isUserHost = true;
+        }
+        resolve(true);
+        console.log("IS HOST: " + this.isUserHost);
+      },error => {
+        reject(false);
+      });
     });
   }
 

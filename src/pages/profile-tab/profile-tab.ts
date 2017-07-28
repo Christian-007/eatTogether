@@ -24,7 +24,14 @@ export class ProfileTabPage {
   currentUser: any;
   peopleData: any; peopleArray: any;
 
-  constructor(public navCtrl: NavController, public tabsService: TabsServiceProvider, public events: Events, public navParams: NavParams, public restapiService: RestapiserviceProvider, public modalCtrl: ModalController) {
+  constructor(
+    public navCtrl: NavController, 
+    public tabsService: TabsServiceProvider, 
+    public events: Events, 
+    public navParams: NavParams, 
+    public restapiService: RestapiserviceProvider, 
+    public modalCtrl: ModalController
+  ) {
     this.currentUser = this.restapiService.getUserInfo();
     this.id = this.currentUser["id"];
     this.fname = this.currentUser["fname"]; this.lname = this.currentUser["lname"];

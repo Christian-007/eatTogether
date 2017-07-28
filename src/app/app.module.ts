@@ -28,13 +28,7 @@ import { File } from '@ionic-native/file';
 import { Transfer } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
 import { Camera } from '@ionic-native/camera';
-import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
-
-const cloudSettings: CloudSettings = {
-  'core': {
-    'app_id': '81ab265a'
-  }
-};
+// import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 
 @NgModule({
   declarations: [
@@ -56,8 +50,7 @@ const cloudSettings: CloudSettings = {
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp),
-    CloudModule.forRoot(cloudSettings)
+    IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [

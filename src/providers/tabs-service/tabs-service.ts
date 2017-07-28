@@ -75,13 +75,14 @@ export class TabsServiceProvider {
   }
 
   getParticipants(event_id: any) {
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       this.http.get(this.restapiService.ipAddress+"/users_events/"+event_id)
         .map(res => res.json())
         .subscribe(data => {
           this.data = data;
           resolve(this.data);
         }, error => {
+          reject(false);
           console.log(JSON.stringify(error.json()));
         });
     });
@@ -101,27 +102,31 @@ export class TabsServiceProvider {
   }
 
   checkUsersInEvent(event_id: any) {
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       this.http.get(this.restapiService.ipAddress+"/users_events/"+event_id)
         .map(res => res.json())
         .subscribe(data => {
           this.data = data;
           resolve(this.data);
         }, error => {
-          console.log(JSON.stringify(error.json()));
+          console.log("ERROR CHECK USERS");
+          reject(false);
+          // console.log(JSON.stringify(error.json()));
         });
     });
   }
 
   checkEventInformation(event_id: any) {
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       this.http.get(this.restapiService.ipAddress+"/event/"+event_id)
         .map(res => res.json())
         .subscribe(data => {
           this.data = data;
           resolve(this.data);
         }, error => {
-          console.log(JSON.stringify(error.json()));
+          reject(false);
+          console.log("ERROR CHECK EVENT INFO");
+          // console.log(JSON.stringify(error.json()));
         });
     });
   }
