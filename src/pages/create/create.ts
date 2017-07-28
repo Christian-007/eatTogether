@@ -31,7 +31,7 @@ export class CreatePage {
   title: string; description: string;
   loc: string; type: string = "public";
   city: string;
-  startdate: any; enddate: any;
+  startdate: any;
   starttime: any; endtime: any; user_id: any;
   loading: Loading; alert: Alert;
   eventTypeOptions: { title: string };
@@ -210,7 +210,7 @@ export class CreatePage {
     this.showLoading();
     this.uploadImage();
 
-    this.tabsService.createEventPost(this.title, this.description, this.loc, this.city, this.lastImage, this.startdate, this.starttime, this.enddate, this.endtime, this.type, this.user_id)
+    this.tabsService.createEventPost(this.title, this.description, this.loc, this.city, this.lastImage, this.startdate, this.starttime, this.endtime, this.type, this.user_id)
     .then(data => {
       console.log(JSON.stringify(data));
       this.loading.dismiss();

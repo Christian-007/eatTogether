@@ -21,11 +21,11 @@ export class TabsServiceProvider {
 
   }
 
-  createEventPost(title: string, description: string, location: string, city: string, imgName: string, startdate: any, starttime: any, enddate: any, endtime: any, type: any, user_id: any) {
+  createEventPost(title: string, description: string, location: string, city: string, imgName: string, startdate: any, starttime: any, endtime: any, type: any, user_id: any) {
     var headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
  
-    var params = 'title='+title+'&'+'description='+description+'&'+'location='+location+'&'+'city='+city+'&'+'imgName='+imgName+'&'+'startdate='+startdate+'&'+'starttime='+starttime+'&'+'enddate='+enddate+'&'+'endtime='+endtime+'&'+'type='+type+'&'+'user_id='+user_id;
+    var params = 'title='+title+'&'+'description='+description+'&'+'location='+location+'&'+'city='+city+'&'+'imgName='+imgName+'&'+'startdate='+startdate+'&'+'starttime='+starttime+'&'+'endtime='+endtime+'&'+'type='+type+'&'+'user_id='+user_id;
 
     return new Promise(resolve => {
       this.http.post(this.restapiService.ipAddress+"/create_events", params , {headers: headers})
