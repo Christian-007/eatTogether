@@ -1,5 +1,6 @@
-import { Component, OnInit} from '@angular/core';
-import { IonicPage, Events, NavController, NavParams} from 'ionic-angular';
+import { Component, OnInit, ViewChild} from '@angular/core';
+import { IonicPage, Events, NavController, NavParams, Searchbar} from 'ionic-angular';
+import { Keyboard } from 'ionic-native';
 
 /**
  * Generated class for the SearchLocationPage page.
@@ -13,8 +14,9 @@ import { IonicPage, Events, NavController, NavParams} from 'ionic-angular';
   templateUrl: 'search-location.html',
 })
 export class SearchLocationPage implements OnInit{
-  loc: any;
+  @ViewChild('searchBar') myInput: Searchbar;
 
+  loc: any;
   autocompleteItems: any;
   autocomplete: any;
   acService:any;
@@ -33,7 +35,15 @@ export class SearchLocationPage implements OnInit{
     this.autocompleteItems = [];
     this.autocomplete = {
       query: ''
-    };        
+    };   
+      
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      Keyboard.show() // for android
+      this.myInput.setFocus();
+    }, 1000);
   }
   
   chooseItem(item){

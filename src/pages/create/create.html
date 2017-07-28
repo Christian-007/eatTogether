@@ -48,24 +48,24 @@
         <ion-col col-12>
           <!-- <ion-input class="form-input" type="text" name="loc" [(ngModel)]="loc" placeholder="Location" (click)="searchLocation()">
           </ion-input> -->
-          <button ion-button color="light" (click)="searchLocation()" class="search-btn" full>{{loc}}</button>
+          <button ion-button color="light" (click)="searchLocation()" class="search-btn" [style.color]="getFontColor()" full>{{loc}}</button>
         </ion-col>
       </ion-row>
 
-      <label for="startdate"><i class="fa fa-calendar" aria-hidden="true"></i> Start</label>
+      <label for="startdate"><i class="fa fa-calendar" aria-hidden="true"></i> Date</label>
       <ion-row>
-        <ion-col col-6>  
+        <ion-col col-12>  
           <ion-datetime class="form-input date" displayFormat="DD/MM/YYYY" name="startdate" [(ngModel)]="startdate" placeholder="Start Date"></ion-datetime>
         </ion-col>
-        <ion-col col-6>
-          <ion-datetime class="form-input date" displayFormat="HH:mm" name="starttime" [(ngModel)]="starttime" placeholder="Start Time"></ion-datetime>
-        </ion-col>
       </ion-row>
 
-      <label for="enddate"><i class="fa fa-calendar" aria-hidden="true"></i> End</label>
+      <label for="enddate"><i class="fa fa-clock-o" aria-hidden="true"></i> Time</label>
       <ion-row>
-        <ion-col col-6>  
+        <!-- <ion-col col-6>  
           <ion-datetime class="form-input date" displayFormat="DD/MM/YYYY" name="enddate" [(ngModel)]="enddate" placeholder="End Date"></ion-datetime>
+        </ion-col> -->
+        <ion-col col-6>
+          <ion-datetime class="form-input date" displayFormat="HH:mm" name="starttime" [(ngModel)]="starttime" placeholder="Start Time"></ion-datetime>
         </ion-col>
         <ion-col col-6>
           <ion-datetime class="form-input date" displayFormat="HH:mm" name="endtime" [(ngModel)]="endtime" placeholder="End Time"></ion-datetime>

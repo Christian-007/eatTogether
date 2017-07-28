@@ -27,6 +27,7 @@ declare var cordova: any;
 })
 export class CreatePage {
 
+  fontColor: string;
   title: string; description: string;
   loc: string; type: string = "public";
   city: string;
@@ -43,10 +44,12 @@ export class CreatePage {
       title: 'Event Type'
     };
     this.loc = "Search for location";
+    this.fontColor = "#a0a0a0";
     this.events.subscribe('searchLocation', (data) => {
       // console.log("data: " + data["location"]);
       this.city = data["city"];
       this.loc = data["location"];
+      this.fontColor = "#000";
     });
     
   }
@@ -55,6 +58,10 @@ export class CreatePage {
     console.log('ionViewDidLoad CreatePage');
     // this.startdate = new Date().toISOString();
     // this.enddate = new Date().toISOString();
+  }
+
+  getFontColor(){
+    return this.fontColor;
   }
 
   searchLocation() {
