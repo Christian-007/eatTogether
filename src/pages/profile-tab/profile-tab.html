@@ -10,7 +10,7 @@
     <ion-title>Profile</ion-title>
     <ion-buttons end>
       <button ion-button (click)="starPeople()">
-        <ion-icon name="star"></ion-icon>
+        <ion-icon name="star"></ion-icon> STARS
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -27,5 +27,80 @@
     <p class="name">{{fname}} {{lname}}</p>
     <p class="location"><i class="fa fa-location-arrow" aria-hidden="true"></i> {{location}}</p>
   </div>
-  <!-- <a href="#" (click)="logoutPage()"> Logout</a> -->
+
+  <div class="recentActivity">
+    <p class="recent-title">RECENT ACTIVITY</p>  
+    <ion-row class="hosted-by">
+      <ion-col col-3 class="avatar-col"><img class="avatar" src="{{profile_pic}}"></ion-col>
+      <ion-col col-8>
+        <ion-row>
+          <ion-col col-12 class="user-name">{{fname}} {{lname}}</ion-col>
+          <ion-col col-12 class="user-location"><i class="fa fa-location-arrow" aria-hidden="true"></i> location</ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col col-1 class="right-btn">
+        <i class="fa fa-angle-right fa-2x" aria-hidden="true"></i>
+      </ion-col>
+    </ion-row>
+    <ion-row class="hosted-by">
+        <ion-col col-3 class="avatar-col"><img class="avatar" src="{{profile_pic}}"></ion-col>
+        <ion-col col-8>
+          <ion-row>
+            <ion-col col-12 class="user-name">{{fname}} {{lname}}</ion-col>
+            <ion-col col-12 class="user-location"><i class="fa fa-location-arrow" aria-hidden="true"></i> location</ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col col-1 class="right-btn">
+          <i class="fa fa-angle-right fa-2x" aria-hidden="true"></i>
+        </ion-col>
+    </ion-row>
+    <ion-row class="hosted-by">
+        <ion-col col-3 class="avatar-col"><img class="avatar" src="{{profile_pic}}"></ion-col>
+        <ion-col col-8>
+          <ion-row>
+            <ion-col col-12 class="user-name">{{fname}} {{lname}}</ion-col>
+            <ion-col col-12 class="user-location"><i class="fa fa-location-arrow" aria-hidden="true"></i> location</ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col col-1 class="right-btn">
+          <i class="fa fa-angle-right fa-2x" aria-hidden="true"></i>
+        </ion-col>
+    </ion-row>
+    <ion-row class="hosted-by">
+        <ion-col col-3 class="avatar-col"><img class="avatar" src="{{profile_pic}}"></ion-col>
+        <ion-col col-8>
+          <ion-row>
+            <ion-col col-12 class="user-name">{{fname}} {{lname}}</ion-col>
+            <ion-col col-12 class="user-location"><i class="fa fa-location-arrow" aria-hidden="true"></i> location</ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col col-1 class="right-btn">
+          <i class="fa fa-angle-right fa-2x" aria-hidden="true"></i>
+        </ion-col>
+    </ion-row>
+    <ion-row class="hosted-by">
+        <ion-col col-3 class="avatar-col"><img class="avatar" src="{{profile_pic}}"></ion-col>
+        <ion-col col-8>
+          <ion-row>
+            <ion-col col-12 class="user-name">{{fname}} {{lname}}</ion-col>
+            <ion-col col-12 class="user-location"><i class="fa fa-location-arrow" aria-hidden="true"></i> location</ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col col-1 class="right-btn">
+          <i class="fa fa-angle-right fa-2x" aria-hidden="true"></i>
+        </ion-col>
+    </ion-row>
+    <ion-row class="hosted-by">
+        <ion-col col-3 class="avatar-col"><img class="avatar" src="{{profile_pic}}"></ion-col>
+        <ion-col col-8>
+          <ion-row>
+            <ion-col col-12 class="user-name">{{fname}} {{lname}}</ion-col>
+            <ion-col col-12 class="user-location"><i class="fa fa-location-arrow" aria-hidden="true"></i> location</ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col col-1 class="right-btn">
+          <i class="fa fa-angle-right fa-2x" aria-hidden="true"></i>
+        </ion-col>
+    </ion-row>
+  </div>
 </ion-content>

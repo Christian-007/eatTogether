@@ -39,7 +39,16 @@ export class ProfileTabPage {
     this.profile_pic = this.restapiService.ipAddress+'/user_image/'+this.currentUser["profile_pic"];
     if(this.currentUser["cover_pic"]!==null)
       this.cover_pic = this.restapiService.ipAddress+'/user_image/'+this.currentUser["cover_pic"];
-
+    let time = new Date().getHours();
+    let minutes = new Date().getMinutes();
+    let year = new Date().getFullYear();
+    var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    let month = new Date().getMonth();
+    let date = new Date().getDate();
+    let fullSQLDate = year+"-"+month+"-"+date;
+    console.log("TIME: " + time + ":" + minutes);
+    console.log("DATE: " + date + " " + monthNames[month] + ", " + year);
+    console.log("SQL DATE: " + fullSQLDate);
   }
 
   ionViewDidLoad() {
