@@ -80,7 +80,7 @@ page-profile-tab {
     .recent-title {
       margin-left: 15px;
       font-weight: 700;
-      font-size: 15px;
+      font-size: 14px;
       margin-bottom: 5px;
     }
 
@@ -129,13 +129,18 @@ page-profile-tab {
       }
 
       .user-name {
-        font-weight: 600;
-        font-size: 16px;
+        font-size: 12px;
+        font-weight: 300;
+        
+        span {
+          font-weight: 600;
+        }
       }
 
       .user-location {
-        font-size: 12px;
-        color: #667F97;
+        font-size: 11px;
+        color: #0B5AC9;
+        font-weight: 500;
       }
     }
 

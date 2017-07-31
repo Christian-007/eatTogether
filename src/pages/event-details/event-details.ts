@@ -23,6 +23,8 @@ export class EventDetailsPage {
   loading: Loading; alert: Alert;
   peopleData: any; peopleArray: any;
   ownerStatus: string; ownerProfile: any;
+  hours: any; minutes: any;
+  year: any; month: any; date: any;
 
   constructor(
     public navCtrl: NavController, 
@@ -147,18 +149,29 @@ export class EventDetailsPage {
   }
 
   joinEvent() {
+    this.hours = new Date().getHours(); this.minutes = new Date().getMinutes();
+    this.year = new Date().getFullYear(); this.month = new Date().getMonth(); this.date = new Date().getDate();
+    let fullSQLDate = this.year+"-"+this.month+"-"+this.date;
+    let timeSQL = this.hours+":"+this.minutes;
+    let timeCreated = new Date().getTime();
+
     this.showLoading("Joining event..");
 
     this.tabsService.joinEventPost(this.currentUser["id"], this.upcomingEvent["id"])
     .then(data => {
       // console.log(JSON.stringify(data));
       // this.loading.dismiss();
-      this.isUserJoined = true;
-      let param = { 'isChange': true };
-      this.events.publish('pageChange', param);
-      this.zone.run(() => {
-        console.log('force update the screen');
-        this.getPeopleInEvents();
+      this.tabsService.saveUserActivities(this.currentUser["id"], this.upcomingEvent["id"], "join", fullSQLDate, timeSQL, timeCreated)
+      .then(data => {
+        this.isUserJoined = true;
+        let param = { 'isChange': true };
+        this.events.publish('pageChange', param);
+        this.zone.run(() => {
+          console.log('force update the screen');
+          this.getPeopleInEvents();
+        });
+      }, error => {
+        this.showAlertError();
       });
     }, error => {
       // console.log(JSON.stringify(error.json()));
@@ -205,26 +218,38 @@ export class EventDetailsPage {
   }
 
   httpRequestCancelEvent() {
+    this.hours = new Date().getHours(); this.minutes = new Date().getMinutes();
+    this.year = new Date().getFullYear(); this.month = new Date().getMonth(); this.date = new Date().getDate();
+    let fullSQLDate = this.year+"-"+this.month+"-"+this.date;
+    let timeSQL = this.hours+":"+this.minutes;
+    let timeCreated = new Date().getTime();
+
     this.showLoading("Cancel joining event..");
 
     this.tabsService.cancelJoinEvent(this.currentUser["id"], this.upcomingEvent["id"], this.upcomingEvent["user_id"])
     .then(data => {
       // console.log(JSON.stringify(data));
-      this.isUserJoined = false;
-      let param = { 'isChange': true };
-      this.events.publish('pageChange', param);
 
-      // Check whether Owner or not
-      if(this.ownerStatus==="owner"){ // if owner, pop/dismiss current page
-        console.log("POP");
-        this.navCtrl.pop();
-      }
-      else { // otherwise, only rerender the current page
-        this.zone.run(() => {
-          console.log('force update the screen');
-          this.getPeopleInEvents();
-        });
-      }
+      this.tabsService.saveUserActivities(this.currentUser["id"], this.upcomingEvent["id"], "cancel", fullSQLDate, timeSQL, timeCreated)
+      .then(data => {
+        this.isUserJoined = false;
+        let param = { 'isChange': true };
+        this.events.publish('pageChange', param);
+
+        // Check whether Owner or not
+        if(this.ownerStatus==="owner"){ // if owner, pop/dismiss current page
+          console.log("POP");
+          this.navCtrl.pop();
+        }
+        else { // otherwise, only rerender the current page
+          this.zone.run(() => {
+            console.log('force update the screen');
+            this.getPeopleInEvents();
+          });
+        }
+      }, error => {
+        this.showAlertError();
+      });
     }, error => {
       // console.log(JSON.stringify(error.json()));
       this.showAlertError();

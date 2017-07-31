@@ -221,4 +221,34 @@ export class TabsServiceProvider {
     });
   }
 
+  getUserActivities(user_id: any) {
+    return new Promise((resolve,reject) => {
+      this.http.get(this.restapiService.ipAddress+"/activities/"+user_id)
+        .map(res => res.json())
+        .subscribe(data => {
+          this.data = data;
+          resolve(this.data);
+        }, error => {
+          reject(false);
+          console.log("ERROR CHECK USER ACTIVITIES");
+        });
+    });
+  }
+
+  saveUserActivities(user_id: any, event_id: any, type: string, date: string, time: string, timeCreated: number){
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+ 
+    var params = 'user_id='+user_id+'&'+'event_id='+event_id+'&'+'type='+type+'&'+'date='+date+'&'+'time='+time+'&'+'timeCreated='+timeCreated;
+
+    return new Promise(resolve => {
+      this.http.post(this.restapiService.ipAddress+"/save_activity", params , {headers: headers})
+        .subscribe(data => {
+          this.data = data;
+          resolve(this.data);
+        });
+    });
+  }
+
+
 }

@@ -30,77 +30,17 @@
 
   <div class="recentActivity">
     <p class="recent-title">RECENT ACTIVITY</p>  
-    <ion-row class="hosted-by">
+    <ion-row class="hosted-by" *ngFor="let activity of activityArray" (tap)="tapEvent(activity)">
       <ion-col col-3 class="avatar-col"><img class="avatar" src="{{profile_pic}}"></ion-col>
       <ion-col col-8>
         <ion-row>
-          <ion-col col-12 class="user-name">{{fname}} {{lname}}</ion-col>
-          <ion-col col-12 class="user-location"><i class="fa fa-location-arrow" aria-hidden="true"></i> location</ion-col>
+          <ion-col col-12 class="user-name"><span>{{fname}} {{lname}}</span> {{activity.activityType}}ed an event: {{activity.title}}.</ion-col>
+          <ion-col col-12 class="user-location">{{activity.time}} - {{activity.date | date: 'yMMMd'}}</ion-col>
         </ion-row>
       </ion-col>
       <ion-col col-1 class="right-btn">
         <i class="fa fa-angle-right fa-2x" aria-hidden="true"></i>
       </ion-col>
-    </ion-row>
-    <ion-row class="hosted-by">
-        <ion-col col-3 class="avatar-col"><img class="avatar" src="{{profile_pic}}"></ion-col>
-        <ion-col col-8>
-          <ion-row>
-            <ion-col col-12 class="user-name">{{fname}} {{lname}}</ion-col>
-            <ion-col col-12 class="user-location"><i class="fa fa-location-arrow" aria-hidden="true"></i> location</ion-col>
-          </ion-row>
-        </ion-col>
-        <ion-col col-1 class="right-btn">
-          <i class="fa fa-angle-right fa-2x" aria-hidden="true"></i>
-        </ion-col>
-    </ion-row>
-    <ion-row class="hosted-by">
-        <ion-col col-3 class="avatar-col"><img class="avatar" src="{{profile_pic}}"></ion-col>
-        <ion-col col-8>
-          <ion-row>
-            <ion-col col-12 class="user-name">{{fname}} {{lname}}</ion-col>
-            <ion-col col-12 class="user-location"><i class="fa fa-location-arrow" aria-hidden="true"></i> location</ion-col>
-          </ion-row>
-        </ion-col>
-        <ion-col col-1 class="right-btn">
-          <i class="fa fa-angle-right fa-2x" aria-hidden="true"></i>
-        </ion-col>
-    </ion-row>
-    <ion-row class="hosted-by">
-        <ion-col col-3 class="avatar-col"><img class="avatar" src="{{profile_pic}}"></ion-col>
-        <ion-col col-8>
-          <ion-row>
-            <ion-col col-12 class="user-name">{{fname}} {{lname}}</ion-col>
-            <ion-col col-12 class="user-location"><i class="fa fa-location-arrow" aria-hidden="true"></i> location</ion-col>
-          </ion-row>
-        </ion-col>
-        <ion-col col-1 class="right-btn">
-          <i class="fa fa-angle-right fa-2x" aria-hidden="true"></i>
-        </ion-col>
-    </ion-row>
-    <ion-row class="hosted-by">
-        <ion-col col-3 class="avatar-col"><img class="avatar" src="{{profile_pic}}"></ion-col>
-        <ion-col col-8>
-          <ion-row>
-            <ion-col col-12 class="user-name">{{fname}} {{lname}}</ion-col>
-            <ion-col col-12 class="user-location"><i class="fa fa-location-arrow" aria-hidden="true"></i> location</ion-col>
-          </ion-row>
-        </ion-col>
-        <ion-col col-1 class="right-btn">
-          <i class="fa fa-angle-right fa-2x" aria-hidden="true"></i>
-        </ion-col>
-    </ion-row>
-    <ion-row class="hosted-by">
-        <ion-col col-3 class="avatar-col"><img class="avatar" src="{{profile_pic}}"></ion-col>
-        <ion-col col-8>
-          <ion-row>
-            <ion-col col-12 class="user-name">{{fname}} {{lname}}</ion-col>
-            <ion-col col-12 class="user-location"><i class="fa fa-location-arrow" aria-hidden="true"></i> location</ion-col>
-          </ion-row>
-        </ion-col>
-        <ion-col col-1 class="right-btn">
-          <i class="fa fa-angle-right fa-2x" aria-hidden="true"></i>
-        </ion-col>
     </ion-row>
   </div>
 </ion-content>
