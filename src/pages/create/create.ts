@@ -207,20 +207,21 @@ export class CreatePage {
   }
 
   createEvent() {
-    this.showLoading();
+    // ERROR WITH LOADING
+    // this.showLoading();
     this.uploadImage();
 
     this.tabsService.createEventPost(this.title, this.description, this.loc, this.city, this.lastImage, this.startdate, this.starttime, this.endtime, this.type, this.user_id)
     .then(data => {
-      console.log(JSON.stringify(data));
-      this.loading.dismiss();
+      // console.log(JSON.stringify(data));
+      // this.loading.dismiss();
+      this.dismissModal(true);
     }, error => {
-      console.log(JSON.stringify(error.json()));
-      this.loading.dismiss();
-      this.showAlertError();
+      // console.log(JSON.stringify(error.json()));
+      // this.loading.dismiss();
+      // this.showAlertError();
     });
-    this.loading.dismiss();
-    this.dismissModal(true);
+    // this.loading.dismiss();
   }
 
   showLoading() {

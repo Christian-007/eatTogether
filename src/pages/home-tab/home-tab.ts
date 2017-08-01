@@ -1,4 +1,4 @@
-import { Component, NgZone } from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicPage, Events, NavController, NavParams, ModalController, AlertController, Alert, LoadingController, Loading } from 'ionic-angular';
 import { CreatePage } from '../create/create';
 import { RestapiserviceProvider } from '../../providers/restapiservice/restapiservice';
@@ -33,13 +33,18 @@ export class HomeTabPage {
     public restapiService: RestapiserviceProvider,
     public tabsService: TabsServiceProvider,
     public loadingCtrl: LoadingController,
-    private alertCtrl: AlertController,
-    private zone: NgZone
+    private alertCtrl: AlertController
   ) {
     this.currentUser = this.restapiService.getUserInfo();
     this.currentUserID = this.currentUser["id"];
     this.showLoading();
-    this.getUpcomingEvents(); // this.getMyEvents();
+    this.getUpcomingEvents().then(data => {
+      this.countMyEvent();
+      if(this.loading!==null){
+        console.log("DISMISS LOADING");
+        this.loading.dismiss();
+      }
+    });
 
     this.events.subscribe('pageChange',
     (data) => {
@@ -58,44 +63,80 @@ export class HomeTabPage {
     modal.onDidDismiss(data => {
       console.log(data);
       if(data["hasData"]){
+        console.log("REFRESH DATAAA");
         // Refresh page with new data
-        this.showLoading();
-        this.getUpcomingEvents();
+        // this.showLoading();
+        this.getUpcomingEvents().then(data => {
+          this.countMyEvent();
+          if(this.loading!==null){
+            console.log("DISMISS LOADING");
+            // this.loading.dismiss();
+          }
+        });
       }
     });
     modal.present();
   }
 
   getUpcomingEvents() {
-    this.tabsService.getUpcomingEvents(this.currentUser["id"])
-    .then(data => {
-      this.upcomingEventsData = data;
+    return new Promise((resolve, reject) => {
+      this.tabsService.getUpcomingEvents(this.currentUser["id"])
+      .then(data => {
+        this.upcomingEventsData = data;
 
-      this.upcomingEventsArray = [];
-      for(let event of this.upcomingEventsData) { 
-        this.upcomingEventsArray.push({
-          id: event.id,
-          title: event.title,
-          description: event.description,
-          location: event.location,
-          city: event.city,
-          imgName: this.restapiService.ipAddress+'/image/'+event.imgName,
-          starttime: event.starttime,
-          startdate: event.startdate,
-          endtime: event.endtime,
-          type: event.type,
-          user_id: event.user_id,
-          user_fname: event.fname,
-          user_lname: event.lname,
-          user_profile_pic: this.restapiService.ipAddress+'/user_image/'+event.profile_pic
-        });
-      }
-      this.countMyEvent();
-
-      if(this.loading!==null){
-        this.loading.dismiss();
-      }
+        this.upcomingEventsArray = [];
+        for(let event of this.upcomingEventsData) { 
+          this.upcomingEventsArray.push({
+            id: event.id,
+            title: event.title,
+            description: event.description,
+            location: event.location,
+            city: event.city,
+            imgName: this.restapiService.ipAddress+'/image/'+event.imgName,
+            starttime: event.starttime,
+            startdate: event.startdate,
+            endtime: event.endtime,
+            type: event.type,
+            user_id: event.user_id,
+            user_fname: event.fname,
+            user_lname: event.lname,
+            user_profile_pic: this.restapiService.ipAddress+'/user_image/'+event.profile_pic
+          });
+        }
+      }, err => {
+        console.log('Error while creating event.');
+      });
     });
+    // this.tabsService.getUpcomingEvents(this.currentUser["id"])
+    // .then(data => {
+    //   this.upcomingEventsData = data;
+
+    //   this.upcomingEventsArray = [];
+    //   for(let event of this.upcomingEventsData) { 
+    //     this.upcomingEventsArray.push({
+    //       id: event.id,
+    //       title: event.title,
+    //       description: event.description,
+    //       location: event.location,
+    //       city: event.city,
+    //       imgName: this.restapiService.ipAddress+'/image/'+event.imgName,
+    //       starttime: event.starttime,
+    //       startdate: event.startdate,
+    //       endtime: event.endtime,
+    //       type: event.type,
+    //       user_id: event.user_id,
+    //       user_fname: event.fname,
+    //       user_lname: event.lname,
+    //       user_profile_pic: this.restapiService.ipAddress+'/user_image/'+event.profile_pic
+    //     });
+    //   }
+    //   this.countMyEvent();
+
+    //   if(this.loading!==null){
+    //     console.log("DISMISS LOADING");
+    //     this.loading.dismiss();
+    //   }
+    // });
   }
 
   countMyEvent() {
@@ -104,29 +145,7 @@ export class HomeTabPage {
       if(this.upcomingEventsArray[i]["user_id"]==this.currentUserID)
         this.myEventCount += 1;
     }
-  }
-
-  getMyEvents() {
-    this.myEventsArray = [];
-    for(let event of this.myEventsData) { 
-      if(event.user_id == this.currentUser["id"])
-      this.myEventsArray.push({
-        id: event.id,
-        title: event.title,
-        description: event.description,
-        location: event.location,
-        city: event.city,
-        imgName: this.restapiService.ipAddress+'/image/'+event.imgName,
-        starttime: event.starttime,
-        startdate: event.startdate,
-        endtime: event.endtime,
-        type: event.type,
-        user_id: event.user_id,
-        user_fname: event.fname,
-        user_lname: event.lname,
-        user_profile_pic: this.restapiService.ipAddress+'/user_image/'+event.profile_pic
-      });
-    }
+    console.log("FINISH COUNTING");
   }
 
   tapEvent(upcomingEvent) {

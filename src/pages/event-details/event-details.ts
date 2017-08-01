@@ -25,6 +25,7 @@ export class EventDetailsPage {
   ownerStatus: string; ownerProfile: any;
   hours: any; minutes: any;
   year: any; month: any; date: any;
+  userActivity: string;
 
   constructor(
     public navCtrl: NavController, 
@@ -161,7 +162,7 @@ export class EventDetailsPage {
     .then(data => {
       // console.log(JSON.stringify(data));
       // this.loading.dismiss();
-      this.tabsService.saveUserActivities(this.currentUser["id"], this.upcomingEvent["id"], "join", fullSQLDate, timeSQL, timeCreated)
+      this.tabsService.saveUserActivities(this.currentUser["id"], this.upcomingEvent["id"], "joined", fullSQLDate, timeSQL, timeCreated)
       .then(data => {
         this.isUserJoined = true;
         let param = { 'isChange': true };
@@ -186,10 +187,12 @@ export class EventDetailsPage {
     if(this.currentUser["id"] == this.upcomingEvent["user_id"]){
       // OWNER
       this.ownerStatus = "owner";
+      this.userActivity = "removed"
       this.showAlertConfirm("Are you sure you want to cancel this event? This will remove the event");
     }else{
       // NOT OWNER
       this.ownerStatus = "not_owner";
+      this.userActivity = "cancelled joining"
       this.showAlertConfirm("Are you sure you want to cancel joining this event?");
     }
   }
@@ -230,7 +233,7 @@ export class EventDetailsPage {
     .then(data => {
       // console.log(JSON.stringify(data));
 
-      this.tabsService.saveUserActivities(this.currentUser["id"], this.upcomingEvent["id"], "cancel", fullSQLDate, timeSQL, timeCreated)
+      this.tabsService.saveUserActivities(this.currentUser["id"], this.upcomingEvent["id"], this.userActivity, fullSQLDate, timeSQL, timeCreated)
       .then(data => {
         this.isUserJoined = false;
         let param = { 'isChange': true };
