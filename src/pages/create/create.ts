@@ -191,11 +191,6 @@ export class CreatePage {
    
     const fileTransfer: TransferObject = this.transfer.create();
    
-    // this.loading = this.loadingCtrl.create({
-    //   content: 'Uploading...',
-    // });
-    // this.loading.present();
-   
     // Use the FileTransfer to upload the image
     fileTransfer.upload(targetPath, url, options).then(data => {
       // this.loading.dismissAll()
@@ -207,21 +202,23 @@ export class CreatePage {
   }
 
   createEvent() {
-    // ERROR WITH LOADING
-    // this.showLoading();
-    this.uploadImage();
+    this.showLoading();
+    
+    if(this.pathForImage(this.lastImage) !== ""){
+      this.uploadImage();
+    }
 
     this.tabsService.createEventPost(this.title, this.description, this.loc, this.city, this.lastImage, this.startdate, this.starttime, this.endtime, this.type, this.user_id)
     .then(data => {
       // console.log(JSON.stringify(data));
-      // this.loading.dismiss();
-      this.dismissModal(true);
+      this.loading.dismiss().then(() => {
+        this.dismissModal(true);
+      });
     }, error => {
-      // console.log(JSON.stringify(error.json()));
-      // this.loading.dismiss();
-      // this.showAlertError();
+      this.loading.dismiss().then(() => {
+        console.log("ERROR OCCURRED...");
+      });
     });
-    // this.loading.dismiss();
   }
 
   showLoading() {

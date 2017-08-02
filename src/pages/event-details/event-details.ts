@@ -153,7 +153,7 @@ export class EventDetailsPage {
     this.hours = new Date().getHours(); this.minutes = new Date().getMinutes();
     this.year = new Date().getFullYear(); this.month = new Date().getMonth(); this.date = new Date().getDate();
     let fullSQLDate = this.year+"-"+this.month+"-"+this.date;
-    let timeSQL = this.hours+":"+this.minutes;
+    let timeSQL = this.hours+":"+(this.minutes<10?'0':'')+this.minutes;
     let timeCreated = new Date().getTime();
 
     this.showLoading("Joining event..");
@@ -162,7 +162,7 @@ export class EventDetailsPage {
     .then(data => {
       // console.log(JSON.stringify(data));
       // this.loading.dismiss();
-      this.tabsService.saveUserActivities(this.currentUser["id"], this.upcomingEvent["id"], "joined", fullSQLDate, timeSQL, timeCreated)
+      this.tabsService.saveUserActivities(this.currentUser["id"], this.upcomingEvent["id"], this.upcomingEvent["title"], "joined", fullSQLDate, timeSQL, timeCreated)
       .then(data => {
         this.isUserJoined = true;
         let param = { 'isChange': true };
@@ -224,7 +224,7 @@ export class EventDetailsPage {
     this.hours = new Date().getHours(); this.minutes = new Date().getMinutes();
     this.year = new Date().getFullYear(); this.month = new Date().getMonth(); this.date = new Date().getDate();
     let fullSQLDate = this.year+"-"+this.month+"-"+this.date;
-    let timeSQL = this.hours+":"+this.minutes;
+    let timeSQL = this.hours+":"+(this.minutes<10?'0':'')+this.minutes;
     let timeCreated = new Date().getTime();
 
     this.showLoading("Cancel joining event..");
@@ -233,7 +233,7 @@ export class EventDetailsPage {
     .then(data => {
       // console.log(JSON.stringify(data));
 
-      this.tabsService.saveUserActivities(this.currentUser["id"], this.upcomingEvent["id"], this.userActivity, fullSQLDate, timeSQL, timeCreated)
+      this.tabsService.saveUserActivities(this.currentUser["id"], this.upcomingEvent["id"], this.upcomingEvent["title"], this.userActivity, fullSQLDate, timeSQL, timeCreated)
       .then(data => {
         this.isUserJoined = false;
         let param = { 'isChange': true };

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ModalController, NavParams, Events } from 'ionic-angular';
+import { IonicPage, NavController, ModalController, ToastController, NavParams, Events } from 'ionic-angular';
 import { RestapiserviceProvider } from '../../providers/restapiservice/restapiservice';
 import { TabsServiceProvider } from '../../providers/tabs-service/tabs-service';
 import { EditProfilePage } from '../edit-profile/edit-profile';
@@ -32,7 +32,8 @@ export class ProfileTabPage {
     public events: Events, 
     public navParams: NavParams, 
     public restapiService: RestapiserviceProvider, 
-    public modalCtrl: ModalController
+    public modalCtrl: ModalController,
+    public toastCtrl: ToastController
   ) {
     this.currentUser = this.restapiService.getUserInfo();
     this.id = this.currentUser["id"];
@@ -42,17 +43,6 @@ export class ProfileTabPage {
     if(this.currentUser["cover_pic"]!==null)
       this.cover_pic = this.restapiService.ipAddress+'/user_image/'+this.currentUser["cover_pic"];
 
-    // let hours = new Date().getHours();
-    // let minutes = new Date().getMinutes();
-    // let year = new Date().getFullYear();
-    // var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    // let month = new Date().getMonth();
-    // let date = new Date().getDate();
-    // let fullSQLDate = year+"-"+month+"-"+date;
-    // let time = new Date().getTime();
-    // console.log("TIME: " + hours + ":" + minutes);
-    // console.log("DATE: " + date + " " + monthNames[month] + ", " + year);
-    // console.log("SQL DATE: " + fullSQLDate);
     this.getActivities();
   }
 
@@ -102,30 +92,51 @@ export class ProfileTabPage {
           activity_id: activity.id,
           activity_user_id: activity.activity_user_id,
           id: activity.event_id,
+          event_title: activity.event_title,
           activityType: activity.activityType,
           date: activity.date,
           time: activity.time,
-          timeCreated: activity.timeCreated,
-          title: activity.title,
-          description: activity.description,
-          location: activity.location,
-          city: activity.city,
-          imgName: this.restapiService.ipAddress+'/image/'+activity.imgName,
-          starttime: activity.starttime,
-          startdate: activity.startdate,
-          endtime: activity.endtime,
-          type: activity.type,
-          event_user_id: activity.activity_user_id,
-          user_fname: activity.fname,
-          user_lname: activity.lname,
-          user_profile_pic: this.restapiService.ipAddress+'/user_image/'+activity.profile_pic
+          timeCreated: activity.timeCreated
         });
       }
     });
   }
 
   tapEvent(activity) {
-    this.navCtrl.push(EventDetailsPage, { upcomingEvent: activity });
+    let eventDetails;
+    console.log("activity: " + JSON.stringify(activity));
+    this.tabsService.checkEventInformation(activity["id"])
+    .then(data => {
+      eventDetails = {
+        "id": data["id"],
+        "title": data["title"],
+        "description": data["description"],
+        "location": data["location"],
+        "city": data["city"],
+        "imgName": this.restapiService.ipAddress+'/image/'+data["imgName"],
+        "starttime": data["starttime"],
+        "startdate": data["startdate"],
+        "endtime": data["endtime"],
+        "type": data["type"],
+        "user_id": data["user_id"],
+        "user_fname": data["fname"],
+        "user_lname": data["lname"],
+        "user_profile_pic": this.restapiService.ipAddress+'/user_image/'+data["profile_pic"]
+      };
+      this.navCtrl.push(EventDetailsPage, { upcomingEvent: eventDetails });
+    },error => {
+      this.presentToast('This event is not available.');
+      console.log("ERROR");
+    });
+  }
+
+  private presentToast(text) {
+    let toast = this.toastCtrl.create({
+      message: text,
+      duration: 3000,
+      position: 'bottom'
+    });
+    toast.present();
   }
 
   logoutPage() {

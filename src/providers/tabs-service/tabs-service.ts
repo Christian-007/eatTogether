@@ -235,11 +235,11 @@ export class TabsServiceProvider {
     });
   }
 
-  saveUserActivities(user_id: any, event_id: any, type: string, date: string, time: string, timeCreated: number){
+  saveUserActivities(user_id: any, event_id: any, event_title: string, type: string, date: string, time: string, timeCreated: number){
     var headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
  
-    var params = 'user_id='+user_id+'&'+'event_id='+event_id+'&'+'type='+type+'&'+'date='+date+'&'+'time='+time+'&'+'timeCreated='+timeCreated;
+    var params = 'user_id='+user_id+'&'+'event_id='+event_id+'&'+'event_title='+event_title+'&'+'type='+type+'&'+'date='+date+'&'+'time='+time+'&'+'timeCreated='+timeCreated;
 
     return new Promise(resolve => {
       this.http.post(this.restapiService.ipAddress+"/save_activity", params , {headers: headers})

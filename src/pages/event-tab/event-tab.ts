@@ -32,7 +32,6 @@ export class EventTabPage {
     public tabsService: TabsServiceProvider, 
     public restapiService: RestapiserviceProvider
   ) {
-    console.log("HELLO WORLD".toLowerCase());
     this.currentUser = this.restapiService.getUserInfo();
     this.searchCity = this.currentUser["location"];
   }
@@ -111,7 +110,6 @@ export class EventTabPage {
   }
 
   tapEvent(upcomingEvent) {
-    console.log("Tapped");
     this.navCtrl.push(EventDetailsPage, { upcomingEvent: upcomingEvent });
   }
 

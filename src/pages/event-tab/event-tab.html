@@ -36,7 +36,7 @@
       <p class="sr-text see-all"><a href="">SEE ALL  <ion-icon name="arrow-forward"></ion-icon></a></p>
     </ion-col>
   </ion-row>
-  <div class="slideContainer">
+  <div class="slideContainer" *ngIf="!isEmptyRecom">
     <ion-slides *ngIf="!isEmptyRecom" #slides pager>
       <ion-slide *ngFor="let recommendation of recommendationArray" (tap)="tapEvent(recommendation)">
         <div class="ion-bg">

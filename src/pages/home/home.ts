@@ -15,8 +15,6 @@ export class HomePage {
   email: string; password: string;
 
   constructor(public navCtrl: NavController, public restapiService: RestapiserviceProvider, public http: Http, public loadingCtrl: LoadingController, private alertCtrl: AlertController) {
-    // this.restapiservice.load().then(data => this.rest = data);
-    // this.getData();
     this.http = http;
     this.navCtrl = navCtrl;
   }
@@ -32,12 +30,6 @@ export class HomePage {
     .then(data => {
       this.users = data;
       console.log(JSON.stringify(data));
-
-      /*let dataList;
-      for(let i = 0; i < data.length; ++i) { 
-        dataList = data[i].fname;
-        console.log(dataList);
-      }*/
       
       this.loading.dismiss();
     });
@@ -49,8 +41,6 @@ export class HomePage {
 
     this.restapiService.getUserLogin(this.email,this.password)
     .then(data => {
-      // this.users = data;
-      console.log(data);
       if(data != false){
         console.log("Logged in successfully!");
         this.navCtrl.push(TabsPage);
