@@ -30,7 +30,10 @@
   </div>
   <ion-row *ngIf="!isEmptyRecom" class="recommended">
     <ion-col col-6>
-      <p class="sr-text">RECOMMENDED</p>
+      <p class="sr-text">
+        RECOMMENDED
+        <ion-badge item-end>{{recommendationArray?.length}}</ion-badge>
+      </p>
     </ion-col>
     <ion-col col-6>
       <p class="sr-text see-all"><a href="">SEE ALL  <ion-icon name="arrow-forward"></ion-icon></a></p>
@@ -61,7 +64,16 @@
   </div>
   <hr *ngIf="!isEmptyRecom">
 
-  <p class="sr-text">SEARCH RESULT</p>  
+  <p class="sr-text">
+    SEARCH RESULT
+    <ion-badge item-end>{{eventsArray?.length}}</ion-badge>
+  </p>  
+  
+  <div class="no-result" *ngIf="eventsArray?.length<1">
+    <i class="fa fa-search fa-5x" aria-hidden="true"></i>
+    <h3>NO EVENT FOUND</h3>
+    <p>There is currently no event in {{searchCity}}. Create an event now or search events in another city!</p>
+  </div>
 
   <ion-card *ngFor="let upcomingEvent of eventsArray" (tap)="tapEvent(upcomingEvent)">
     <div class="bg-img" [ngStyle]="{ 'background-image': 'url(' + upcomingEvent.imgName + ')'}"></div>

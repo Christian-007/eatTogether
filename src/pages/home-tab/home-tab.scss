@@ -4,6 +4,12 @@ page-home-tab {
     font-family: 'Source Sans Pro', sans-serif !important;
     background-color: #F8F9FB;  
 
+    .no-result {
+      padding: 70px 15px 15px;
+      color: #667F97;
+      text-align: center;
+    }
+
     .sectionTitle, .see-btn {
       padding: 20px 10px 5px;
       font-size: 12px;

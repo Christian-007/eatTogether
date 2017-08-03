@@ -213,6 +213,8 @@ export class CreatePage {
       // console.log(JSON.stringify(data));
       this.loading.dismiss().then(() => {
         this.dismissModal(true);
+        let param = {'isChange': true};
+        this.events.publish('activityChange', param);
       });
     }, error => {
       this.loading.dismiss().then(() => {

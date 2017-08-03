@@ -167,6 +167,8 @@ export class EventDetailsPage {
         this.isUserJoined = true;
         let param = { 'isChange': true };
         this.events.publish('pageChange', param);
+        this.events.publish('activityChange', param);
+
         this.zone.run(() => {
           console.log('force update the screen');
           this.getPeopleInEvents();
@@ -238,6 +240,7 @@ export class EventDetailsPage {
         this.isUserJoined = false;
         let param = { 'isChange': true };
         this.events.publish('pageChange', param);
+        this.events.publish('activityChange', param);
 
         // Check whether Owner or not
         if(this.ownerStatus==="owner"){ // if owner, pop/dismiss current page

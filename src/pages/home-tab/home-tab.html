@@ -36,6 +36,12 @@
         <ion-badge item-end>{{upcomingEventsArray?.length}}</ion-badge>
       </div>
 
+      <div class="no-result" *ngIf="upcomingEventsArray?.length<1">
+        <i class="fa fa-calendar-o fa-5x" aria-hidden="true"></i>
+        <h3>NO UPCOMING EVENT</h3>
+        <p>Find and join an event now by pressing the Search tab and enters a city name!</p>
+      </div>
+
       <ion-card *ngFor="let upcomingEvent of upcomingEventsArray" (tap)="tapEvent(upcomingEvent)">
         <div class="bg-img" [ngStyle]="{ 'background-image': 'url(' + upcomingEvent.imgName + ')'}"></div>
         <ion-card-content>
@@ -71,7 +77,13 @@
         MY EVENT
         <ion-badge item-end>{{myEventCount}}</ion-badge>
       </div>
-      <!-- This tap on MY EVENT MAY NOT WORK -->
+      
+      <div class="no-result" *ngIf="myEventCount<1">
+        <i class="fa fa-calendar-o fa-5x" aria-hidden="true"></i>
+        <h3>NO CREATED EVENT</h3>
+        <p>Create an event now by pressing '+' button on the top right of Home tab!</p>
+      </div>
+      
       <ion-card *ngFor="let upcomingEvent of upcomingEventsArray;" (tap)="tapEvent(upcomingEvent)">
         <div *ngIf="upcomingEvent.user_id == currentUserID">
           <div class="bg-img" [ngStyle]="{ 'background-image': 'url(' + upcomingEvent.imgName + ')'}"></div>

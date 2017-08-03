@@ -44,6 +44,13 @@ export class ProfileTabPage {
       this.cover_pic = this.restapiService.ipAddress+'/user_image/'+this.currentUser["cover_pic"];
 
     this.getActivities();
+
+    this.events.subscribe('activityChange',
+    (data) => {
+      if(data["isChange"]) {
+        this.getActivities();
+      }
+    });
   }
 
   ionViewDidLoad() {

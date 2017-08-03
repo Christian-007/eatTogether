@@ -22,12 +22,27 @@ page-event-tab {
     }
   }
 
+  ion-badge {
+    padding: 3px 8px;
+    font-size: 10px;
+    background-color: #404b69 !important;
+    border-radius: 15px;
+    color: #fff;
+  }
+
   .swiper-pagination-bullets {
     bottom: 0 !important;
   }
 
   .content {
     background-color: #F8F8F8;
+
+    .no-result {
+      padding: 50px 15px 15px;
+      color: #667F97;
+      text-align: center;
+      font-family: 'Source Sans Pro', sans-serif;
+    }
 
     hr {
       height: 1px;
@@ -40,6 +55,7 @@ page-event-tab {
 
       .sr-text {
         font-weight: 600;
+        color: #404b69;
       }
 
       .see-all {
