@@ -13,6 +13,7 @@ export class HomePage {
   loading: Loading;
   users: any;
   email: string; password: string;
+  title: string = "My Page";
 
   constructor(public navCtrl: NavController, public restapiService: RestapiserviceProvider, public http: Http, public loadingCtrl: LoadingController, private alertCtrl: AlertController) {
     this.http = http;
@@ -21,6 +22,10 @@ export class HomePage {
 
   signupPage() {
   	this.navCtrl.push(SignupPage);
+  }
+
+  getTitle() {
+    return this.title;
   }
 
   getData() {
