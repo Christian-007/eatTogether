@@ -74,5 +74,88 @@ page-user-profile {
       }      
     }
 
+    .recentActivity {
+      margin-top: 30px;
+
+      .recent-title {
+        margin-left: 15px;
+        font-weight: 700;
+        font-size: 14px;
+        margin-bottom: 5px;
+      }
+
+      .avatar-col {
+        position: relative;
+
+        img.avatar {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+
+      .avatar-col, .people-col {
+        text-align: center;
+      }
+
+      .people-col {
+        padding: 5px 10px;
+
+        .avatar {
+          width: 25px;
+          height: 25px;
+          margin-left: 4px;
+        }
+      }
+
+      .avatar {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        overflow: hidden;
+      }
+
+      .hosted-by:hover {
+        background-color: #fafafa;
+      }
+
+      .hosted-by {
+        padding: 0.3em 0;
+        border-top: 1px solid #F1F1F1;
+
+        [col-12]{
+          padding: 3px 0 0;
+        }
+
+        .user-name {
+          font-size: 12px;
+          font-weight: 300;
+          
+          span {
+            font-weight: 600;
+          }
+        }
+
+        .user-location {
+          font-size: 11px;
+          color: #0B5AC9;
+          font-weight: 500;
+        }
+      }
+
+      .right-btn {
+        position: relative;
+
+        i {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          color: #8a8a8a;
+        }
+      }
+    }
+
   }
 }

@@ -28,11 +28,11 @@ declare var cordova: any;
 export class CreatePage {
 
   fontColor: string;
-  title: string; description: string;
-  loc: string; type: string = "public";
-  city: string;
-  startdate: any;
-  starttime: any; endtime: any; user_id: any;
+  title: string = ""; description: string = "";
+  loc: string = ""; type: string = "public";
+  city: string = "";
+  startdate: string = "";
+  starttime: string = ""; endtime: string = ""; user_id: any;
   loading: Loading; alert: Alert;
   eventTypeOptions: { title: string };
   lastImage: string = null;
@@ -58,6 +58,24 @@ export class CreatePage {
     console.log('ionViewDidLoad CreatePage');
     // this.startdate = new Date().toISOString();
     // this.enddate = new Date().toISOString();
+  }
+
+  checkFormData() {
+    console.log(this.startdate);
+    console.log(this.starttime);
+    console.log(this.endtime);
+    var targetPath = this.pathForImage(this.lastImage);
+    console.log(targetPath);
+    if(!this.title.length || !this.description.length || !this.loc.length || !targetPath.length || !this.startdate.length || !this.starttime.length || !this.endtime.length){
+      let alert = this.alertCtrl.create({
+        title: "Empty Field",
+        subTitle: "Please fill up all of the fields accordingly (including the event picture).",
+        buttons: ['OK']
+      });
+      alert.present();
+    }else {
+      this.createEvent();
+    }
   }
 
   getFontColor(){

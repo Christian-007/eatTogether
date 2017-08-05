@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, AlertController, Alert } from 'ionic-angular';
 import { RestapiserviceProvider } from '../../providers/restapiservice/restapiservice';
 import { TabsServiceProvider } from '../../providers/tabs-service/tabs-service';
+import { EventDetailsPage } from '../event-details/event-details';
 
 /**
  * Generated class for the UserProfilePage page.
@@ -21,6 +22,7 @@ export class UserProfilePage {
   location: string; profile_pic: string = null;
   cover_pic: string = null;
   alert: Alert; isStarred = false; isOwner = false;
+  activityData: any; activityArray: any;
 
   constructor(
     public navCtrl: NavController, 
@@ -46,6 +48,8 @@ export class UserProfilePage {
     }else{
       this.cover_pic = this.profileUser["cover_pic"];
     }
+
+    this.getActivities();
 
     this.currentUser = this.restapiService.getUserInfo();
     if(this.currentUser["id"]===this.profileUser["id"]){
@@ -108,6 +112,54 @@ export class UserProfilePage {
     }, error => {
       console.log(JSON.stringify(error.json()));
       this.presentToast('Error Occurred.');
+    });
+  }
+  
+  getActivities() {
+    this.tabsService.getUserActivities(this.id)
+    .then(data => {
+      this.activityData = data;
+      this.activityArray = [];
+      for(let activity of this.activityData) { 
+        this.activityArray.push({
+          activity_id: activity.id,
+          activity_user_id: activity.activity_user_id,
+          id: activity.event_id,
+          event_title: activity.event_title,
+          activityType: activity.activityType,
+          date: activity.date,
+          time: activity.time,
+          timeCreated: activity.timeCreated
+        });
+      }
+    });
+  }
+
+  tapEvent(activity) {
+    let eventDetails;
+    console.log("activity: " + JSON.stringify(activity));
+    this.tabsService.checkEventInformation(activity["id"])
+    .then(data => {
+      eventDetails = {
+        "id": data["id"],
+        "title": data["title"],
+        "description": data["description"],
+        "location": data["location"],
+        "city": data["city"],
+        "imgName": this.restapiService.ipAddress+'/image/'+data["imgName"],
+        "starttime": data["starttime"],
+        "startdate": data["startdate"],
+        "endtime": data["endtime"],
+        "type": data["type"],
+        "user_id": data["user_id"],
+        "user_fname": data["fname"],
+        "user_lname": data["lname"],
+        "user_profile_pic": this.restapiService.ipAddress+'/user_image/'+data["profile_pic"]
+      };
+      this.navCtrl.push(EventDetailsPage, { upcomingEvent: eventDetails });
+    },error => {
+      this.presentToast('This event is not available.');
+      console.log("ERROR");
     });
   }
 
