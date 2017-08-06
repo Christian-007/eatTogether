@@ -66,7 +66,7 @@ export class CreatePage {
     console.log(this.endtime);
     var targetPath = this.pathForImage(this.lastImage);
     console.log(targetPath);
-    if(!this.title.length || !this.description.length || !this.loc.length || !targetPath.length || !this.startdate.length || !this.starttime.length || !this.endtime.length){
+    if(!this.title.length || !this.description.length || !this.loc.length || !this.startdate.length || !this.starttime.length || !this.endtime.length){
       let alert = this.alertCtrl.create({
         title: "Empty Field",
         subTitle: "Please fill up all of the fields accordingly (including the event picture).",

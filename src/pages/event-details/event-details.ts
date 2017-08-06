@@ -38,7 +38,6 @@ export class EventDetailsPage {
     private zone: NgZone
     ) {
     this.upcomingEvent = navParams.data.upcomingEvent;
-    console.log("PIC: " + this.upcomingEvent["user_profile_pic"]);
     this.currentUser = this.restapiService.getUserInfo();
     this.checkIfUserHasJoined()
     .then(data => {

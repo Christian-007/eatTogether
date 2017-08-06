@@ -13,8 +13,6 @@ import { RestapiserviceProvider } from '../restapiservice/restapiservice';
 @Injectable()
 export class TabsServiceProvider {
   data: any;
-  // ipAddress = "http://192.168.1.31:5000";
-  ipAddress = "http://143.167.211.7:5000";
 
   constructor(public http: Http, public restapiService: RestapiserviceProvider) {
     console.log('Hello TabsServiceProvider Provider');

@@ -41,25 +41,27 @@
   </ion-row>
   <div class="slideContainer" *ngIf="!isEmptyRecom">
     <ion-slides *ngIf="!isEmptyRecom" #slides pager>
-      <ion-slide *ngFor="let recommendation of recommendationArray" (tap)="tapEvent(recommendation)">
-        <div class="ion-bg">
-          <ion-card>
-            <div class="bg-img" [ngStyle]="{ 'background-image': 'url(' + recommendation.imgName + ')'}"></div>
-            <div class="card-title">{{recommendation.title}}</div>
-            <div class="content-custom">
-              <p class="rec-title">Hosted by: {{recommendation.user_fname}} {{recommendation.user_lname}}</p>
-              <ion-row class="rec-row">
-                <ion-col col-6>
-                  <p class="rec-date"><i class="fa fa-calendar" aria-hidden="true"></i> {{recommendation.startdate | date: 'yMMMd'}}</p>
-                </ion-col>
-                <ion-col col-6>
-                  <p class="rec-time"><i class="fa fa-clock-o" aria-hidden="true"></i> {{recommendation.starttime}} - {{recommendation.endtime}}</p>
-                </ion-col>
-              </ion-row>
-            </div>
-          </ion-card>
-        </div>
-      </ion-slide>
+      <ng-container *ngFor="let recommendation of recommendationArray; let i=index">
+        <ion-slide *ngIf="i<5" (tap)="tapEvent(recommendation)">
+          <div class="ion-bg" *ngIf="i<5">
+            <ion-card>
+              <div class="bg-img" [ngStyle]="{ 'background-image': 'url(' + recommendation.imgName + ')'}"></div>
+              <div class="card-title">{{recommendation.title}}</div>
+              <div class="content-custom">
+                <p class="rec-title">Hosted by: {{recommendation.user_fname}} {{recommendation.user_lname}}</p>
+                <ion-row class="rec-row">
+                  <ion-col col-6>
+                    <p class="rec-date"><i class="fa fa-calendar" aria-hidden="true"></i> {{recommendation.startdate | date: 'yMMMd'}}</p>
+                  </ion-col>
+                  <ion-col col-6>
+                    <p class="rec-time"><i class="fa fa-clock-o" aria-hidden="true"></i> {{recommendation.starttime}} - {{recommendation.endtime}}</p>
+                  </ion-col>
+                </ion-row>
+              </div>
+            </ion-card>
+          </div>
+        </ion-slide>
+      </ng-container>
     </ion-slides>
   </div>
   <hr *ngIf="!isEmptyRecom">
