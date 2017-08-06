@@ -115,7 +115,7 @@ export class ProfileTabPage {
     this.tabsService.checkEventInformation(activity["id"])
     .then(data => {
       eventDetails = {
-        "id": data["event_id"],
+        "id": data["id"],
         "title": data["title"],
         "description": data["description"],
         "location": data["location"],

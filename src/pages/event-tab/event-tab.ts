@@ -3,6 +3,7 @@ import { IonicPage, NavController, Slides, NavParams, LoadingController, Loading
 import { RestapiserviceProvider } from '../../providers/restapiservice/restapiservice';
 import { TabsServiceProvider } from '../../providers/tabs-service/tabs-service';
 import { EventDetailsPage } from '../event-details/event-details';
+import { RecommendedPage } from '../recommended/recommended';
 
 /**
  * Generated class for the EventTabPage page.
@@ -44,6 +45,10 @@ export class EventTabPage {
     this.doRefresh(0);
   }
 
+  goToRecommended(){
+    this.navCtrl.push(RecommendedPage);
+  }
+
   doRefresh(refresher) {
     this.searchEventsByCity().then(data => {
       if(data){
@@ -76,12 +81,10 @@ export class EventTabPage {
             this.isEmptyRecom = true;
           }
 
-          console.log("RECOMMENDATION: " + JSON.stringify(this.recommendationData));
           if(refresher != 0){
             console.log("SLIDES", this.slides);
             if(this.slides !== undefined){                          
               let currentIndex = this.slides.getActiveIndex();
-              console.log("HEY: " + currentIndex);
               this.slides.slideTo(0, 500);
             }
             refresher.complete();

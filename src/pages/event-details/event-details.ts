@@ -80,8 +80,7 @@ export class EventDetailsPage {
       });
 
     }, error => {
-      console.log("FINISHED CHECK USER");
-      console.log(JSON.stringify(error.json()));
+      console.log("ERROR CHECK USER");
     });
   }
 
