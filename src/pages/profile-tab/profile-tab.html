@@ -31,7 +31,10 @@
   <div class="recentActivity">
     <p class="recent-title">RECENT ACTIVITY</p>  
     <ion-row class="hosted-by" *ngFor="let activity of activityArray" (tap)="tapEvent(activity)">
-      <ion-col col-3 class="avatar-col"><img class="avatar" src="{{profile_pic}}"></ion-col>
+      <ion-col col-3>
+        <!-- <img class="avatar" src="{{profile_pic}}"> -->
+        <div class="avatar-col" [ngStyle]="{ 'background-image': 'url(' + profile_pic + ')'}"></div>
+      </ion-col>
       <ion-col col-8>
         <ion-row>
           <ion-col col-12 class="user-name"><span>{{fname}} {{lname}}</span> {{activity.activityType}} an event: {{activity.event_title}}.</ion-col>

@@ -63,6 +63,14 @@ export class ProfileTabPage {
       console.log(data);
       if(data["navigate"]==="logout"){
         this.logoutPage();
+      }else if(data["navigate"]==="profile"){
+        this.currentUser = this.restapiService.getUserInfo();
+        this.id = this.currentUser["id"];
+        this.fname = this.currentUser["fname"]; this.lname = this.currentUser["lname"];
+        this.email = this.currentUser["email"]; this.location = this.currentUser["location"];
+        this.profile_pic = this.restapiService.ipAddress+'/user_image/'+this.currentUser["profile_pic"];
+        this.cover_pic = this.restapiService.ipAddress+'/user_image/'+this.currentUser["cover_pic"];
+        this.getActivities();
       }
     });
     modal.present();

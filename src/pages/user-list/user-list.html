@@ -19,7 +19,7 @@
     <p>Start starring people now by going through their profiles and press the 'star' button to get recommended events based on those people!</p>
   </div>
   <ion-row  *ngFor="let people of peopleArray"class="hosted-by" (tap)="userProfile(people)">
-    <ion-col col-3 class="avatar-col"><img class="avatar" src="{{people.profile_pic}}"></ion-col>
+    <ion-col col-3 class="avatar-col"><img class="avatar" [ngStyle]="{ 'background': 'url(' + people.profile_pic + ')'}"></ion-col>
     <ion-col col-8>
       <ion-row>
         <ion-col col-12 class="user-name">{{people.fname}} {{people.lname}}</ion-col>

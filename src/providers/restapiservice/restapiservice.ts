@@ -31,8 +31,8 @@ export class RestapiserviceProvider {
   currentUser: User;
   data: any;
   // ipAddress = "http://localhost:5000";
-  ipAddress = "http://192.168.1.23:5000";
-  // ipAddress = "http://143.167.209.124:5000";
+  // ipAddress = "http://192.168.1.23:5000";
+  ipAddress = "http://143.167.208.02:5000";
   // ipAddress = "https://restful-api-dissertation.herokuapp.com";
   param: any;
 
@@ -113,15 +113,17 @@ export class RestapiserviceProvider {
     return new Promise(resolve => {
       this.http.put(this.ipAddress+"/edit_user/"+user_id, params , {headers: headers})
         .subscribe(data => {
-          this.data = data;
-          // this.currentUser.id = id;
-          // this.currentUser.fname = fname;
-          // this.currentUser.lname = lname;
-          // this.currentUser.email = email;
-          // this.currentUser.location = location;
-          // this.currentUser.profile_pic = profile_pic;
-          // this.currentUser.cover_pic = cover_pic;
-          resolve(this.data);
+          this.getOneUserInfo(user_id)
+          .then(data => {
+            this.currentUser.id = data["id"];
+            this.currentUser.fname = data["fname"];
+            this.currentUser.lname = data["lname"];
+            this.currentUser.email = data["email"];
+            this.currentUser.location = data["location"];
+            this.currentUser.profile_pic = data["profile_pic"];
+            this.currentUser.cover_pic = data["cover_pic"];
+            resolve(true);
+          });
         });
     });
   }

@@ -109,7 +109,6 @@ export class TabsServiceProvider {
         }, error => {
           console.log("ERROR CHECK USERS");
           reject(false);
-          // console.log(JSON.stringify(error.json()));
         });
     });
   }
@@ -124,7 +123,6 @@ export class TabsServiceProvider {
         }, error => {
           reject(false);
           console.log("ERROR CHECK EVENT INFO");
-          // console.log(JSON.stringify(error.json()));
         });
     });
   }
@@ -137,7 +135,7 @@ export class TabsServiceProvider {
           this.data = data;
           resolve(this.data);
         }, error => {
-          console.log(JSON.stringify(error.json()));
+          console.log("error getting events");
         });
     });
   }
@@ -150,7 +148,7 @@ export class TabsServiceProvider {
           this.data = data;
           resolve(this.data);
         }, error => {
-          console.log(JSON.stringify(error.json()));
+          console.log("error getting upcoming events");
         });
     });
   }
@@ -178,7 +176,7 @@ export class TabsServiceProvider {
           this.data = data;
           resolve(this.data);
         }, error => {
-          console.log(JSON.stringify(error.json()));
+          console.log("error checking stars");
         });
     });
   }
@@ -189,6 +187,8 @@ export class TabsServiceProvider {
         .subscribe(data => {
           this.data = data;
           resolve(this.data);
+        }, error => {
+          console.log("error unstarring person");
         });
     });
   }
@@ -201,7 +201,7 @@ export class TabsServiceProvider {
           this.data = data;
           resolve(this.data);
         }, error => {
-          console.log(JSON.stringify(error.json()));
+          console.log("error getting stars");
         });
     });
   }
@@ -214,7 +214,7 @@ export class TabsServiceProvider {
           this.data = data;
           resolve(this.data);
         }, error => {
-          console.log(JSON.stringify(error.json()));
+          console.log("error getting recommendations");
         });
     });
   }
@@ -241,10 +241,10 @@ export class TabsServiceProvider {
 
     return new Promise(resolve => {
       this.http.post(this.restapiService.ipAddress+"/save_activity", params , {headers: headers})
-        .subscribe(data => {
-          this.data = data;
-          resolve(this.data);
-        });
+      .subscribe(data => {
+        this.data = data;
+        resolve(this.data);
+      });
     });
   }
 

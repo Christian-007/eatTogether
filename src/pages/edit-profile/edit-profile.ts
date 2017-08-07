@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, ViewController, NavController, Events, NavParams, ToastController, AlertController, ActionSheetController, Platform } from 'ionic-angular';
+import { IonicPage, ViewController, NavController, Events, NavParams, ToastController, AlertController, ActionSheetController, Platform, LoadingController, Loading } from 'ionic-angular';
 import { RestapiserviceProvider } from '../../providers/restapiservice/restapiservice';
 
 import { File } from '@ionic-native/file';
@@ -28,6 +28,7 @@ export class EditProfilePage {
   profile_pic: string; cover_pic: string;
   profileImage: string = null; coverImage: string = null;
   changeType: string;
+  loading: Loading;
 
   constructor(
     public navCtrl: NavController,  
@@ -42,8 +43,9 @@ export class EditProfilePage {
     private filePath: FilePath, 
     public events: Events,
     public toastCtrl: ToastController, 
-    public platform: Platform)
-  {
+    public platform: Platform,
+    public loadingCtrl: LoadingController
+  ){
     this.currentUser = navParams.data.currentUser;
     this.id = this.currentUser["id"];
     this.fname = this.currentUser["fname"];
@@ -59,15 +61,12 @@ export class EditProfilePage {
   }
 
   logoutPage() {
-    // this.restapiService.logout();
-    // this.events.unsubscribe('pageChange');
-    // console.log("PARENT: " + this.viewCtrl.parent);
     this.dismiss('logout');
-    // this.navCtrl.parent.parent.parent.pop();
   }
 
   // Upload cover pic, upload profile pic, upload user details
   saveChanges() {
+    this.showLoading();
 
     // Step 1: Upload cover pic
     this.uploadImage(this.coverImage, "cover")
@@ -83,8 +82,10 @@ export class EditProfilePage {
             this.restapiService.updateUserDetails(this.id, this.fname, this.lname, this.email, this.location, this.coverImage, this.profileImage)
             .then(data => {
               console.log(JSON.stringify(data));
-              this.presentToast('Successfully saved changes');
-              this.dismiss('profile');
+              this.loading.dismiss().then(() => {
+                this.presentToast('Successfully saved changes');
+                this.dismiss('profile');
+              });
             }, error => {
               console.log(JSON.stringify(error.json()));
             });
@@ -99,6 +100,14 @@ export class EditProfilePage {
     }, error => {
       console.log(JSON.stringify(error.json()));
     });
+  }
+
+  showLoading() {
+    this.loading = this.loadingCtrl.create({
+      content: "Saving changes...",
+      dismissOnPageChange: true
+    });
+    this.loading.present();
   }
 
   dismiss(navigation: string) {
@@ -313,7 +322,6 @@ export class EditProfilePage {
       // Use the FileTransfer to upload the image
       fileTransfer.upload(targetPath, url, options).then(data => {
         if (data) {
-          this.presentToast('Image succesful uploaded.');
           resolve(data);
         }else {
           reject("ERROR");
