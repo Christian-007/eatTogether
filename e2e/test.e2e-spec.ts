@@ -1,4 +1,4 @@
-import { browser, element, by, ElementFinder } from 'protractor';
+import { browser, element, by, ElementFinder, protractor } from 'protractor';
  
 describe('E2E Application Test', () => {
  
@@ -16,18 +16,6 @@ describe('E2E Application Test', () => {
    
   });
 
-  // Click the 'About' tab
-  // element(by.css('[aria-controls=tabpanel-t0-2]')).click().then(() => { 
-
-  //   // Wait for the page transition
-  //   browser.driver.sleep(1000);
-
-  //   expect(element(by.css('ion-list ion-item ion-label')) // Grab the label of the list item
-  //     .getAttribute('innerHTML')) // Get the text content
-  //     .toContain('@ionicframework'); // Check if it contains the text "@ionicframework"
-
-  // });
-
   it('the user cannot login to the application', () => {
     var alert = element(by.css('.alert-wrapper .alert-title'));
     element(by.css('.loginButton')).click().then(() => { 
@@ -35,11 +23,20 @@ describe('E2E Application Test', () => {
       .getAttribute('innerHTML'))
       .toContain('Login Error'); 
     });
-  
   });
 
   it('the user can login to the application', () => {
-    
+    let email: ElementFinder = element(by.css('input[name=email]'));
+    let password: ElementFinder = element(by.css('input[name=password]'));
+    email.sendKeys('b.wilson@gmail.com');
+    password.sendKeys('123');
+    element(by.css('.loginButton')).click();
+    browser.driver.sleep(1000);
+    expect(element(by.css('.sectionTitle')).getAttribute('innerHTML')).toContain('UPCOMING EVENT'); 
+  });
+
+  it('the user can search events by city', () => {
+    // User login
     let email: ElementFinder = element(by.css('input[name=email]'));
     let password: ElementFinder = element(by.css('input[name=password]'));
     email.sendKeys('b.wilson@gmail.com');
@@ -48,6 +45,34 @@ describe('E2E Application Test', () => {
     browser.driver.sleep(1000);
     expect(element(by.css('.sectionTitle')).getAttribute('innerHTML')).toContain('UPCOMING EVENT'); 
 
+    // Go to search tab, automatically search events in user location, expects some events
+    browser.driver.sleep(1000);
+    element(by.css('[aria-controls=tabpanel-t0-1]')).click();
+    browser.driver.sleep(1000);
+    expect(element.all(by.css('.eventsList'))).toBeTruthy();
+  });
+
+  it('the user cannot find any events in the inputted city', () => {
+    // User login
+    let search: ElementFinder = element(by.css('input[name=search]'));
+    let email: ElementFinder = element(by.css('input[name=email]'));
+    let password: ElementFinder = element(by.css('input[name=password]'));
+
+    email.sendKeys('b.wilson@gmail.com');
+    password.sendKeys('123');
+    element(by.css('.loginButton')).click();
+    browser.driver.sleep(1000);
+    expect(element(by.css('.sectionTitle')).getAttribute('innerHTML')).toContain('UPCOMING EVENT'); 
+
+    // Go to search tab, clear search input, type 'London', expects no event found
+    browser.driver.sleep(1000);
+    element(by.css('[aria-controls=tabpanel-t0-1]')).click();
+    browser.driver.sleep(1000);
+    search.clear();
+    search.sendKeys("London");
+    browser.actions().sendKeys(protractor.Key.ENTER).click().perform();
+    browser.driver.sleep(2000);
+    expect(element(by.css('page-event-tab .no-result h3')).getAttribute('innerHTML')).toContain('NO EVENT FOUND'); 
   });
  
 });

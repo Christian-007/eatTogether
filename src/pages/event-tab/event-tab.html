@@ -77,7 +77,7 @@
     <p>There is currently no event in {{searchCity}}. Create an event now or search events in another city!</p>
   </div>
 
-  <ion-card *ngFor="let upcomingEvent of eventsArray" (tap)="tapEvent(upcomingEvent)">
+  <ion-card class="eventsList" *ngFor="let upcomingEvent of eventsArray" (tap)="tapEvent(upcomingEvent)">
     <div class="bg-img" [ngStyle]="{ 'background-image': 'url(' + upcomingEvent.imgName + ')'}"></div>
     <ion-card-content>
       <ion-card-title class="cardTitle">
