@@ -43,7 +43,7 @@ export class CreatePage {
     this.eventTypeOptions = {
       title: 'Event Type'
     };
-    this.loc = "Search for location";
+    // this.loc = "Search for location";
     this.fontColor = "#a0a0a0";
     this.events.subscribe('searchLocation', (data) => {
       // console.log("data: " + data["location"]);
@@ -69,7 +69,7 @@ export class CreatePage {
     if(!this.title.length || !this.description.length || !this.loc.length || !this.startdate.length || !this.starttime.length || !this.endtime.length){
       let alert = this.alertCtrl.create({
         title: "Empty Field",
-        subTitle: "Please fill up all of the fields accordingly (including the event picture).",
+        subTitle: "Please fill up all of the fields accordingly.",
         buttons: ['OK']
       });
       alert.present();

@@ -17,17 +17,11 @@
 
 
 <ion-content>
-  <!-- <div #map id="map"></div>   -->
   <div id="photo" class="bg-img" [style.background-image]="getImgPath(lastImage)">
     <button class="select-btn" (click)="presentActionSheet()"><ion-icon name="camera"></ion-icon> SELECT IMAGE</button>
   </div>
 
   <div class="form-content">
-    <!-- <img src="{{pathForImage(lastImage)}}" style="width: 100%" [hidden]="lastImage === null">
-    <h3 [hidden]="lastImage !== null">Please Select Image!</h3> -->
-    <!-- <button ion-button icon-left (click)="presentActionSheet()">
-      <ion-icon name="camera"></ion-icon>Select Image
-    </button> -->
     <ion-grid>
       <label for="title">Event Title</label>
       <ion-row>
@@ -46,9 +40,8 @@
       <ion-row>
         <label for="loc"><i class="fa fa-map-marker" aria-hidden="true"></i> Location</label>
         <ion-col col-12>
-          <!-- <ion-input class="form-input" type="text" name="loc" [(ngModel)]="loc" placeholder="Location" (click)="searchLocation()">
-          </ion-input> -->
-          <button ion-button color="light" (click)="searchLocation()" class="search-btn" [style.color]="getFontColor()" full>{{loc}}</button>
+          <button ion-button color="light" *ngIf="loc.length<1" (click)="searchLocation()" class="search-btn" [style.color]="getFontColor()" full>Search for location</button>
+          <button ion-button color="light" *ngIf="loc.length>0" (click)="searchLocation()" class="search-btn" [style.color]="getFontColor()" full>{{loc}}</button>
         </ion-col>
       </ion-row>
 
