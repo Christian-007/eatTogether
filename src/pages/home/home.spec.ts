@@ -40,21 +40,9 @@ describe('HomePage', () => {
             
   });
 
+  it('should have no loading spinner', () => {
+    expect(component.loading).toBeUndefined();
+  });
+
+
 });
-
-// let homePage: any;
- 
-// describe('Page: Home Page', () => {
- 
-//     beforeEach(() => {
-//       homePage = HomePage;
-//     });
-
-//     it('should return a title', () => {
-
-//         let result = HomePage.getTitle();
-//         expect(result).toBe('My Page');
-            
-//     });
- 
-// });

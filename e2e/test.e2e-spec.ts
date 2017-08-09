@@ -1,6 +1,61 @@
 import { browser, element, by, ElementFinder, protractor } from 'protractor';
+
+describe('Event Details Test', () => {
+  beforeEach(() => {
+    browser.get('');
+    browser.driver.sleep(500);
+
+    // User login
+    let email: ElementFinder = element(by.css('input[name=email]'));
+    let password: ElementFinder = element(by.css('input[name=password]'));
+
+    email.sendKeys('b.wilson@gmail.com');
+    password.sendKeys('123');
+    element(by.css('.loginButton')).click();
+    browser.driver.sleep(1000);
+  });
+
+  it('the user can join an event', () => {
+    browser.driver.sleep(1000);
+    element(by.css('[aria-controls=tabpanel-t0-1]')).click();
+    browser.driver.sleep(1000);
+    element(by.css('page-event-tab ion-card:nth-child(7)')).click();
+    browser.driver.sleep(1000);
+    element(by.css('page-event-details .join-btn button')).click();
+    browser.driver.sleep(1000);
+    element(by.css('.alert-wrapper .alert-button-group button')).click();
+    browser.driver.sleep(1000);
+    expect(element(by.css('page-event-details .count-people')).getAttribute('innerHTML')).toContain(' 2 people joined'); 
+  });
+
+  it('the users can see an indicator if they already joined an event', () => {
+    browser.driver.sleep(1000);
+    element(by.css('[aria-controls=tabpanel-t0-1]')).click();
+    browser.driver.sleep(1000);
+    element(by.css('page-event-tab ion-card:nth-child(7)')).click();
+    browser.driver.sleep(1000);
+    expect(element(by.css('page-event-details .joined-btn button')).getAttribute('innerHTML')).toContain(' JOINED'); 
+    browser.driver.sleep(1000);
+  });
+
+  it('the user can cancel joining an event', () => {
+    browser.driver.sleep(1000);
+    element(by.css('[aria-controls=tabpanel-t0-1]')).click();
+    browser.driver.sleep(1000);
+    element(by.css('page-event-tab ion-card:nth-child(7)')).click();
+    browser.driver.sleep(1000);
+    element(by.css('page-event-details .cancel-btn button')).click();
+    browser.driver.sleep(1000);
+    element(by.css('.alert-wrapper .alert-button-group button:nth-child(2)')).click();
+    browser.driver.sleep(1000);
+    element(by.css('.alert-wrapper .alert-button-group button')).click();
+    browser.driver.sleep(1000);
+    expect(element(by.css('page-event-details .count-people')).getAttribute('innerHTML')).toContain(' 1 people joined'); 
+  });
+
+});
  
-describe('Create Event Test', () => {
+describe('Home Tab Test', () => {
   beforeEach(() => {
     browser.get('');
     browser.driver.sleep(500);
@@ -81,13 +136,28 @@ describe('Create Event Test', () => {
     browser.driver.sleep(1000);
     element(by.css('page-create .create-btn')).click();
     browser.driver.sleep(2000);
-
     expect(element(by.css('page-home-tab ion-card .cardTitle')).getAttribute('innerHTML')).toContain('Meal at Cavendish'); 
     
   }, 60000);
+
+  it('the user can remove an event', () => {
+    browser.driver.sleep(1000);
+    element(by.css('page-home-tab ion-segment-button:nth-child(2)')).click();
+    browser.driver.sleep(2000);
+    element(by.css('page-home-tab div[ng-reflect-ng-switch=my] ion-card:nth-child(2)')).click();
+    browser.driver.sleep(1000);
+    element(by.css('page-event-details .cancel-btn button')).click();
+    browser.driver.sleep(1000);
+    element(by.css('.alert-wrapper .alert-button-group button:nth-child(2)')).click();
+    browser.driver.sleep(1000);
+    element(by.css('.alert-wrapper .alert-button-group button')).click();
+    browser.driver.sleep(1000);
+    expect(element(by.css('page-home-tab div[ng-reflect-ng-switch=my] .sectionTitle ion-badge')).getAttribute('innerHTML')).toContain('0'); 
+  });
+
 });
 
-describe('Search Test', () => {
+describe('Search Tab Test', () => {
   beforeEach(() => {
     browser.get('');
     browser.driver.sleep(500);
