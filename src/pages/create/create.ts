@@ -65,6 +65,7 @@ export class CreatePage {
     console.log(this.starttime);
     console.log(this.endtime);
     var targetPath = this.pathForImage(this.lastImage);
+
     console.log(targetPath);
     if(!this.title.length || !this.description.length || !this.loc.length || !this.startdate.length || !this.starttime.length || !this.endtime.length){
       let alert = this.alertCtrl.create({
@@ -74,7 +75,21 @@ export class CreatePage {
       });
       alert.present();
     }else {
-      this.createEvent();
+      this.showLoading();
+    
+      if(targetPath !== ""){
+        this.uploadImage()
+        .then(data => {
+          if(data){
+            this.createEvent();
+          }
+        }, error => {
+          console.log("ERROR UPLOADING PICTURES");
+        });
+      }else {
+        this.lastImage = "cover_default.png";
+        this.createEvent();
+      }
     }
   }
 
@@ -209,23 +224,19 @@ export class CreatePage {
    
     const fileTransfer: TransferObject = this.transfer.create();
    
-    // Use the FileTransfer to upload the image
-    fileTransfer.upload(targetPath, url, options).then(data => {
-      // this.loading.dismissAll()
-      this.presentToast('Image succesful uploaded.');
-    }, err => {
-      // this.loading.dismissAll()
-      this.presentToast('Error while uploading file.');
+    return new Promise((resolve, reject) => {
+      // Use the FileTransfer to upload the image
+      fileTransfer.upload(targetPath, url, options).then(data => {
+        this.presentToast('Image succesfully uploaded.');
+        resolve(data);
+      }, err => {
+        this.presentToast('Error while uploading file.');
+        reject(false);
+      });
     });
   }
 
   createEvent() {
-    this.showLoading();
-    
-    if(this.pathForImage(this.lastImage) !== ""){
-      this.uploadImage();
-    }
-
     this.tabsService.createEventPost(this.title, this.description, this.loc, this.city, this.lastImage, this.startdate, this.starttime, this.endtime, this.type, this.user_id)
     .then(data => {
       // console.log(JSON.stringify(data));
