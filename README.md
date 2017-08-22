@@ -1,7 +1,8 @@
 # eatTogether
 Dissertation Project
 
-This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
+*Demo link: https://lets-eat-together-app.herokuapp.com/
+*Please open this demo from a mobile phone or use the mobile view feature on Google Chrome to get the suitable screen size as its layout is based on mobile phones. Some features (such as Upload picture) may not work since it requires FileStorage API of targeted mobile platform.
 
 ## How to use this template
 
